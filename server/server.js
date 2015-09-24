@@ -13,6 +13,7 @@ everyauth.github
   .appId(config.github.appId)
   .appSecret(config.github.appSecret)
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, githubUserMetadata) {
+
     var user = {
       host: 'api.github.com',
       path: '/organiations',
