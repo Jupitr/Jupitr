@@ -1,5 +1,7 @@
 var express = require('express');
-var partials = require('express-partials');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var everyauth = require('everyauth');
 var helpers = require('./utils/helpers');
 var handler = require('./utils/request-handler');
@@ -48,18 +50,27 @@ everyauth.everymodule.handleLogout( function (req, res) {
   res.end();
 });
 
-app.configure(function() {
-  app.use(partials());
-  app.use(express.bodyParser());
-  app.use(express.static(__dirname + '/public'));
-  app.use(express.cookieParser('infinity divded by infinity'));
-  app.use(express.session());
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(__dirname + '/public'));
+app.use(cookieParser('infinity divded by infinity'));
+app.use(session({
+  saveUninitialized: true,
+  resave: false,
+  secret: 'infinity divded by infinity'
+}));
 
 app.get('/', helpers.validateUser, function(req, res) {
   res.sendStatus(200);
 });
 
+app.get('/api/updateAcc', function(req, res) {
+  // call db update api
+  res.sendStatus(200);
+});
 
+app.get('/api/createAcc', helpers.validateUser, function(req, res) {
+  res.sendStatus(200);
+});
 
 module.exports = app;
