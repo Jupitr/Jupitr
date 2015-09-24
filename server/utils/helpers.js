@@ -17,5 +17,18 @@ module.exports = {
     else {
       res.redirect('/login');
     }
+  },
+
+  sendGHRequest: function (https, user, cb) {
+    https.request(user, cb);
+  },
+
+  checkAuth: function (data, key, prop) {
+    data.forEach(function(item){
+      if (item.key === prop) {
+        return true;
+      }
+    });
+    return false;
   }
 };
