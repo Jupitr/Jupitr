@@ -1,0 +1,20 @@
+{
+  "name": "jupitr",
+  "version": "1.0.0",
+  "description": "a tool to conect hack reactor students and alumni",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dnld/Jupitr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dnld/Jupitr/issues"
+  },
+  "homepage": "https://github.com/Dnld/Jupitr#readme",
+  "dependencies": {
+    "body-parser": "^1.14.0",
+    "express": "^4.13.3",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13"
+  }
+}
