@@ -11,58 +11,47 @@ var https = require('https');
 var app = express();
 
 everyauth.github
-  .entryPath('/auth/github')
+  .entryPath('/github')
   .appId(config.github.appId)
   .appSecret(config.github.appSecret)
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, githubUserMetadata) {
-    var user = {
-      host: 'api.github.com',
-      path: '/organiations',
-      method: 'GET'
-    };
-    helpers.sendGHRequest(https, user, function(res) {
-      var data = '';
-      var org;
-      res.setEncoding('utf8');
-      res.on('data', function (chunk) {
-        data += chunk;
-      });
-      res.on('end', function () {
-        org = JSON.parse(data); 
-        if (helpers.checkAuth(org)) {
-          session.oauth = accessToken;
-          session.uid = githubUserMetadata.login;
-          return session.uid;       
-        }
-        else {
-          console.log('not authorized');
-        }
-      });
-    });
-  })
+    console.log(githubUserMetadata);
+    session.oauth = accessToken;
+    session.uid = githubUserMetadata.login;
+    return session.uid;
+    })
   .redirectPath('/');
 
 // default logout path is /logout
 everyauth.everymodule.handleLogout( function (req, res) {
   req.logout(); 
-  req.session.uid = null;
-  res.writeHead(303, { 'Location': this.logoutRedirectPath() });
+  req.session.destroy(function(err){
+    if (err) {
+      throw err;
+    }
+  });
+  res.writeHead(303, { 'Location': '/get' });
   res.end();
 });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/../client'));
 app.use(cookieParser('infinity divded by infinity'));
 app.use(session({
   saveUninitialized: true,
   resave: false,
   secret: 'infinity divded by infinity'
 }));
+app.use(everyauth.middleware());
 
 app.get('/', helpers.validateUser, function(req, res) {
   res.sendStatus(200);
 });
+
+// app.get('/login', function(req, res) {
+//   res.sendStatus(200);
+// });
 
 app.get('/api/updateAcc', function(req, res) {
   // call db update api
