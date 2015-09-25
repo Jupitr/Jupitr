@@ -1,0 +1,21 @@
+{
+  "name": "Jupitr",
+  "main": "index.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Jupitr/Jupitr",
+  "authors": [
+    "Melinda Budde",
+    "Lain Jiang",
+    "Kevin Lee",
+    "Don Steinert"
+  ],
+  "description": "A portal for Hack Reactor alumni and students to connect",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
