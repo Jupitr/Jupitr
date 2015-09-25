@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var zipcodes = require('zipcodes');
 
+// sub document to be included in user documents
 var employerSchema = new mongoose.Schema({
   name: String,
   role: String,
@@ -21,12 +22,8 @@ var userSchema = new mongoose.Schema({
   website: String,
   gender: String,
   race: String,
-  
-  // TODO -- coordinate how employment data will be passed from client
   currentemployer: [employerSchema],
   prioremployers: [employerSchema],
-  
-  
   thesis: String,
   thesisurl: String,
   greenfield: String,
@@ -34,13 +31,13 @@ var userSchema = new mongoose.Schema({
   technologies: Array,
 });
 
-// middleware to retreive exact location data
+// middleware to retrieve precise location data
 userSchema.pre('save', function(next) {
   var temp = zipcodes.lookup(this.zip);
   this.city = temp.city;
   this.state = temp.state;
   this.latitude = temp.latitude;
-  this.longitude = temp.longitudel;
+  this.longitude = temp.longitude;
   next();
 });
 
