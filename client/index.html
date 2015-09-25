@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html ng-app="jupitr">
+
+  <head>
+    <meta charset="utf-8">    
+    <title>Jupitr</title>
+    <!-- <link rel="stylesheet" href="styles/style.css"> -->
+  </head>    
+
+  <body>
+    <header>
+      <h1>Jupitr</h1>
+      <!-- if head is repeated across all pages of website, include link back to main page -->
+    </header>
+
+    <div ng-view></div>    
+
+    <footer>
+      <small>&copy; Jupitr</small>
+    </footer>
+
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+
+    <script src="app/auth/auth.js"></script>
+    <script src="app/login/login_controller.js"></script>
+    <script src="app/profile/profile.js"></script>
+    <!-- <script src="app/services/services.js"></script> -->
+    <!-- <script src="app/app.js"></script> -->
+  </body>
+
+</html>
