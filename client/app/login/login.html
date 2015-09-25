@@ -4,10 +4,39 @@ Could also implement bootstrap social buttons for a better looking button
  -->
 <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 
-<!-- UI thought. GitHub login button centered in page. Animated background of faded data visualization. 
+<!-- d3 source and styling will also be included in index.html when linked -->
+<script src="../../../node_modules/d3/d3.min.js"></script>
+<style>
+
+rect {
+  fill: grey;
+  pointer-events: all;
+}
+
+.node {
+  fill: blue;
+}
+
+.target {
+  fill: none;
+  stroke: red;
+  pointer-events: none;
+}
+
+.link {
+  stroke: white;
+}
+
+</style>
+
+<!-- UI thought. GitHub login button centered in page. Animated background of faded datagit log visualization. 
  -->
  <div id="login">
   <a class="btn btn-lg btn-success" onclick="hello('github').login()" href="#" role="button">Sign up with GitHub</a>
+</div>
+
+<div class="animation">
+  <script src="login_animation.js"></script>
 </div>
 
 
