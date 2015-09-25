@@ -18,28 +18,24 @@ exports.addUser = function(data, callback) {
     technologies: data.technologies,    
   });
   
-  // adds current and past employment records to 
+  // adds current and past employment information as sub docs
   user.currentemployer.push(data.currentemployer);
-  
-  // TODO -- coordinate how employment info will be passed
-  // currentemployer: [employerSchema],
-  // prioremployers: [employerSchema],
-  
-  console.log(user);
+  data.pastemployers.forEach(function(record) {
+    user.currentemployer.push(record);
+  });
   
   user.save(function(err) {
     if (err) {
       console.error(err);
       return;
     }
-      // possibly change to res.sendStatus(201)
     console.log('user record created');  
     callback();
   });
   
 };
 
-// TODO -- figure out functionality to update a user record
+// TODO -- add functionality to update a user record
 
 // returns all user data
 exports.sendAllUsers = function(callback) {
