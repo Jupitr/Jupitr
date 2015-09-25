@@ -11,7 +11,7 @@ var https = require('https');
 var app = express();
 
 everyauth.github
-  .entryPath('/login')
+  .entryPath('/github')
   .appId(config.github.appId)
   .appSecret(config.github.appSecret)
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, githubUserMetadata) {
@@ -36,7 +36,7 @@ everyauth.everymodule.handleLogout( function (req, res) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(express.static(__dirname + '/../client'));
+app.use(express.static(__dirname + '/../client'));
 app.use(cookieParser('infinity divded by infinity'));
 app.use(session({
   saveUninitialized: true,
