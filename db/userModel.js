@@ -8,6 +8,7 @@ var employerSchema = new mongoose.Schema({
   enddate: Date
 });
 
+
 var userSchema = new mongoose.Schema({  
   email: String,
   cohort: String,
