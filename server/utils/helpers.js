@@ -1,4 +1,6 @@
 'use strict';
+var github = require('octonode');
+
 module.exports = {
   // errorLogger: function (error, req, res, next) {
   //   // log the error then send it to the next middleware 
@@ -19,8 +21,16 @@ module.exports = {
     }
   },
 
-  sendGHRequest: function (https, user, cb) {
-    https.request(user, cb);
+  getOrgs: function (token, cb) {
+    var client = github.client(token);
+    var me = client.me();
+    me.orgs(function(err, body){
+      if (!err) {
+        return cb(body.reduce(function(total, current){
+          return current.login === 'remotebeta' || total;
+        }, false));
+      }
+    });
   },
 
   checkAuth: function (data, key, prop) {
