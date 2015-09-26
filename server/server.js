@@ -4,9 +4,9 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var everyauth = require('everyauth');
 var helpers = require('./utils/helpers');
-var handler = require('./utils/request-handler');
+// var handler = require('./utils/request-handler');
 var config = require('./utils/config');
-var https = require('https');
+var user = require('../db/userController.js');
 
 var app = express();
 
@@ -14,13 +14,13 @@ everyauth.github
   .entryPath('/github')
   .appId(config.github.appId)
   .appSecret(config.github.appSecret)
+  .scope('user')
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, githubUserMetadata) {
-    console.log(githubUserMetadata);
     session.oauth = accessToken;
     session.uid = githubUserMetadata.login;
     return session.uid;
-    })
-  .redirectPath('/');
+  })
+  .redirectPath('/auth');
 
 // default logout path is /logout
 everyauth.everymodule.handleLogout( function (req, res) {
@@ -49,9 +49,23 @@ app.get('/', helpers.validateUser, function(req, res) {
   res.sendStatus(200);
 });
 
-// app.get('/login', function(req, res) {
-//   res.sendStatus(200);
-// });
+app.get('/auth', function(req, res) {
+  if (req.session && req.session.uid) {
+    helpers.getOrgs(req.session.oauth, function(is){
+      if (is) {
+        console.log(is);
+        res.redirect('/');
+      }
+      else {
+        console.log(is);
+        res.redirect('/logout');
+      }
+    });
+  }
+  else {
+    res.redirect('/');
+  }
+});
 
 app.get('/api/updateAcc', function(req, res) {
   // call db update api
