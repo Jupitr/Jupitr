@@ -6,7 +6,7 @@ var everyauth = require('everyauth');
 var helpers = require('./utils/helpers');
 // var handler = require('./utils/request-handler');
 var config = require('./utils/config');
-// var https = require('https');
+var user = require('../db/userController.js');
 
 var app = express();
 
