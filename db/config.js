@@ -1,7 +1,14 @@
 var mongoose = require('mongoose');
 
-// TO DO -- determine how this should be configured to deploy
-mongoose.connect('mongodb://localhost/jupitr');
+// configuration for local development
+// mongoose.connect('mongodb://localhost/jupitr');
+
+// configuration for deployment
+var uri = 'ds051833.mongolab.com:51833/heroku_r1vgthql';
+var options = {
+  user: 'heroku_r1vgthql',
+  pass: '4aun3a4j2pv7oo9vvc8bup2eil'
+}
 
 var db = mongoose.connection;
 
