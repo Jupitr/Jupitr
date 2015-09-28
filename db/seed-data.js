@@ -7,7 +7,7 @@ var firstNames = ['Noah', 'Emma', 'Liam', 'Olivia', 'Mason', 'Sophia', 'Jacob',
 
 var lastNames = ['Smith', 'Doe', 'Miller', 'Penny', 'Tabor', 'Lee', 'Balestra',
   'Savage', 'Machen', 'Cruz', 'Potter', 'Jones', 'Peoples', 'Rourke', 'Hendricks',
-  'Gilfoyle', 'Bighetti', 'Hanneman', 'Belson', 'Hall', 'Bachman'];
+  'Gilfoyle', 'Bighetti', 'Hanneman', 'Belson', 'Hall', 'Bachman', 'Lopez'];
   
 var zips = ['94121', '94110', '94014', '94132', '94133', '10014', '10128',
   '90210', '90004', '98105', '98111', '97201', '73301', '02108', '33101',
@@ -18,7 +18,7 @@ var genders = ['male', 'female'];
 var races = ['Asian', 'Caucasion/White', 'Black/African-American', 'Hispanic',
   'Native American', 'Other'];
 
-var techs = ['JavaScript', 'Node', 'MongoDB', 'Express', 'HTML',
+var techs = ['JavaScript', 'Node', 'MongoDB', 'Express', 'HTML', 'Angular',
   'CSS', 'Java', 'iOS', 'Unix', 'D3', 'Backbone', 'MSQL', 'Fortran', 'vim'];
   
 var companies = ['Apple', 'Uber', 'Amazon', 'Google', 'Stripe', 'Hack Reactor',
@@ -28,8 +28,8 @@ var companies = ['Apple', 'Uber', 'Amazon', 'Google', 'Stripe', 'Hack Reactor',
 var roles = ['Developer', 'Engineer', 'Programmer'];
 
 var projects = ['Purify CSS', 'Otto', 'Mirror', 'Lamp', 'Juiptr', 'Super Duper',
-  'ToDoer', 'Orange', 'Cool Project Name', 'Zig Zag', 'Streamline', 'L7', 
-  'Middle-Out Compression', 'Weissman Tester'];
+  'ToDoer', 'Orange', 'Cool Project Name', 'Zig Zag', 'Stream Line', 'L7', 
+  'Middle-Out Compression', 'Weissman Tester', 'IDKJS', 'JS For Cats'];
 
 var pickRandom = function(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -42,7 +42,7 @@ var generateRandomUser = function() {
   var email = firstName + lastName + '@myemail.com';
   var cohort = 'HRRB' + Math.floor(Math.random() * 10);
   var zip = pickRandom(zips);
-  var handle = firstName + Math.floor(Math.random() * 100);
+  var handle = firstName + Math.floor(Math.random() * 1000);
   var githubLogin = handle;
   var githubLink = 'http://www.github.com/' + handle;
   var twitter = '@' + handle;
@@ -89,7 +89,7 @@ var generateRandomUser = function() {
     twitter: twitter,
     website: website,
     gender: gender,
-    race: gender,
+    race: race,
     currentemployer: currentEmployer,
     prioremployer1: priorEmployer1,
     prioremployer2: priorEmployer2,
