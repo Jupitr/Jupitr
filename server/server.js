@@ -6,12 +6,12 @@ var everyauth = require('everyauth');
 var helpers = require('./utils/helpers');
 // var handler = require('./utils/request-handler');
 var config = require('./utils/config');
-// var https = require('https');
+var user = require('../db/userController.js');
 
 var app = express();
 
 everyauth.github
-  .entryPath('/github')
+  .entryPath('/api/github')
   .appId(config.github.appId)
   .appSecret(config.github.appSecret)
   .scope('user')
@@ -30,7 +30,8 @@ everyauth.everymodule.handleLogout( function (req, res) {
       throw err;
     }
   });
-  res.writeHead(303, { 'Location': '/get' });
+  // if status is 303 then FE redirect
+  res.sendStatus(303);
   res.end();
 });
 
@@ -45,8 +46,13 @@ app.use(session({
 }));
 app.use(everyauth.middleware());
 
-app.get('/', helpers.validateUser, function(req, res) {
-  res.sendStatus(200);
+app.get('/api/home', helpers.validateUser, function(req, res) {
+  if (req.body.allUser) {
+    user.sendAllUsers(function(users){
+      res.sendStatus(200);
+      res.json(users);
+    });
+  }
 });
 
 app.get('/auth', function(req, res) {
@@ -54,7 +60,7 @@ app.get('/auth', function(req, res) {
     helpers.getOrgs(req.session.oauth, function(is){
       if (is) {
         console.log(is);
-        res.redirect('/');
+        res.redirect('/api/home');
       }
       else {
         console.log(is);
@@ -63,16 +69,24 @@ app.get('/auth', function(req, res) {
     });
   }
   else {
-    res.redirect('/');
+    res.redirect('/api/home');
   }
 });
 
-app.get('/api/updateAcc', function(req, res) {
-  // call db update api
-  res.sendStatus(200);
+app.get('/api/update', function(req, res) {
+  // call update user api; uncomment when done
+  // user.updateUser(req.data, function(){
+    res.sendStatus(200);
+  // });
 });
 
-app.get('/api/createAcc', helpers.validateUser, function(req, res) {
+app.get('/api/create', helpers.validateUser, function(req, res) {
+  user.addUser(req.data, function(){
+    res.sendStatus(200);
+  });
+});
+
+app.get('/api/', helpers.validateUser, function(req, res) {
   res.sendStatus(200);
 });
 

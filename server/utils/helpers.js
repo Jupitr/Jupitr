@@ -4,7 +4,7 @@ var github = require('octonode');
 module.exports = {
   // errorLogger: function (error, req, res, next) {
   //   // log the error then send it to the next middleware 
-  //   console.error(error.stack);
+  //   console.error(error.stack);`
   //   next(error);
   // },
   // errorHandler: function (error, req, res, next) {
@@ -13,11 +13,13 @@ module.exports = {
   //   res.send(500, {error: error.message});
   // },
   validateUser: function (req, res, next) {
+    console.log(req.session);
     if (req.session && req.session.uid) {
       next();
     }
     else {
-      res.redirect('/login');
+      // send status code for FE to handle
+      res.sendStatus(303);
     }
   },
 
@@ -33,12 +35,19 @@ module.exports = {
     });
   },
 
-  checkAuth: function (data, key, prop) {
-    data.forEach(function(item){
-      if (item.key === prop) {
-        return true;
-      }
-    });
-    return false;
+  checkAuth: function (req, res) {
+    if (req.session && req.session.uid) {
+      module.exports.getOrgs(req.session.oauth, function(is){
+        if (is) {
+          res.redirect('/api/home');
+        }
+        else {
+          res.redirect('/logout');
+        }
+      });
+    }
+    else {
+      res.redirect('/api/home');
+    }
   }
 };
