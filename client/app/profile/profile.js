@@ -1,12 +1,12 @@
 angular.module('jupitr.profile', [])
-.controller('profileController', function($scope, Users) {  
+.controller('profileController', function($scope, User) {  
   $scope.profile = {}; 
 
   $scope.update = function(user) {
     // deep copy of user object stored in profile object
     $scope.profile = angular.copy(user); 
     // Update Users with updated user profile, then send to main/home page
-    Users.update($scope.profile)
+    User.update($scope.profile)
       .then(function() {
         $location.path('/');
       })
