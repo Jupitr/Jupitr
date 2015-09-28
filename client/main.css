@@ -1,0 +1,19 @@
+/*Login Visualization*/
+rect {
+  fill: grey;
+  pointer-events: all;
+}
+
+.node {
+  fill: blue;
+}
+
+.target {
+  fill: none;
+  stroke: red;
+  pointer-events: none;
+}
+
+.link {
+  stroke: white;
+}
