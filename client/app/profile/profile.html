@@ -2,7 +2,7 @@
 
   <nav class="navigation">
     <ul>
-      <li><a href="#/data">Data</a></li>
+      <li><a href="#/home">Home</a></li>
       <li><a class='selected' href="#/profile">Profile</a></li>
       <li><a href="#/logout">Logout</a></li>
     </ul>
@@ -63,32 +63,32 @@
         </label>
           Current Job Title/Role:
           <input type="text" name="role" maxlength="100" 
-            ng-model="user.role" ng-class="" placeholder="">
+            ng-model="user.currentemployer.role" ng-class="" placeholder="">
         </label>
         <label>
           Current Employer:
-          <input type="text" name="current-employer" maxlength="100" 
-            ng-model="user.currentemployer" ng-class="" placeholder="">
+          <input type="text" name="currentemployer" maxlength="100" 
+            ng-model="user.currentemployer.name" ng-class="" placeholder="">
         </label>
         <label>
           Start Date:
           <input type="date" name="current-startdate" maxlength="100" 
-            ng-model="user.current-startdate" ng-class="" placeholder="">
+            ng-model="user.currentemployer.startdate" ng-class="" placeholder="">
         </label>
         <label>
           Previous Employer:
-          <input type="textarea" name="prior-employer" 
-            ng-model="user.prior-employer" ng-class="" placeholder="">
+          <input type="textarea" name="prioremployer" 
+            ng-model="user.prioremployer.name" ng-class="" placeholder="">
         </label>
         <label>
           Start Date:
           <input type="date" name="prev-startdate" maxlength="100" 
-            ng-model="user.rev-startdate" ng-class="" placeholder="">
+            ng-model="user.prioremployer.startdate" ng-class="" placeholder="">
         </label>
         <label>
           End Date:
           <input type="date" name="prev-enddate" maxlength="100" 
-            ng-model="user.prev-enddate" ng-class="" placeholder=""> 
+            ng-model="user.prioremployer.enddate" ng-class="" placeholder=""> 
         </label>
         <label>
           Github:
@@ -131,11 +131,13 @@
             ng-model="user.technologies" ng-class="" placeholder="">
         </label>
       </fieldset>
-   
-      <button type="submit" value="save" ng-disabled='profileForm.$invalid'>
-        Save Profile
-      </button>            
+
+      <input type="button" ng-click="reset()" value="Reset">
+      <input type="submit" ng-click="update(user)" value="Save Profile" 
+        ng-disabled='profileForm.$invalid'>          
     </form>
+      <pre>user = {{user | json}}</pre> <!-- Remove before deployment -->
+      <pre>profile = {{profile | json}}</pre> <!-- Remove before deployment -->
   </div>
 
 </div>
