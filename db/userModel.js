@@ -3,13 +3,15 @@ var zipcodes = require('zipcodes');
 
 // sub document to be included in user documents
 var employerSchema = new mongoose.Schema({
-  name: String,
+  company: String,
   role: String,
   startdate: Date,
   enddate: Date
 });
 
 var userSchema = new mongoose.Schema({  
+  name: String,
+  githublogin: String,
   email: String,
   cohort: String,
   zip: Number,
@@ -17,13 +19,15 @@ var userSchema = new mongoose.Schema({
   state: String,
   latitude: Number,
   longitude: Number,
-  github: String,
+  githublink: String,
   twitter: String,
   website: String,
   gender: String,
   race: String,
   currentemployer: [employerSchema],
-  prioremployers: [employerSchema],
+  prioremployer1: [employerSchema],
+  prioremployer2: [employerSchema],
+  prioremployer3: [employerSchema],
   thesis: String,
   thesisurl: String,
   greenfield: String,

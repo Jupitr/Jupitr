@@ -1,12 +1,14 @@
 var User = require('./userModel.js');
 
 // creates new user record
-exports.addUser = function(data, callback) {
+exports.addUser = addUser = function(data, callback) {
   var user = new User({
+    name: data.name,
+    githublogin: data.githublogin,
     email: data.email,
     cohort: data.cohort,
     zip: data.zip,
-    github: data.github,
+    githublink: data.githublink,
     twitter: data.twitter,
     website: data.website,
     gender: data.gender,
@@ -20,9 +22,9 @@ exports.addUser = function(data, callback) {
   
   // adds current and past employment information as sub docs
   user.currentemployer.push(data.currentemployer);
-  data.pastemployers.forEach(function(record) {
-    user.currentemployer.push(record);
-  });
+  user.prioremployer1.push(data.prioremployer1);
+  user.prioremployer2.push(data.prioremployer2);
+  user.prioremployer3.push(data.prioremployer3);
   
   user.save(function(err) {
     if (err) {
@@ -48,3 +50,19 @@ exports.sendAllUsers = function(callback) {
     callback(users);
   });
 };
+
+///////////////////////////////////////////////////////////////////////////////
+//                   to seed database with user records                      //
+//               uncomment function below and restart server                 //
+//      set the records variable to specify number of records to create      //
+///////////////////////////////////////////////////////////////////////////////
+
+
+var records = 100;
+
+var userGenerator = require('./seed-data.js');
+for (var i = 0; i < records; i++) {
+  addUser(userGenerator(), function() {
+    console.log('seed record created');
+  });
+}
