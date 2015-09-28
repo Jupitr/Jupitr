@@ -4,7 +4,7 @@ var github = require('octonode');
 module.exports = {
   // errorLogger: function (error, req, res, next) {
   //   // log the error then send it to the next middleware 
-  //   console.error(error.stack);
+  //   console.error(error.stack);`
   //   next(error);
   // },
   // errorHandler: function (error, req, res, next) {
@@ -17,7 +17,8 @@ module.exports = {
       next();
     }
     else {
-      res.redirect('/');
+      // send status code for FE to handle
+      res.sendStatus(303);
     }
   },
 
