@@ -36,9 +36,11 @@ module.exports = {
   },
 
   checkAuth: function (req, res) {
+    console.log('checking auth');
     if (req.session && req.session.uid) {
       module.exports.getOrgs(req.session.oauth, function(is){
         if (is) {
+          console.log(is);
           res.redirect('/api/home');
         }
         else {
