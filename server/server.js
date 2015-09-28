@@ -48,12 +48,9 @@ app.use(session({
 app.use(everyauth.middleware());
 
 app.get('/api/home', helpers.validateUser, function(req, res) {
-  if (req.body.allUser) {
-    user.sendAllUsers(function(users){
-      res.sendStatus(200);
-      res.json(users);
-    });
-  }
+  user.sendAllUsers(function(users){
+    res.json(users);
+  });
 });
 
 app.get('/auth', helpers.checkAuth);
