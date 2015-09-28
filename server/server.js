@@ -7,6 +7,7 @@ var helpers = require('./utils/helpers');
 // var handler = require('./utils/request-handler');
 var config = require('./utils/config');
 var user = require('../db/userController.js');
+var db = require('../db/config.js');
 
 var app = express();
 
