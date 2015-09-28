@@ -13,6 +13,7 @@ module.exports = {
   //   res.send(500, {error: error.message});
   // },
   validateUser: function (req, res, next) {
+    console.log(req.session);
     if (req.session && req.session.uid) {
       next();
     }
@@ -38,7 +39,7 @@ module.exports = {
     if (req.session && req.session.uid) {
       module.exports.getOrgs(req.session.oauth, function(is){
         if (is) {
-          res.redirect('/');
+          res.redirect('/api/home');
         }
         else {
           res.redirect('/logout');
@@ -46,7 +47,7 @@ module.exports = {
       });
     }
     else {
-      res.redirect('/');
+      res.redirect('/api/home');
     }
   }
 };
