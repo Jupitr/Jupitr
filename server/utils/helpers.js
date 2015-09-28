@@ -39,7 +39,7 @@ module.exports = {
     if (req.session && req.session.uid) {
       module.exports.getOrgs(req.session.oauth, function(is){
         if (is) {
-          res.redirect('/');
+          res.redirect('/api/home');
         }
         else {
           res.redirect('/logout');
@@ -47,7 +47,7 @@ module.exports = {
       });
     }
     else {
-      res.redirect('/');
+      res.redirect('/api/home');
     }
   }
 };
