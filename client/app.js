@@ -4,7 +4,8 @@
     'jupitr.login',
     // 'jupitr.home',
     'jupitr.profile',
-    'jupitr.auth'
+    'jupitr.auth',
+    'ngRoute'
   ])
   .config(function($routeProvider){ // need to add $httpProvider?
     $routeProvider
