@@ -29,7 +29,7 @@ var roles = ['Developer', 'Engineer', 'Programmer'];
 
 var projects = ['Purify CSS', 'Otto', 'Mirror', 'Lamp', 'Juiptr', 'Super Duper',
   'ToDoer', 'Orange', 'Cool Project Name', 'Zig Zag', 'Stream Line', 'L7', 
-  'Middle-Out Compression', 'Weissman Tester', 'IDKJS'];
+  'Middle-Out Compression', 'Weissman Tester', 'IDKJS', 'JS For Cats'];
 
 var pickRandom = function(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -42,7 +42,7 @@ var generateRandomUser = function() {
   var email = firstName + lastName + '@myemail.com';
   var cohort = 'HRRB' + Math.floor(Math.random() * 10);
   var zip = pickRandom(zips);
-  var handle = firstName + Math.floor(Math.random() * 100);
+  var handle = firstName + Math.floor(Math.random() * 1000);
   var githubLogin = handle;
   var githubLink = 'http://www.github.com/' + handle;
   var twitter = '@' + handle;
