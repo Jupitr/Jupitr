@@ -91,4 +91,11 @@ app.get('/api/', helpers.validateUser, function(req, res) {
   res.sendStatus(200);
 });
 
+// temp route to display profile info for deployment testing
+app.get('/test' , function(req, res) {
+  user.sendAllUsers(function(data) {
+    res.send(data);
+  });
+})
+
 module.exports = app;
