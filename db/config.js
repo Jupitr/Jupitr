@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 
-// TO DO -- determine how this should be configured to deploy
-mongoose.connect('mongodb://localhost/jupitr');
+var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/jupitr'
+mongoose.connect(dbUri);
 
 var db = mongoose.connection;
 
 db.once('open', function() {
-  console.log('Connection established with MongoDB');
+  console.log('Connection established with MongoDB at: ' + dbUri);
 });
-db.on('error', console.error.bind(console, 'connection error'));
+db.on('error', console.error.bind(console, 'Connection error: unable to establish connection with MongoDB at: ' + dbUri));
 db.on('diconnected', mongoose.connect);
 
 module.exports = db;

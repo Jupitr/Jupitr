@@ -48,31 +48,12 @@ app.use(session({
 app.use(everyauth.middleware());
 
 app.get('/api/home', helpers.validateUser, function(req, res) {
-  if (req.body.allUser) {
-    user.sendAllUsers(function(users){
-      res.sendStatus(200);
-      res.json(users);
-    });
-  }
+  user.sendAllUsers(function(users){
+    res.json(users);
+  });
 });
 
-app.get('/auth', function(req, res) {
-  if (req.session && req.session.uid) {
-    helpers.getOrgs(req.session.oauth, function(is){
-      if (is) {
-        console.log(is);
-        res.redirect('/api/home');
-      }
-      else {
-        console.log(is);
-        res.redirect('/logout');
-      }
-    });
-  }
-  else {
-    res.redirect('/api/home');
-  }
-});
+app.get('/auth', helpers.checkAuth);
 
 app.get('/api/update', function(req, res) {
   // call update user api; uncomment when done
