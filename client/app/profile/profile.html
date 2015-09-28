@@ -2,12 +2,141 @@
 
   <nav class="navigation">
     <ul>
-      <li><a href="#/logout">Logout</a></li>
+      <li><a href="#/data">Data</a></li>
       <li><a class='selected' href="#/profile">Profile</a></li>
+      <li><a href="#/logout">Logout</a></li>
     </ul>
   </nav>
 
-  <div class="profile"></div>
+  <div class="profile">
+    <form name="profileForm" ng-submit='updateProfile()' novalidate>
+      <fieldset>
+        <legend>
+          Contact Information and Personal Details
+        </legend>
+        <label>
+          Name:
+          <input type="text" name="name" maxlength="100" 
+            ng-model="" ng-class="" placeholder="" required>
+        </label>
+        <label>
+          Email:
+          <input type="email" name="email" maxlength="100" 
+            ng-model="" ng-class="" placeholder="" required>
+        </label>
+        <label>
+          Zipcode:
+          <input type="text" name="zip" maxlength="5" 
+            ng-model="" ng-class="" placeholder="" required>
+        </label>
+        <label>
+          Cohort:
+          <select name="cohort" ng-model="" ng-class="" required>
+              <option value="HRRB01">HRRB01</option>
+              <option value="HRRB02">HRRB02</option>
+              <option value="HRRB03">HRRB03</option>
+              <option value="HRRB04">HRRB04</option>
+              <option value="HRRB05">HRRB05</option>
+              <option value="HRRB06">HRRB06</option>
+              <option value="HRRB07">HRRB07</option>
+              <option value="HRRB07">HRRB08</option>
+          </select>
+        </label>
+        <label>
+          Gender:
+          <select name="gender" ng-model="" ng-class="">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+          </select>
+        </label>
+        <label>
+          Ethnicity:
+          <input type="text" name="race" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>
+          Career Information
+        </legend>
+        </label>
+          Current Job Title/Role:
+          <input type="text" name="role" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Current Employer:
+          <input type="text" name="currentemployer" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Start Date:
+          <input type="date" name="current-startdate" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Previous Employer:
+          <input type="textarea" name="prioremployer" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Start Date:
+          <input type="date" name="prev-startdate" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          End Date:
+          <input type="date" name="prev-enddate" maxlength="100" 
+            ng-model="" ng-class="" placeholder=""> 
+        </label>
+        <label>
+          Github:
+          <input type="text" name="github" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Twitter:
+          <input type="text" name="twitter" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Website:
+          <input type="text" name="website" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">  
+        </label>
+        <label>
+          Thesis:
+          <input type="text" name="thesis" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Thesis URL:
+          <input type="url" name="thesisurl" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Greenfield:
+          <input type="text" name="greenfield" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Legacy Project:
+          <input type="text" name="legacy" maxlength="100" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+        <label>
+          Technologies:
+          <input type="textarea" name="technologies" 
+            ng-model="" ng-class="" placeholder="">
+        </label>
+      </fieldset>
+   
+      <button type="submit" value="save" ng-disabled='profileForm.$invalid'>
+        Save Profile
+      </button>            
+    </form>
+  </div>
 
 </div>
 
