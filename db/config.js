@@ -6,7 +6,7 @@ mongoose.connect('mongodb://localhost/jupitr');
 var db = mongoose.connection;
 
 db.once('open', function() {
-  console.log('connection with MongoDB established');
+  console.log('Connection established with MongoDB');
 });
 db.on('error', console.error.bind(console, 'connection error'));
 db.on('diconnected', mongoose.connect);

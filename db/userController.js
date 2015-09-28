@@ -39,7 +39,7 @@ exports.addUser = addUser = function(data, callback) {
 
 // TODO -- add functionality to update a user record
 
-// returns all user data
+// returns an array all user profiles as separate JSON objects
 exports.sendAllUsers = function(callback) {
   User.find({}, function(err, users) {
     if (err) {
@@ -51,6 +51,18 @@ exports.sendAllUsers = function(callback) {
   });
 };
 
+// finds specific user profile based on github login handle
+// passes callback a JSON object of profile or undefined
+exports.findUserProfile = function(login, callback) {
+  User.find({githublogin: login}, function(err, profile) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    callback(profile[0]);
+  });
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 //                   to seed database with user records                      //
 //               un-comment function below and restart server                //
@@ -58,12 +70,13 @@ exports.sendAllUsers = function(callback) {
 //    re-comment the function to avoid seeding the database multiple times   //
 ///////////////////////////////////////////////////////////////////////////////
 
+/*
+var records = 100;
 
-// var records = 100;
-
-// var userGenerator = require('./seed-data.js');
-// for (var i = 0; i < records; i++) {
-//   addUser(userGenerator(), function() {
-//     console.log('seed record created');
-//   });
-// }
+var userGenerator = require('./seed-data.js');
+for (var i = 0; i < records; i++) {
+  addUser(userGenerator(), function() {
+    console.log('seed record created');
+  });
+}
+*/
