@@ -53,8 +53,9 @@ exports.sendAllUsers = function(callback) {
 
 ///////////////////////////////////////////////////////////////////////////////
 //                   to seed database with user records                      //
-//               uncomment function below and restart server                 //
+//               un-comment function below and restart server                //
 //      set the records variable to specify number of records to create      //
+//    re-comment the function to avoid seeding the database multiple times   //
 ///////////////////////////////////////////////////////////////////////////////
 
 
