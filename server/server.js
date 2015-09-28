@@ -69,7 +69,7 @@ app.get('/auth', function(req, res) {
     });
   }
   else {
-    res.sendstatus(200);
+    res.redirect('/api/home');
   }
 });
 
