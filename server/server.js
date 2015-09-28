@@ -11,7 +11,7 @@ var user = require('../db/userController.js');
 var app = express();
 
 everyauth.github
-  .entryPath('/github')
+  .entryPath('/api/github')
   .appId(config.github.appId)
   .appSecret(config.github.appSecret)
   .scope('user')
@@ -30,8 +30,8 @@ everyauth.everymodule.handleLogout( function (req, res) {
       throw err;
     }
   });
-  console.log(req.session);
-  res.writeHead(303, { 'Location': '/get' });
+  // if status is 303 then FE redirect
+  res.sendStatus(303);
   res.end();
 });
 
@@ -46,26 +46,47 @@ app.use(session({
 }));
 app.use(everyauth.middleware());
 
-app.get('/', helpers.validateUser, function(req, res) {
-  if (req.session && !req.session.init) {
+app.get('/api/home', helpers.validateUser, function(req, res) {
+  if (req.body.allUser) {
     user.sendAllUsers(function(users){
-      req.session.init = true;
       res.sendStatus(200);
       res.json(users);
     });
   }
+});
+
+app.get('/auth', function(req, res) {
+  if (req.session && req.session.uid) {
+    helpers.getOrgs(req.session.oauth, function(is){
+      if (is) {
+        console.log(is);
+        res.redirect('/api/home');
+      }
+      else {
+        console.log(is);
+        res.redirect('/logout');
+      }
+    });
+  }
   else {
-    res.sendStatus(200);
+    res.redirect('/');
   }
 });
 
-app.get('/auth', helpers.checkAuth);
-
-app.get('/api/updateAcc', function(req, res) {
-  res.sendStatus(200);
+app.get('/api/update', function(req, res) {
+  // call update user api; uncomment when done
+  // user.updateUser(req.data, function(){
+    res.sendStatus(200);
+  // });
 });
 
-app.get('/api/createAcc', helpers.validateUser, function(req, res) {
+app.get('/api/create', helpers.validateUser, function(req, res) {
+  user.addUser(req.data, function(){
+    res.sendStatus(200);
+  });
+});
+
+app.get('/api/', helpers.validateUser, function(req, res) {
   res.sendStatus(200);
 });
 
