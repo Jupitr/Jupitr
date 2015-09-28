@@ -13,11 +13,12 @@ module.exports = {
   //   res.send(500, {error: error.message});
   // },
   validateUser: function (req, res, next) {
+    console.log(req.session);
     if (req.session && req.session.uid) {
       next();
     }
     else {
-      res.redirect('/login');
+      res.redirect('/');
     }
   },
 
@@ -33,12 +34,19 @@ module.exports = {
     });
   },
 
-  checkAuth: function (data, key, prop) {
-    data.forEach(function(item){
-      if (item.key === prop) {
-        return true;
-      }
-    });
-    return false;
+  checkAuth: function (req, res) {
+    if (req.session && req.session.uid) {
+      module.exports.getOrgs(req.session.oauth, function(is){
+        if (is) {
+          res.redirect('/');
+        }
+        else {
+          res.redirect('/logout');
+        }
+      });
+    }
+    else {
+      res.redirect('/');
+    }
   }
 };

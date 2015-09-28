@@ -30,6 +30,7 @@ everyauth.everymodule.handleLogout( function (req, res) {
       throw err;
     }
   });
+  console.log(req.session);
   res.writeHead(303, { 'Location': '/get' });
   res.end();
 });
@@ -46,29 +47,21 @@ app.use(session({
 app.use(everyauth.middleware());
 
 app.get('/', helpers.validateUser, function(req, res) {
-  res.sendStatus(200);
-});
-
-app.get('/auth', function(req, res) {
-  if (req.session && req.session.uid) {
-    helpers.getOrgs(req.session.oauth, function(is){
-      if (is) {
-        console.log(is);
-        res.redirect('/');
-      }
-      else {
-        console.log(is);
-        res.redirect('/logout');
-      }
+  if (req.session && !req.session.init) {
+    user.sendAllUsers(function(users){
+      req.session.init = true;
+      res.sendStatus(200);
+      res.json(users);
     });
   }
   else {
-    res.redirect('/');
+    res.sendStatus(200);
   }
 });
 
+app.get('/auth', helpers.checkAuth);
+
 app.get('/api/updateAcc', function(req, res) {
-  // call db update api
   res.sendStatus(200);
 });
 
