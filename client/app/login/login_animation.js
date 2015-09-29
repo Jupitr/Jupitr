@@ -13,7 +13,7 @@ var forceGraph = d3.layout.force()
     .charge(-60)
     .on('tick', tick);
 
-var svg = d3.select('.animation').append('svg')
+var svg = d3.select('#animation').append('svg')
     .attr('width', width)
     .attr('height', height)
     .on('mousemove', function(){

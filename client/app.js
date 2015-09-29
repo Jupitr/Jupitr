@@ -14,8 +14,8 @@
         controller: 'loginController'
       })
       .when('/home', {
-        templateUrl: '',
-        controller: ''
+        templateUrl: 'app/home/home.html',
+        controller: 'homeController'
       });
       .when('/profile', {
         templateUrl: 'app/profile/profile.html',
