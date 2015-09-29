@@ -67,33 +67,38 @@
         </legend>
         </label>
           Current Job Title/Role:
-          <input type="text" name="role" maxlength="100" 
-            ng-model="user.currentemployer.role" ng-class="" placeholder="">
+          <input type="text" name="currentemployerrole" maxlength="100" 
+            ng-model="user.currentemployerrole" ng-class="" placeholder="">
         </label>
         <label>
           Current Employer:
           <input type="text" name="currentemployer" maxlength="100" 
-            ng-model="user.currentemployer.name" ng-class="" placeholder="">
+            ng-model="user.currentemployer" ng-class="" placeholder="">
         </label>
         <label>
           Start Date:
-          <input type="date" name="current-startdate" maxlength="100" 
-            ng-model="user.currentemployer.startdate" ng-class="" placeholder="">
+          <input type="date" name="currentemployerstartdate" maxlength="100" 
+            ng-model="user.currentstartdate" ng-class="" placeholder="">
         </label>
         <label>
-          Previous Employer:
-          <input type="textarea" name="prioremployer" 
-            ng-model="user.prioremployer.name" ng-class="" placeholder="">
+          Previous Employers:
+          <input type="text" name="prioremployer1" 
+            ng-model="user.prioremployer1" ng-class="" placeholder="">
+        </label>
+        </label>
+          Current Job Title/Role:
+          <input type="text" name="prioremployer1role" maxlength="100" 
+            ng-model="user.prioremployer1role" ng-class="" placeholder="">
         </label>
         <label>
           Start Date:
-          <input type="date" name="prev-startdate" maxlength="100" 
-            ng-model="user.prioremployer.startdate" ng-class="" placeholder="">
+          <input type="date" name="prioremployer1startdate" maxlength="100" 
+            ng-model="user.prioremployer1startdate" ng-class="" placeholder="">
         </label>
         <label>
           End Date:
-          <input type="date" name="prev-enddate" maxlength="100" 
-            ng-model="user.prioremployer.enddate" ng-class="" placeholder=""> 
+          <input type="date" name="prioremployer1enddate" maxlength="100" 
+            ng-model="user.prioremployer1enddate" ng-class="" placeholder=""> 
         </label>
         <label>
           Github:
