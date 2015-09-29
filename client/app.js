@@ -23,8 +23,8 @@
         authenticate: true
       })
       .otherwise({
-        // redirectTo: '/home'
-      })
+        redirectTo: '/'
+      });
     // Need to add $httpProvider.interceptors.push('AttachTokens');?
   })
   .factory('', function(){ // factory to attach tokens?
