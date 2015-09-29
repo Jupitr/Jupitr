@@ -14,7 +14,6 @@ module.exports = {
   // },
 
   validateUser: function (req, res, next) {
-    console.log(req.session);
     if (req.session && req.session.uid) {
       next();
     }
@@ -50,7 +49,7 @@ module.exports = {
       });
     }
     else {
-      res.redirect('/#/login');
+      res.redirect('/api/login');
     }
   },
 
@@ -59,12 +58,12 @@ module.exports = {
     user.findUserProfile(login, function(record){
       if (record) {
         record.inDB = true;
-        res.json(record);
+        res.redirect('/#/home');
       }
       else {
         req.session.userRecord.zip = '00000';
         user.addUser(req.session.userRecord, function() {
-          res.send(req.session.userRecord);
+          res.redirect('/api/profile');
         });
       }
     });

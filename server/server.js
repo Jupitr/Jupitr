@@ -38,7 +38,6 @@ everyauth.everymodule.handleLogout( function (req, res) {
     }
   });
   res.redirect('/#/login');
-  res.end();
 });
 
 app.use(bodyParser.json());
@@ -52,29 +51,30 @@ app.use(session({
 }));
 app.use(everyauth.middleware());
 
-app.get('/api/home', function(req, res) {
+app.get('/api/alluser', function(req, res) {
   helpers.validateUser(req, res, function(){
     user.sendAllUsers(function(users){
       res.json(users);
       res.end();
     });
-  })
+  });
 });
 
 app.get('/auth', function(req, res){
-  helpers.checkAuth(req, res, helpers.getOrgs)
+  helpers.checkAuth(req, res, helpers.getOrgs);
 });
 
-app.get('/api/update', function(req, res) {
-  // call update user api; uncomment when done
-  // user.updateUser(req.data, function(){
-    res.sendStatus(200);
-  // });
-});
+// app.get('/api/update', function(req, res) {
+//   // call update user api; uncomment when done
+//   // user.updateUser(req.data, function(){
+//     res.sendStatus(200);
+//   // });
+// });
 
-app.get('/api/create', helpers.validateUser, function(req, res) {
-  user.addUser(req.data, function(){
-    res.sendStatus(200);
+app.get('/api/profile', helpers.validateUser, function(req, res) {
+  user.findUserProfile(req.session.uid, function(record){
+    console.log(record);
+    res.json(record);
   });
 });
 
@@ -87,6 +87,6 @@ app.get('/test' , function(req, res) {
   user.sendAllUsers(function(data) {
     res.send(data);
   });
-})
+});
 
 module.exports = app;
