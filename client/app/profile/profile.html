@@ -15,12 +15,12 @@
           Contact Information and Personal Details
         </legend>
         <label>
-          Name:
+          Name: {{profile.name}}
           <input type="text" name="name" maxlength="100" 
-            ng-model="user.name" ng-class="" placeholder="" required>
+            ng-model="user.name" ng-class="" ng-value="potato" required>
         </label>
         <label>
-          Github Login:
+          Github Login: 
           <input type="text" name="githublogin" maxlength="100" 
             ng-model="user.githublogin" ng-class="" placeholder="" required>
         </label>

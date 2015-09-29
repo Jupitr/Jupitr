@@ -2,6 +2,7 @@ angular.module('jupitr.profile', [])
 .controller('profileController', function($scope, User, $location) { 
   // get profile from session. 
   $scope.profile = User.getMyRecord(function(data) {
+    console.log("prof:" + data);
     return data; // Add || {}?
   }); 
 
