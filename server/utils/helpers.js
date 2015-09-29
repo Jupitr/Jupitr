@@ -1,5 +1,5 @@
-'use strict';
 var github = require('octonode');
+var user = require('../../db/userController.js');
 
 module.exports = {
   // errorLogger: function (error, req, res, next) {
@@ -18,8 +18,7 @@ module.exports = {
       next();
     }
     else {
-      // send status code for FE to handle
-      res.sendStatus(303);
+      res.redirect('/#/login');
     }
   },
 
@@ -35,13 +34,12 @@ module.exports = {
     });
   },
 
-  checkAuth: function (req, res) {
+  checkAuth: function (req, res, next) {
     console.log('checking auth');
     if (req.session && req.session.uid) {
       module.exports.getOrgs(req.session.oauth, function(is){
         if (is) {
-          console.log(is);
-          res.redirect('/api/home');
+          module.exports.checkUserInDB(req, res, req.session.uid);
         }
         else {
           res.redirect('/logout');
@@ -49,7 +47,19 @@ module.exports = {
       });
     }
     else {
-      res.redirect('/api/home');
+      res.redirect('/#/login');
     }
+  },
+
+  checkUserInDB: function(req, res, login) {
+    console.log(login);
+    user.findUserProfile(login, function(record){
+      if (record) {
+        res.redirect('/#/home');
+      }
+      else {
+        res.redirect('/#/profile');
+      }
+    })
   }
 };
