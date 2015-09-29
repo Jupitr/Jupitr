@@ -63,5 +63,4 @@ angular.module('jupitr.services', [])
     update: update
   };
 
-})
-.factory(); // Auth factory
+}); 
