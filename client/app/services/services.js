@@ -19,7 +19,12 @@ angular.module('jupitr.services', [])
       url: '/api/profile'
     })
     .then(function(resp) {
-      cb(resp.data);
+      if (resp.data === 'Unauthorized') {
+        $location.path('/login');
+      }
+      else {
+        cb(resp.data);
+      }
     });
   };
 

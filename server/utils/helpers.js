@@ -14,11 +14,12 @@ module.exports = {
   // },
 
   validateUser: function (req, res, next) {
+    console.log('validate user', !!(req.session && req.session.uid));
     if (req.session && req.session.uid) {
       next();
     }
     else {
-      res.redirect('/#/login');
+      res.end('Unauthorized');
     }
   },
 
@@ -44,12 +45,12 @@ module.exports = {
           module.exports.checkUserInDB(req, res, req.session.uid);
         }
         else {
-          res.redirect('/logout');
+          res.redirect('/#/logout');
         }
       });
     }
     else {
-      res.redirect('/api/login');
+      res.redirect('/#/login');
     }
   },
 
