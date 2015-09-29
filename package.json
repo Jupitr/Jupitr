@@ -39,7 +39,7 @@
     "grunt-nodemon": "^0.4.0",
     "grunt-shell": "^1.1.2",
     "mocha": "^2.3.3",
-    "mongoose": "^4.1.8",
+    "mongoose": "4.1.8",
     "octonode": "^0.7.1",
     "parseurl": "^1.3.0",
     "session": "^0.1.0",
