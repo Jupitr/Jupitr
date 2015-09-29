@@ -21,7 +21,7 @@ angular.module('jupitr', [
       })
       .when('/profile', {
         templateUrl: 'app/profile/profile.html',
-        controller: 'profileController'
+        controller: 'profileController',
       })
       .otherwise({
         redirectTo: '/'
