@@ -1,4 +1,5 @@
-var userController = require('./userController');
+var user = require('./userController.js');
+var db = require('./config.js');
 
 var firstNames = ['Noah', 'Emma', 'Liam', 'Olivia', 'Mason', 'Sophia', 'Jacob', 
   'Isabella', 'William', 'Ava', 'Ethan', 'Mia', 'Michael', 'Emily', 'Alex',
@@ -112,5 +113,17 @@ var generateRandomUser = function() {
 }
 
 // console.log(generateRandomUser());
+
+var records = Number(process.argv[2]);
+
+for (var i = 0; i < records; i++) {
+  user.addUser(generateRandomUser(), function() {
+    console.log('seed record created');
+  });
+}
+
+setTimeout(function() {
+  process.exit();
+}, 1000);
 
 module.exports = generateRandomUser;
