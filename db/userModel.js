@@ -40,13 +40,13 @@ var userSchema = new mongoose.Schema({
 
 // middleware to retrieve precise location data
 userSchema.pre('save', function(next) {
-  // if (this.zip) {
+  if (this.zip) {
     var temp = zipcodes.lookup(this.zip);
     this.city = temp.city;
     this.state = temp.state;
     this.latitude = temp.latitude;
     this.longitude = temp.longitude;
-  // }
+  }
   next();
 });
 
