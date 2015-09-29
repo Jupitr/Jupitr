@@ -15,7 +15,7 @@
     "npm": "2.14.2"
   },
   "scripts": {
-    ""
+    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "node index.js"
   },
   "homepage": "https://github.com/Dnld/Jupitr#readme",
