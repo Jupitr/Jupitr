@@ -57,28 +57,22 @@ var generateRandomUser = function() {
   technologies.push(pickRandom(techs));
   technologies.push(pickRandom(techs));
   technologies.push(pickRandom(techs));
-  
-  var currentEmployer = {
-    company: pickRandom(companies),
-    role: pickRandom(roles),
-    startdate: new Date(),
-    enddate: new Date()
-  };
-  
-  var priorEmployer1 = {
-    company: pickRandom(companies),
-    role: pickRandom(roles),
-    startdate: new Date(),
-    enddate: new Date()
-  };
+  var currentEmployer = pickRandom(companies);
+  var currentEmployerRole = pickRandom(roles);
+  var currentEmployerStartDate = new Date();
+  var priorEmployer1 = pickRandom(companies);
+  var priorEmployer1Role = pickRandom(roles);
+  var priorEmployer1StartDate = new Date();
+  var priorEmployer1EndDate = new Date();
+  var priorEmployer2 = pickRandom(companies);
+  var priorEmployer2Role = pickRandom(roles);
+  var priorEmployer2StartDate = new Date();
+  var priorEmployer2EndDate = new Date();
+  var priorEmployer3 = pickRandom(companies);
+  var priorEmployer3Role = pickRandom(roles);
+  var priorEmployer3StartDate = new Date();
+  var priorEmployer3EndDate = new Date();
 
-  var priorEmployer2 = {
-    company: pickRandom(companies),
-    role: pickRandom(roles),
-    startdate: new Date(),
-    enddate: new Date()
-  };
-  
   return {
     name: name,
     githublogin: githubLogin,
@@ -97,7 +91,22 @@ var generateRandomUser = function() {
     thesisurl: thesisurl,
     greenfield: greenfield,
     legacy: legacy,
-    technologies: technologies 
+    technologies: technologies ,
+    currentemployer: currentEmployer,
+    currentemployerrole: currentEmployerRole,
+    currentemployerstartdate: currentEmployerStartDate,
+    prioremployer1: priorEmployer1,
+    prioremployer1role: priorEmployer1Role,
+    prioremployer1startdate: priorEmployer1StartDate,
+    prioremployer1enddate: priorEmployer2StartDate,
+    prioremployer2: priorEmployer2,
+    prioremployer2role: priorEmployer2Role,
+    prioremployer2startdate: priorEmployer2StartDate,
+    prioremployer2enddate: priorEmployer2EndDate,
+    prioremployer3: priorEmployer3,
+    prioremployer3role: priorEmployer3Role,
+    prioremployer3startdate: priorEmployer3StartDate,
+    prioremployer3enddate: priorEmployer3EndDate,
   };
   
 }
