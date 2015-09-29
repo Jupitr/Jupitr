@@ -19,6 +19,12 @@ everyauth.github
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, githubUserMetadata) {
     session.oauth = accessToken;
     session.uid = githubUserMetadata.login;
+    session.userRecord = {
+      name: githubUserMetadata.name,
+      githublogin: githubUserMetadata.login,
+      email: githubUserMetadata.email,
+      githublink: 'https://github.com/' + githubUserMetadata.login
+    };
     return session.uid;
   })
   .redirectPath('/auth');
@@ -46,14 +52,18 @@ app.use(session({
 }));
 app.use(everyauth.middleware());
 
-app.get('/api/home', helpers.validateUser, function(req, res) {
-  user.sendAllUsers(function(users){
-    res.json(users);
-    res.end();
-  });
+app.get('/api/home', function(req, res) {
+  helpers.validateUser(req, res, function(){
+    user.sendAllUsers(function(users){
+      res.json(users);
+      res.end();
+    });
+  })
 });
 
-app.get('/auth', helpers.checkAuth);
+app.get('/auth', function(req, res){
+  helpers.checkAuth(req, res, helpers.getOrgs)
+});
 
 app.get('/api/update', function(req, res) {
   // call update user api; uncomment when done

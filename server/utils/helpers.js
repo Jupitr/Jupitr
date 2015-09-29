@@ -12,6 +12,7 @@ module.exports = {
   //   // message for gracefull error handling on app
   //   res.send(500, {error: error.message});
   // },
+
   validateUser: function (req, res, next) {
     console.log(req.session);
     if (req.session && req.session.uid) {
@@ -22,6 +23,7 @@ module.exports = {
     }
   },
 
+  // get and check organization
   getOrgs: function (token, cb) {
     var client = github.client(token);
     var me = client.me();
@@ -34,10 +36,11 @@ module.exports = {
     });
   },
 
+  // check if user has the correct authentication
   checkAuth: function (req, res, next) {
     console.log('checking auth');
     if (req.session && req.session.uid) {
-      module.exports.getOrgs(req.session.oauth, function(is){
+      next(req.session.oauth, function(is){
         if (is) {
           module.exports.checkUserInDB(req, res, req.session.uid);
         }
@@ -51,15 +54,19 @@ module.exports = {
     }
   },
 
+  // check whether a valid user (i.e one that has HR auth) is already in the DB
   checkUserInDB: function(req, res, login) {
-    console.log(login);
     user.findUserProfile(login, function(record){
       if (record) {
-        res.redirect('/#/home');
+        record.inDB = true;
+        res.json(record);
       }
       else {
-        res.redirect('/#/profile');
+        req.session.userRecord.zip = '00000';
+        user.addUser(req.session.userRecord, function() {
+          res.send(req.session.userRecord);
+        });
       }
-    })
+    });
   }
 };
