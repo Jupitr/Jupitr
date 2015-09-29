@@ -78,31 +78,10 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      'git-add': {
-        command: 'git --no-pager add .',
-        options: {
-          stdout: true,
-          stderr: true,
-          // execOptions: { cwd: '../deploy'}
+      // seeds database with 300 records
+      seeddb: {
+        command: 'node db/seed-data.js 300'
         }
-      },
-      'git-commit':           {
-        command: 'git --no-pager commit -m "update"',
-        options: {
-          stdout: true,
-          stderr: true,
-          // execOptions: { cwd: '../deploy'}
-        }
-      },
-      'git-push':             {
-        command: 'git --no-pager push heroku master',
-        options: {
-          failOnError: true,
-          stdout: true,
-          stderr: true,
-          // execOptions: { cwd: '../deploy'}
-        }
-      }
     }
   });
 
@@ -132,6 +111,11 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
+  // seeds database with 300 records
+  grunt.registerTask('seeddb', [
+    'shell:seeddb'
+  ]);
+  
   grunt.registerTask('test', [
     'jshint',
     'mochaTest'
