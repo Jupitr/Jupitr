@@ -2,18 +2,28 @@
 var width = 800;
 var height = 600;
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#map").append("svg")
   .attr("width", width)
   .attr("height", height);
 
-// creating map using US state data, ask team if they want world data.
-
+// storing map using US state data, TODO ask team if they want world data.
+var states = d3.geo.albersUsa()
+  .scale(1000)
+  .translate([width, height]);
 // d3.geo.albersUsa for US map
 // d3.geo.equirectangular for world map
 // https://github.com/mbostock/d3/wiki/Geo-Projections
 
-d3.json('us.json', function(err, us){
+// using states variable to render map
+var map = d3.geo.path()
+  .projection(states);
 
+svg.append('rect')
+  .attr('width', width)
+  .attr('height', height)
+  .classed('background', true);
+
+d3.json('us.json', function(err, us){
   // https://gist.github.com/markmarkoh/2969317
   // link for world data if group prefers world over us data
   if(error){
