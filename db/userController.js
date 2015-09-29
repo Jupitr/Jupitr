@@ -72,7 +72,7 @@ exports.addUser = addUser = function(data, callback) {
 
 // updates user profile
 exports.updateProfile = updateProfile = function(data, callback) {
-  User.findByIdAndUpdate(data.id, data, function(err, profile) {
+  User.findByIdAndUpdate(data._id, data, function(err, profile) {
     if (err) {
       console.error(err);
       return;
@@ -89,7 +89,7 @@ exports.updateProfile = updateProfile = function(data, callback) {
 //    re-comment the function to avoid seeding the database multiple times   //
 ///////////////////////////////////////////////////////////////////////////////
 
-
+/*
 var records = 100;
 
 var userGenerator = require('./seed-data.js');
@@ -98,4 +98,4 @@ for (var i = 0; i < records; i++) {
     console.log('seed record created');
   });
 }
-
+*/
