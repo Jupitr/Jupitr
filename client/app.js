@@ -16,7 +16,7 @@
       .when('/home', {
         templateUrl: 'app/home/home.html',
         controller: 'homeController'
-      });
+      })
       .when('/profile', {
         templateUrl: 'app/profile/profile.html',
         controller: 'profileController',
