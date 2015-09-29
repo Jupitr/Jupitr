@@ -41,11 +41,12 @@ var userSchema = new mongoose.Schema({
 // middleware to retrieve precise location data
 userSchema.pre('save', function(next) {
   if (this.zip) {
-    var temp = zipcodes.lookup(this.zip);
-    this.city = temp.city;
-    this.state = temp.state;
-    this.latitude = temp.latitude;
-    this.longitude = temp.longitude;
+    // var temp = zipcodes.lookup(this.zip);
+    // console.log('TEMP ', temp);
+    this.city = zipcodes.lookup(this.zip).city;
+    this.state = zipcodes.lookup(this.zip).state;
+    this.latitude = zipcodes.lookup(this.zip).latitude;
+    this.longitude = zipcodes.lookup(this.zip).longitude;
   }
   next();
 });
