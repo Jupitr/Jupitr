@@ -76,12 +76,29 @@ module.exports = function(grunt) {
         tasks: ['cssmin']
       }
     },
+    
+    'mongo-drop': {
+      options: {
+        dbname: 'jupitr',
+        host: 'localhost'
+      }
+    },
 
     shell: {
       // seeds database with 300 records
       seeddb: {
         command: 'node db/seed-data.js 300'
-        }
+      },
+      // dropdb: {
+      //   multiple: {
+      //     command: [
+      //       'mongo',
+      //       'use jupitr',
+      //       'db.dropDatabase()',
+      //       'exit'
+      //     ].join('&&')
+      //   }
+      // }
     }
   });
 
@@ -90,6 +107,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-mongo-drop-task');  
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
@@ -114,6 +132,10 @@ module.exports = function(grunt) {
   // seeds database with 300 records
   grunt.registerTask('seeddb', [
     'shell:seeddb'
+  ]);
+  
+  grunt.registerTask('dropdb', [
+    'mongo-drop'
   ]);
   
   grunt.registerTask('test', [
