@@ -2,7 +2,7 @@
   angular.module('jupitr', [
     'jupitr.services',
     'jupitr.login',
-    // 'jupitr.home',
+    'jupitr.home',
     'jupitr.profile',
     // 'jupitr.auth',
     'ngRoute'
@@ -11,12 +11,12 @@
     $routeProvider
       .when('/login', {
         templateUrl: 'app/login/login.html',
-        controller: 'LoginController'
+        controller: 'loginController'
       })
-      // .when('/home', {
-      //   templateURL: '',
-      //   controller: ''
-      // });
+      .when('/home', {
+        templateUrl: 'app/home/home.html',
+        controller: 'homeController'
+      })
       .when('/profile', {
         templateUrl: 'app/profile/profile.html',
         controller: 'profileController',
