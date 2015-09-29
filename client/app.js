@@ -4,10 +4,9 @@
     'jupitr.login',
     'jupitr.home',
     'jupitr.profile',
-    // 'jupitr.auth',
     'ngRoute'
   ])
-  .config(function($routeProvider){ // need to add $httpProvider?
+  .config(function($routeProvider){ 
     $routeProvider
       .when('/login', {
         templateUrl: 'app/login/login.html',
@@ -25,13 +24,5 @@
       .otherwise({
         redirectTo: '/'
       });
-    // Need to add $httpProvider.interceptors.push('AttachTokens');?
   })
-  .factory('', function(){ // factory to attach tokens?
-
-  })
-  .run(function(){
-    
-  });
-
 })();
