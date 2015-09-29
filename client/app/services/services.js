@@ -1,8 +1,8 @@
 angular.module('jupitr.services', [])
 
-.factory('User', function($http) {
+.factory('User', function($http, $location) {
   // need to add handle success/errors to these?
-
+  
   var getAll = function() {
     return $http({
       method: 'GET', 
@@ -10,6 +10,16 @@ angular.module('jupitr.services', [])
     })
     .then(function(resp) {
       return resp.data;
+    });
+  };
+
+  var getMyRecord = function(cb) {
+    return $http({
+      method: 'GET',
+      url: '/api/profile'
+    })
+    .then(function(resp) {
+      cb(resp);
     });
   };
 
@@ -47,6 +57,7 @@ angular.module('jupitr.services', [])
   // };
 
   return {
+    getMyRecord: getMyRecord,
     getAll: getAll,
     getUser: getUser,
     update: update

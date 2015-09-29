@@ -1,5 +1,5 @@
 angular.module('jupitr.profile', [])
-.controller('profileController', function($scope, User) {  
+.controller('profileController', function($scope, User, $location) {  
   $scope.profile = {}; 
 
   $scope.update = function(user) {
@@ -20,5 +20,8 @@ angular.module('jupitr.profile', [])
     $scope.user = angular.copy($scope.profile);
   };
 
-  $scope.reset();
+  User.getMyRecord(function(data){
+    console.log(data);
+    $scope.reset();
+  });
 });
