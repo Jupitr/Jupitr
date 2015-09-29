@@ -10,21 +10,21 @@
   .config(function($routeProvider){ // need to add $httpProvider?
     $routeProvider
       .when('/login', {
-        templateURL: 'app/login/login.html',
+        templateUrl: 'app/login/login.html',
         controller: 'LoginController'
-      });
+      })
       // .when('/home', {
       //   templateURL: '',
       //   controller: ''
       // });
       .when('/profile', {
-        templateURL: 'app/profile/profile.html',
+        templateUrl: 'app/profile/profile.html',
         controller: 'profileController',
         authenticate: true
-      });
+      })
       .otherwise({
         // redirectTo: '/home'
-      });
+      })
     // Need to add $httpProvider.interceptors.push('AttachTokens');?
   })
   .factory('', function(){ // factory to attach tokens?
