@@ -12,14 +12,16 @@
   },
   "engines": {
     "node": "0.12.7",
-    "npm": "2.14.2" 
+    "npm": "2.14.2"
   },
   "scripts": {
+    ""
     "start": "node index.js"
   },
   "homepage": "https://github.com/Dnld/Jupitr#readme",
   "dependencies": {
     "body-parser": "^1.14.0",
+    "bower": "^1.5.3",
     "cookie-parser": "^1.4.0",
     "depd": "^1.1.0",
     "everyauth": "^0.4.9",
