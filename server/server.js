@@ -31,8 +31,7 @@ everyauth.everymodule.handleLogout( function (req, res) {
       throw err;
     }
   });
-  // if status is 303 then FE redirect
-  res.sendStatus(303);
+  res.redirect('/#/login');
   res.end();
 });
 
@@ -50,6 +49,7 @@ app.use(everyauth.middleware());
 app.get('/api/home', helpers.validateUser, function(req, res) {
   user.sendAllUsers(function(users){
     res.json(users);
+    res.end();
   });
 });
 
