@@ -17,12 +17,13 @@ rect {
 #animation {
 }
 
-/*Home Visualization*/
-
 .link {
   stroke: grey;
   opacity: 0.2;
 }
+
+/*Home Visualization*/
+
 
 #map {
   fill:none;
