@@ -1,25 +1,12 @@
 # Jupitr
 
-> A portal for Hack Reactor alumni and students to connect
+> Jupitr is portal for Hack Reactor alumni and students to connect with each other.
 
 ## Team
 
   - __Product Owner__: Kevin lee
-  - __Scrum Master__: Donald Steiner
+  - __Scrum Master__: Donald Steinert
   - __Development Team Members__: Melinda Budde, Lain Jiang
-
-## Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies and Running Jupitr](#installing-dependencies-and-running-jupitr)
-1. [Team](#team)
-1. [Contributing](#contributing)
-
-## Usage
-
-> Some usage instructions
 
 ## Requirements
 
@@ -30,7 +17,7 @@
 
 ## Development
 
-### Installing Dependencies and Running Jupitr
+### Installing Dependencies
 
 From within the root directory install all dependencies with the following command:
 
@@ -38,10 +25,12 @@ From within the root directory install all dependencies with the following comma
 npm install
 ```
 
-Once your MongoDB server is running, you can seed the database with generated user profiles with either of the following commands:
+### Usage
+
+Once your MongoDB server is running, you can seed the database with randomly generated user profiles with either of the following commands:
 
 ```
-node db/seed-db.js [profile records to create]
+node db/seed-db.js [number of profiles to create]
 ```
 ```
 grunt seeddb // creates 50 profile records with each call
