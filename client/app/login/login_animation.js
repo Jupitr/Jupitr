@@ -3,7 +3,21 @@
 var width = 800;
 var height = 600;
 
-var nodeCount = [{}, {}, {}];
+// var nodeCount = [{}, {}, {}];
+
+var nodes = [
+  {name: 'Kevin', group: 1}, 
+  {name: 'Don', group: 1},
+  {name: 'Melinda', group: 1}, 
+  {name: 'Lain', group: 1}
+];
+
+var links = [
+  {'source':1,'target':0,'value':1},
+  {'source':2,'target':0,'value':8},
+  {'source':3,'target':0,'value':10},
+  {'source':3,'target':2,'value':6},
+];
 
 // force graph animation as basic introdution to the site
 var forceGraph = d3.layout.force()
