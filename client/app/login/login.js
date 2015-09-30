@@ -68,6 +68,63 @@ angular.module('jupitr.login', [])
       restrict: 'EA',
       template: '<svg width="800" height="600"></svg>',
       link: function(scope, elem, attrs){
+        var d3 = $window.d3;
+        var rawSvg = elem.find("svg")[0];
+        var svg = d3.select(rawSvg);
+        
+        var forceGraph = d3.layout.force()
+          .size([width, height])
+          .distance(100)
+          .charge(-100)
+          .gravity(0.05);
+          // .on('tick', tick);
+
+
+        svg.append('rect')
+          .attr('width', width)
+          .attr('height', height);
+
+        var drawGraph = function(){
+
+          forceGraph
+            .nodes(nodes)
+            .links(links)
+            .start();
+
+          var link = svg.selectAll(".link")
+            .data(links)
+            .enter().append("line")
+            .attr("class", "link");
+
+          var node = svg.selectAll(".node")
+            .data(nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .call(forceGraph.drag);
+
+          node.append("image")
+            .attr("xlink:href", "https://github.com/favicon.ico")
+            .attr("x", -8)
+            .attr("y", -8)
+            .attr("width", 25)
+            .attr("height", 25);
+
+          node.append("text")
+            .attr("dx", 20)
+            .attr("dy", ".35em")
+            .text(function(d) { return d.name });
+
+          forceGraph.on("tick", function() {
+            link.attr("x1", function(d) { return d.source.x; })
+              .attr("y1", function(d) { return d.source.y; })
+              .attr("x2", function(d) { return d.target.x; })
+              .attr("y2", function(d) { return d.target.y; });
+
+            node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+          });
+        };
+
+        drawGraph();
       }
     }
   });
