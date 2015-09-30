@@ -22,17 +22,18 @@ rect {
 .link {
   stroke: grey;
   opacity: 0.2;
+}
 
 #map {
   fill:none;
 }
 
 #states {
-  fill: rgba(200, 200, 200, 0.5);
+  fill: rgba(0, 0, 0, 0.95);
 }
 
 #state-borders {
-  stroke: #aaa;
+  stroke: white;
   stroke-width: 0.5px;
 }
 

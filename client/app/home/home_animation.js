@@ -23,6 +23,7 @@ var map = d3.geo.path()
 var locStore = {};
 var dummyLoc = [];
 // dummy data
+var dummyLength = dummy().length;
 dummy().forEach(function(user){
   var x, y;
   var coords = floorCoords([user.longitude, user.latitude], function(coords, lati, longi){
@@ -30,7 +31,7 @@ dummy().forEach(function(user){
     y = longi;
     return coords;
   });
-  console.log(coords);
+
   if (locStore[coords] !== undefined) {
     locStore[coords]++;
     dummyLoc.push([x, y]);
@@ -80,7 +81,9 @@ d3.json('app/home/us.json', function(err, us){
       var num = floorCoords(d, function(data){
         return locStore[data];
       });
-      return num > 20 ? 20 : num;
+      // var scale = d3.scale.linear().domain([1, 50]).range([5, 20]);
+      // num = scale(num);
+      return num/(dummyLength/200);
     })
     .attr('fill', function(d){
       var num = floorCoords(d, function(data){
@@ -112,7 +115,7 @@ function floorCoords(arr, cb) {
   cb = cb || function(coords) {
     return coords;
   };
-  var x = Math.floor(arr[0]) + 0.5;
-  var y = Math.floor(arr[1]) + 0.5;
+  var x = Math.floor(arr[0] * 5) / 5;
+  var y = Math.floor(arr[1] * 5) / 5;
   return cb(x + ', ' + y, x, y);
 }
