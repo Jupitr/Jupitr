@@ -7,9 +7,9 @@ var height = 600;
 
 var nodes = [
   {name: 'Kevin', group: 1}, 
-  {name: 'Don', group: 1},
+  {name: 'Don', group: 2},
   {name: 'Melinda', group: 1}, 
-  {name: 'Lain', group: 1}
+  {name: 'Lain', group: 3}
 ];
 
 var links = [

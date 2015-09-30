@@ -8,11 +8,16 @@ rect {
   fill: black;
 }
 
-/*.target {
-  fill: none;
-  stroke: red;
-  pointer-events: none;
-}*/
+#login {
+  display: inline-block;
+  float: right;
+  width: 33%;
+}
+
+#animation {
+}
+
+/*Home Visualization*/
 
 .link {
   stroke: grey;
@@ -35,3 +40,5 @@ rect {
   stroke: rgba(50, 50, 50, 0.2);
   stroke-width: 0.05px;
 }
+
+/*Home Page*/
