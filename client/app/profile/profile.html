@@ -183,12 +183,10 @@
         </label>
       </fieldset>
 
-      <!-- <input type="button" ng-click="reset()" value="Reset"> -->
       <input type="submit" ng-click="update(user)" value="Save Profile" 
       ng-disabled='profileForm.$invalid'>          
     </form>
       <pre>user = {{user | json}}</pre> <!-- Remove before deployment -->
-      <pre>profile = {{profile | json}}</pre> <!-- Remove before deployment -->
   </div>
 
 </div>
