@@ -30,25 +30,52 @@
           ng-model="user.email" ng-class="" required>
         </label>
         <label>
+          City: 
+          <input type="text" name="city" maxlength="100" 
+          ng-model="user.city" ng-class="" required>
+        </label>
+        <label>
+          State: 
+          <input type="text" name="state" maxlength="100" 
+          ng-model="user.state" ng-class="" required>
+        </label>
+        <label>
           Zipcode:
           <input type="text" name="zip" maxlength="5" 
           ng-model="user.zip" ng-class="" required>
         </label>
         <label>
-          School/Cohort:
-          <select name="cohort" ng-model="user.cohort" ng-class="" required>
-            <option value="HR">Hack Reactor, San Francisco</option>Cohort Number:
-            <input type="text" name="HRCohort"> 
-            <option value="HRRB">Hack Reactor, Remote Beta</option>Cohort Number:
-            <input type="text" name="HRRBCohort"> 
-          </select>
+          School/Cohort:        
+            <input type="radio" name="HR" ng-model="school.name" value="HR">Hack Reactor, San Francisco
+            <input type="radio" name="HRRB" ng-model="school.name" value="HRRB">Hack Reactor, Remote Beta
+            <select name="cohort" ng-model="user.cohort" ng-class="">
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+            </select>
         </label>
         <label>
           Gender:
           <select name="gender" ng-model="user.gender" ng-class="">
             <option value="male">Male</option>
             <option value="female">Female</option>
-            <option value="transgender">Transgender</option>
             <option value="other">Other</option>
           </select>
         </label>
@@ -59,7 +86,7 @@
             <option value="Black/African-American">Black or African American</option>
             <option value="Hispanic">Hispanic or Latino</option>
             <option value="Native American">Native American or Alaska Native</option>
-            <option value="Native Hawaiian/Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
+            <option value="Middle Eastern">Middle Eastern</option>
             <option value="Caucasion/White">White</option>
             <option value="Other">Other</option>
           </select>
@@ -70,15 +97,24 @@
         <legend>
           Career Information
         </legend>
-        </label>
-          Current Job Title/Role:
-          <input type="text" name="currentemployerrole" maxlength="100" 
-          ng-model="user.currentemployerrole" ng-class="">
-        </label>
         <label>
           Current Employer:
           <input type="text" name="currentemployer" maxlength="100" 
           ng-model="user.currentemployer" ng-class="">
+        </label>
+        <label>
+          Job Type:
+          <select name="currentemployertype" ng-model="user.currentemployertype" ng-class="">
+            <option value="onsite">Onsite</option>
+            <option value="remote">Remote</option>
+            <option value="freelance">Freelance</option>
+            <option value="contract">Contract</option>
+          </select>
+        </label>
+        </label>
+          Current Job Title/Role:
+          <input type="text" name="currentemployerrole" maxlength="100" 
+          ng-model="user.currentemployerrole" ng-class="">
         </label>
         <label>
           Start Date:
@@ -89,6 +125,15 @@
           Previous Employer 1:
           <input type="text" name="prioremployer1" 
           ng-model="user.prioremployer1" ng-class="">
+        </label>
+        <label>
+          Job Type:
+          <select name="prioremployer1type" ng-model="user.prioremployer1type" ng-class="">
+            <option value="onsite">Onsite</option>
+            <option value="remote">Remote</option>
+            <option value="freelance">Freelance</option>
+            <option value="contract">Contract</option>
+          </select>
         </label>
         </label>
           Job Title/Role:
@@ -110,6 +155,15 @@
           <input type="text" name="prioremployer2" 
           ng-model="user.prioremployer2" ng-class="">
         </label>
+        <label>
+          Job Type:
+          <select name="prioremployer2type" ng-model="user.prioremployer2type" ng-class="">
+            <option value="onsite">Onsite</option>
+            <option value="remote">Remote</option>
+            <option value="freelance">Freelance</option>
+            <option value="contract">Contract</option>
+          </select>
+        </label>
         </label>
           Job Title/Role:
           <input type="text" name="prioremployer2role" maxlength="100" 
@@ -129,6 +183,15 @@
           Previous Employer 3:
           <input type="text" name="prioremployer3" 
           ng-model="user.prioremployer3" ng-class="">
+        </label>
+        <label>
+          Job Type:
+          <select name="prioremployer3type" ng-model="user.prioremployer3type" ng-class="">
+            <option value="onsite">Onsite</option>
+            <option value="remote">Remote</option>
+            <option value="freelance">Freelance</option>
+            <option value="contract">Contract</option>
+          </select>
         </label>
         </label>
           Job Title/Role:
@@ -182,27 +245,36 @@
         </label>
         <label>
           Technologies:
-          <input type="checkbox" name="technologies" value="angular">Angular
-          <input type="checkbox" name="technologies" value="backbone">Backbone
-          <input type="checkbox" name="technologies" value="CSS">CSS
-          <input type="checkbox" name="technologies" value="d3">D3
-          <input type="checkbox" name="technologies" value="Express">Express
-          <input type="checkbox" name="technologies" value="Fortran">Fortran
-          <input type="checkbox" name="technologies" value="HTML">HTML
-          <input type="checkbox" name="technologies" value="iOS">iOS
-          <input type="checkbox" name="technologies" value="Java">Java
-          <input type="checkbox" name="technologies" value="JavaScript">JavaScript
-          <input type="checkbox" name="technologies" value="MongoDB">MongoDB
-          <input type="checkbox" name="technologies" value="Node">Node        
-          <input type="checkbox" name="technologies" value="SQL">SQL
-          <input type="checkbox" name="technologies" value="Unix">Unix          
-          <input type="checkbox" name="technologies" value="vim">vim
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Android">Android
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Angular">Angular
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Backbone">Backbone
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="C/C++">C/C++
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="CSS">CSS
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="D3">D3
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Go">Go
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Express">Express
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="HTML">HTML
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="iOS">iOS
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Java">Java
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="JavaScript">JavaScript
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Jquery">Jquery
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="MongoDB">MongoDB
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Node">Node
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Pearl">Pearl
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="PHP">PHP
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Rails">Rails
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="React">React
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Ruby">Ruby
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Ruby">Rust          
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="SQL">SQL
+          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Unix">Unix          
         </label>
       </fieldset>
 
       <input type="submit" ng-click="update(user)" value="Save Profile" 
       ng-disabled='profileForm.$invalid'>          
     </form>
+      <pre>school = {{school | json}}</pre> <!-- Remove before deployment -->
       <pre>user = {{user | json}}</pre> <!-- Remove before deployment -->
   </div>
 
