@@ -1,22 +1,22 @@
 /*Login Visualization*/
 rect {
-  fill: grey;
+  fill: white;
   pointer-events: all;
 }
 
 .node {
-  fill: blue;
+  fill: black;
 }
 
-.target {
+/*.target {
   fill: none;
   stroke: red;
   pointer-events: none;
-}
+}*/
 
 .link {
-  stroke: white;
-}
+  stroke: grey;
+  opacity: 0.2;
 
 #map {
   fill:none;
