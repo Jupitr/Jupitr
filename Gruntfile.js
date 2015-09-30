@@ -130,6 +130,10 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
+  grunt.registerTask('server-prod', [
+    'shell'
+  ]);
+  
   // seeds database with 300 records
   grunt.registerTask('seeddb', [
     'shell:seeddb'
@@ -160,30 +164,13 @@ module.exports = function(grunt) {
     'uglify',
     'cssmin'
   ]);
-
-  grunt.registerTask('server-prod', [
-    'shell'
+  
+  grunt.registerTask('run', [
+    'nodemon'
   ]);
 
-  grunt.registerTask('upload', function(n) {
-    if (grunt.option('prod')) {
-      grunt.task.run([ 'server-prod' ]);
-    } else {
-      console.log('local server');
-      grunt.task.run([ 'server-dev' ]);
-    }
-  });
-
-  grunt.registerTask('deploy', function(){
-    grunt.task.run([ 'test', 'build', 'upload' ]);
-  });
-
-  grunt.registerTask('heroku:production', function(){
-    grunt.task.run([ 'build' ]);
-  });
-
-  grunt.registerTask('heroku:development', function(){
-    grunt.task.run([ 'build' ]);
+  grunt.registerTask('local', function(){
+    grunt.task.run([ 'test', 'build', 'run' ]);
   });
 
 };
