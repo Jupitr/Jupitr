@@ -5,8 +5,8 @@ angular.module('jupitr.profile', [])
 
   $scope.update = function() {
     // combine school name (HR/HRRB) with cohort number
-    // to send back to database as HR## or HRRB##
-    $scope.user.cohort = $scope.school.name + $scope.user.cohort;
+    // to send back to database as HR # or HRRB #
+    $scope.user.cohort = $scope.school.name + " " + $scope.user.cohort;
     // Update using User factory (see services.js) with updated user profile, 
     // then send to profile page again
     User.update($scope.user)
@@ -19,10 +19,13 @@ angular.module('jupitr.profile', [])
   };
 
   User.getMyRecord(function(data){
-    console.log(data);
     // get profile data from session
     $scope.user = data;
     // Split school name (HR/HRRB) from cohort number
     // for use in form
+    if ($scope.user.cohort) {
+      $scope.school = $scope.user.cohort.split(' ')[0];
+      $scope.user.cohort = $scope.user.cohort.split(' ')[1];
+    }
   });
 });
