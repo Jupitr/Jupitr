@@ -1,6 +1,6 @@
 # Jupitr
 
-> Jupitr is portal for Hack Reactor alumni and students to connect with each other.
+Jupitr is portal for Hack Reactor students and alumni to connect with each other.
 
 ## Team
 
