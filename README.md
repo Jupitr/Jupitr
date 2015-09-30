@@ -1,12 +1,12 @@
-# Project Name
+# Jupitr
 
-> Pithy project description
+> A portal for Hack Reactor alumni and students to connect
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Kevin lee
+  - __Scrum Master__: Donald Steiner
+  - __Development Team Members__: Melinda Budde, Lain Jiang
 
 ## Table of Contents
 
@@ -24,11 +24,9 @@
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 0.12.7
+- npm 2.14.2
+- MongoDb 3.0.6
 
 ## Development
 
@@ -39,13 +37,11 @@ From within the root directory:
 ```sh
 sudo npm install -g bower
 npm install
-bower install
 ```
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
+View the project roadmap [https://github.com/Jupitr/Jupitr/issues](LINK_TO_PROJECT_ISSUES)
 
 ## Contributing
 
