@@ -1,7 +1,7 @@
 {
   "name": "jupitr",
   "version": "1.0.0",
-  "description": "A portal for Hack Reactor alumni and students to connect",
+  "description": "A portal for Hack Reactor students and alumni to connect with each other",
   "main": "index.js",
   "repository": {
     "type": "git",

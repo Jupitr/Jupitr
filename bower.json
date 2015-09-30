@@ -9,7 +9,7 @@
     "Kevin Lee",
     "Don Steinert"
   ],
-  "description": "A portal for Hack Reactor alumni and students to connect",
+  "description": "A portal for Hack Reactor students and alumni to connect with each other",
   "license": "MIT",
   "ignore": [
     "**/.*",
