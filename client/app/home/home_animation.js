@@ -58,7 +58,14 @@ d3.json('app/home/us.json', function(err, us){
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-    .attr("d", map);
+    .attr("d", map)
+    .attr('fill', 'rgba(0, 0, 0, 0.95)')
+    .on('mouseover', function(){
+      d3.select(this).style('fill', 'rgba(0, 0, 0, 0.8)');
+    })
+    .on("mouseout", function(d) {
+      d3.select(this).style('fill', 'rgba(0, 0, 0, 0.95)');
+    });
 
   g.append("path")
     .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
@@ -69,21 +76,33 @@ d3.json('app/home/us.json', function(err, us){
 
   // path connecting people from the same cohort
   for (var prop in cohortCoords) {
-    var color = randomColor(0.4);
+    var color= randomColor(0.6);
     var connectionData = cohortCoords[prop];
     var connection = d3.svg.line()
                            .x(function(d){return states(d)[0];})
                            .y(function(d){return states(d)[1];})
                            .interpolate('linear');
+    // connections
     g.append('g')
        .append('path')
        .attr('d', connection(connectionData))
        .attr('stroke', color)
        .attr('stroke-width', 0.2)
        .attr('fill', 'none');
+
+    // precise location info per cohort
+    g.append('g')
+      .selectAll('circle')
+      .data(connectionData).enter()
+      .append('circle')
+      .attr('class', 'user')
+      .attr('transform', function(d) {
+        return 'translate(' + states(d) + ')'; 
+      })
+      .attr('r', 5)
+      .attr('fill', 'rgba(255, 0, 0, 0.5)');
   }  
-  
-  
+
   // general data location
   g.append('g')
     .selectAll('circle')
@@ -98,7 +117,7 @@ d3.json('app/home/us.json', function(err, us){
         return locStoreGen[data];
       });
       // var scale = d3.scale.linear().domain([1, 200]).range([5, 50]);
-      // num = scale(num);
+      // num = scale(num);  
       return num < 10 ? 10 : num;
     })
     .attr('fill', function(d) {
@@ -106,27 +125,14 @@ d3.json('app/home/us.json', function(err, us){
         console.log(locStoreGen[data]);
         return locStoreGen[data];
       });
-      var r = 120 + num * 2;
+      var r = 120 + num;
       var g = 120 + num * 4;
       var b = 150 + num * 6;
-      return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + 0.30 + ')';
+      return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + 0.4 + ')';
     })
     .attr('stroke', 'white')
     .attr('stroke-width', 0.35);
 
-  // precise data location
-  g.append('g')
-    .selectAll('circle')
-    .data(dummyLoc).enter()
-    .append('circle')
-    .attr('class', 'user')
-    .attr('transform', function(d) {
-      return 'translate(' + states(d) + ')'; 
-    })
-    .attr('r', 5)
-    .attr('fill', function(d) {
-      return 'rgba(255, 0, 0, 0.25)';
-    });
 });
 
 
@@ -148,9 +154,9 @@ function floorCoords(arr, cb) {
 
 function randomColor(alpha) {
   alpha = alpha || 1;
-  var r = 200;
+  var r = Math.floor(Math.random() * 150) + 100;
   var g = Math.floor(Math.random() * 150) + 100;
-  var b = Math.floor(Math.random() * 150) + 100;
+  var b = 200;
   return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
 }
 
