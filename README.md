@@ -57,7 +57,7 @@ Additional Grunt tasks are specified in Gruntfile.js
 
 ### Roadmap
 
-View the project roadmap [https://github.com/Jupitr/Jupitr/issues](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/Jupitr/Jupitr/issues)
 
 ## Contributing
 
