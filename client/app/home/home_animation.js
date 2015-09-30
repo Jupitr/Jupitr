@@ -20,10 +20,14 @@ var g = svg.append("g");
 var map = d3.geo.path()
   .projection(states);
 
+// stores generalized location info
 var locStoreGen = {};
+var dummyLocGen = [];
+// stores precise location info
 var dummyLoc = [];
 // dummy data
 var dummyLength = dummy().length;
+
 dummy().forEach(function(user){
   var x, y;
   var coords = floorCoords([user.longitude, user.latitude], function(coords, lati, longi){
@@ -34,16 +38,15 @@ dummy().forEach(function(user){
 
   if (locStoreGen[coords] !== undefined) {
     locStoreGen[coords]++;
-    dummyLoc.push([x, y]);
+    dummyLocGen.push([x, y]);
   }
   else {
     locStoreGen[coords] = 1;
   }
   // locStoreGen[coords] = locStoreGen[coords] === undefined ? 1 : locStoreGen[coords]++;
+
+  dummyLoc.push([noise(user.longitude), noise(user.latitude)]); 
 });
-
-console.table(locStoreGen);
-
 
 // svg.append('rect')
 //   .attr('width', width)
@@ -69,41 +72,51 @@ d3.json('app/home/us.json', function(err, us){
     .attr('d', map)
     .attr('stroke', 'black')
     .attr('stroke-width', 0.1);
-
-  g.append('g')
   
+  // precise data location
   g.append('g')
     .selectAll('circle')
     .data(dummyLoc).enter()
-    .append("circle")
+    .append('circle')
     .attr('class', 'user')
+    .attr('transform', function(d) {
+      console.log(d);
+      console.log(states(d));
+      return 'translate(' + states(d) + ')'; 
+    })
+    .attr('r', 5)
+    .attr('fill', function(d) {
+      return 'rgba(255, 0, 0, 0.2)';
+    });
+  
+  // general data location
+  g.append('g')
+    .selectAll('circle')
+    .data(dummyLocGen).enter()
+    .append("circle")
+    .attr('class', 'userGen')
     .attr('transform', function(d) {
       return "translate(" + states(d) + ")";  
     })
-    .attr('r', function(d){
-      var num = floorCoords(d, function(data){
+    .attr('r', function(d) {
+      var num = floorCoords(d, function(data) {
         return locStoreGen[data];
       });
-      // var scale = d3.scale.linear().domain([1, 50]).range([5, 20]);
+      // var scale = d3.scale.linear().domain([1, 200]).range([5, 50]);
       // num = scale(num);
-      return num/(dummyLength/200);
+      return num < 10 ? 10 : num;
     })
-    .attr('fill', function(d){
-      var num = floorCoords(d, function(data){
+    .attr('fill', function(d) {
+      var num = floorCoords(d, function(data) {
         return locStoreGen[data];
       });
-      // var alphaScale = d3.scale.linear()
-      //                         .domain([1, 25])
-      //                         .range([0.7,1]);
-      // var a = 1 - alphaScale(extractCoords(d));
-      var r = 50;
-      var g = 90 + num * 2;
-      var b = 120 + num * 2;
+      var r = 120;
+      var g = 120 + num * 2;
+      var b = 150 + num * 2;
       return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + 0.05 + ')';
-    });
-    // .attr('stroke', 'black')
-    // .attr('stroke-width', 2);
-// create map using topojson or geojson
+    })
+    .attr('stroke', 'white')
+    .attr('stroke-width', 0.05);
 });
 
 
