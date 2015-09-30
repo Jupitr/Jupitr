@@ -94,12 +94,12 @@ exports.updateProfile = updateProfile = function(data, callback) {
 ///////////////////////////////////////////////////////////////////////////////
 
 
-var records = 600;
+// var records = 600;
 
-var userGenerator = require('./seed-data.js');
-for (var i = 0; i < records; i++) {
-  addUser(userGenerator(), function() {
-    console.log('seed record created');
-  });
-}
+// var userGenerator = require('./seed-data.js');
+// for (var i = 0; i < records; i++) {
+//   addUser(userGenerator(), function() {
+//     console.log('seed record created');
+//   });
+// }
 
