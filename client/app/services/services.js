@@ -73,4 +73,12 @@ angular.module('jupitr.services', [])
     update: update
   };
 
+})
+.factory('d3', function(){
+  var d3 = function(){
+    
+  };
+  return {
+    d3: d3
+  };
 }); 
