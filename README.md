@@ -13,8 +13,7 @@
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+    1. [Installing Dependencies and Running Jupitr](#installing-dependencies-and-running-jupitr)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
@@ -25,19 +24,36 @@
 ## Requirements
 
 - Node 0.12.7
-- npm 2.14.2
-- MongoDb 3.0.6
+- Npm 2.14.2
+- MongoDB 3.0.6
+- Mongoose 4.1.8
 
 ## Development
 
-### Installing Dependencies
+### Installing Dependencies and Running Jupitr
 
-From within the root directory:
+From within the root directory install all dependencies with the following command:
 
-```sh
-sudo npm install -g bower
+```
 npm install
 ```
+
+Once your MongoDB server is running, you can seed the database with generated user profiles with either of the following commands:
+
+```
+node db/seed-db.js [profile records to create]
+```
+```
+grunt seeddb // creates 50 profile records with each call
+```
+
+Jupiter can be deployed locally with the following command:
+
+```
+grunt local
+```
+
+Additional Grunt tasks are specified in Gruntfile.js
 
 ### Roadmap
 
