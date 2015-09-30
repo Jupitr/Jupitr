@@ -95,6 +95,11 @@ module.exports = function(grunt) {
       rebase: {
         command: 'git pull --rebase upstream staging'
       },
+      
+      // pushes to remote origin branch
+      push: {
+        command: 'git push origin'
+      }
     }
   });
 
@@ -135,8 +140,14 @@ module.exports = function(grunt) {
     'mongo-drop'
   ]);
   
+  // rebases from upstream staging
   grunt.registerTask('rebase', [
     'shell:rebase'
+  ]);
+  
+  // pushes to remote origin branch
+  grunt.registerTask('push', [
+    'shell:push'
   ]);
   
   grunt.registerTask('test', [
