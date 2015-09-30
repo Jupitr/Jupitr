@@ -12,11 +12,12 @@ var lastNames = ['Smith', 'Doe', 'Miller', 'Penny', 'Tabor', 'Lee', 'Balestra',
   'Jeter', 'Martinez', 'Wang', 'Rodriguez', ];
   
 var zips = ['94121', '94110', '94014', '94132', '94133', '10014', '10128',
-  '90210', '90004', '98105', '98111', '97201', '73301', '02108', '33101',
+  '90210', '90004', '98105', '98111', '97201', '73301', '02121', '33101',
   '72201', '19019', '80123', '20009', '94107', '94703', '94606', '95015',
   '60611', '60617', '48207', '10003', '48224', '44105', '44112', '53705',
   '53711', '53202', '84601', '84601', '87101', '87105', '77001', '77005',
-  '30301', '30305', '37115', '37203', '33601', '33605', '02113', '57702'];
+  '30301', '30305', '37115', '37203', '33601', '33605', '02113', '57702',
+  '02113', '64108', '80211'];
 
 var onsiteOrRemote = ['HR', 'HRRB'];
 
@@ -50,7 +51,7 @@ var generateRandomUser = function() {
   var lastName = pickRandom(lastNames);
   var name = firstName + ' ' + lastName;
   var email = firstName + lastName + '@myemail.com';
-  var cohort = pickRandom(onsiteOrRemote) + Math.floor(Math.random() * 15);
+  var cohort = pickRandom(onsiteOrRemote) + ' ' + Math.floor(Math.random() * 15);
   var zip = pickRandom(zips);
   var handle = firstName.toLowerCase() + Math.floor(Math.random() * 1000);
   var githubLogin = handle;
