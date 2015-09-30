@@ -86,15 +86,15 @@ exports.updateProfile = updateProfile = function(data, callback) {
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//                    to seed database with user records                     //
+//            to seed database with user records for deployment:             //
 //                un-comment function below and restart server               //
-//           also comment out the set-interval call in seed-data.js          //
+//           also comment-out the set-interval call in seed-data.js          //
 //      set the records variable to specify number of records to create      //
 //    re-comment the function to avoid seeding the database multiple times   //
 ///////////////////////////////////////////////////////////////////////////////
 
-/*
-var records = 200;
+
+var records = 600;
 
 var userGenerator = require('./seed-data.js');
 for (var i = 0; i < records; i++) {
@@ -102,4 +102,4 @@ for (var i = 0; i < records; i++) {
     console.log('seed record created');
   });
 }
-*/
+
