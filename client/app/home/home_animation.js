@@ -20,7 +20,7 @@ var g = svg.append("g");
 var map = d3.geo.path()
   .projection(states);
 
-var locStore = {};
+var locStoreGen = {};
 var dummyLoc = [];
 // dummy data
 var dummyLength = dummy().length;
@@ -32,17 +32,17 @@ dummy().forEach(function(user){
     return coords;
   });
 
-  if (locStore[coords] !== undefined) {
-    locStore[coords]++;
+  if (locStoreGen[coords] !== undefined) {
+    locStoreGen[coords]++;
     dummyLoc.push([x, y]);
   }
   else {
-    locStore[coords] = 1;
+    locStoreGen[coords] = 1;
   }
-  // locStore[coords] = locStore[coords] === undefined ? 1 : locStore[coords]++;
+  // locStoreGen[coords] = locStoreGen[coords] === undefined ? 1 : locStoreGen[coords]++;
 });
 
-console.table(locStore);
+console.table(locStoreGen);
 
 
 // svg.append('rect')
@@ -70,7 +70,10 @@ d3.json('app/home/us.json', function(err, us){
     .attr('stroke', 'black')
     .attr('stroke-width', 0.1);
 
-  g.selectAll('circle')
+  g.append('g')
+  
+  g.append('g')
+    .selectAll('circle')
     .data(dummyLoc).enter()
     .append("circle")
     .attr('class', 'user')
@@ -79,7 +82,7 @@ d3.json('app/home/us.json', function(err, us){
     })
     .attr('r', function(d){
       var num = floorCoords(d, function(data){
-        return locStore[data];
+        return locStoreGen[data];
       });
       // var scale = d3.scale.linear().domain([1, 50]).range([5, 20]);
       // num = scale(num);
@@ -87,7 +90,7 @@ d3.json('app/home/us.json', function(err, us){
     })
     .attr('fill', function(d){
       var num = floorCoords(d, function(data){
-        return locStore[data];
+        return locStoreGen[data];
       });
       // var alphaScale = d3.scale.linear()
       //                         .domain([1, 25])
