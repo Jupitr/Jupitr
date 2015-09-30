@@ -5,6 +5,7 @@ var height = 600;
 
 // var nodeCount = [{}, {}, {}];
 
+//sample data sets added for testing
 var nodes = [
   {name: 'Kevin', group: 1}, 
   {name: 'Don', group: 2},
