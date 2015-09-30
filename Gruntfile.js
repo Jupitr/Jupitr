@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    
     concat: {
       dist: {
         src: [
@@ -86,6 +87,7 @@ module.exports = function(grunt) {
     },
 
     shell: {
+      
       // seeds database with 300 records
       seeddb: {
         command: 'node db/seed-data.js 50'
@@ -99,7 +101,13 @@ module.exports = function(grunt) {
       // pushes to remote origin branch
       push: {
         command: 'git push origin'
+      },
+      
+      // installs dependencies via npm and bower
+      depends: {
+        command: 'npm install'
       }
+      
     }
   });
 
@@ -127,21 +135,11 @@ module.exports = function(grunt) {
   });
 
   ////////////////////////////////////////////////////
-  // Main grunt tasks
+  //              Main grunt tasks                  //
   ////////////////////////////////////////////////////
 
   grunt.registerTask('server-prod', [
     'shell'
-  ]);
-  
-  // seeds database with 300 records
-  grunt.registerTask('seeddb', [
-    'shell:seeddb'
-  ]);
-  
-  // drops jupiter database
-  grunt.registerTask('dropdb', [
-    'mongo-drop'
   ]);
   
   // rebases from upstream staging
@@ -154,23 +152,42 @@ module.exports = function(grunt) {
     'shell:push'
   ]);
   
-  grunt.registerTask('test', [
-    'jshint',
-    'mochaTest'
-  ]);
-
-  grunt.registerTask('build', [
-    'concat',
-    'uglify',
-    'cssmin'
+  // seeds database with 300 records
+  grunt.registerTask('seeddb', [
+    'shell:seeddb'
   ]);
   
+  // drops jupiter database
+  grunt.registerTask('dropdb', [
+    'mongo-drop'
+  ]);
+
+  // installs dependencies via npm and bower
+  grunt.registerTask('depends', [
+    'shell:depends'
+  ]);
+  
+  // TODO -- add linting and testing
+  grunt.registerTask('test', [
+    // 'jshint',
+    // 'mochaTest'
+  ]);
+
+  // TODO -- add build processes    
+  grunt.registerTask('build', [
+    // 'concat',
+    // 'uglify',
+    // 'cssmin'
+  ]);
+  
+  // runs server via nodemon
   grunt.registerTask('run', [
     'nodemon'
   ]);
 
+  // runs local deployment for testing
   grunt.registerTask('local', function(){
-    grunt.task.run([ 'test', 'build', 'run' ]);
+    grunt.task.run([ 'depends', 'test', 'build', 'run' ]);
   });
 
 };
