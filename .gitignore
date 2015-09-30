@@ -35,3 +35,6 @@ client/lib
 
 # Development tools
 *.jshintrc
+
+# Config files
+server/utils/config.js
