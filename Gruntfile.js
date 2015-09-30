@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    
     concat: {
       dist: {
         src: [
@@ -86,6 +87,7 @@ module.exports = function(grunt) {
     },
 
     shell: {
+      
       // seeds database with 300 records
       seeddb: {
         command: 'node db/seed-data.js 50'
@@ -105,6 +107,7 @@ module.exports = function(grunt) {
       depends: {
         command: 'npm install'
       }
+      
     }
   });
 
@@ -139,16 +142,6 @@ module.exports = function(grunt) {
     'shell'
   ]);
   
-  // seeds database with 300 records
-  grunt.registerTask('seeddb', [
-    'shell:seeddb'
-  ]);
-  
-  // drops jupiter database
-  grunt.registerTask('dropdb', [
-    'mongo-drop'
-  ]);
-  
   // rebases from upstream staging
   grunt.registerTask('rebase', [
     'shell:rebase'
@@ -159,13 +152,28 @@ module.exports = function(grunt) {
     'shell:push'
   ]);
   
+  // seeds database with 300 records
+  grunt.registerTask('seeddb', [
+    'shell:seeddb'
+  ]);
+  
+  // drops jupiter database
+  grunt.registerTask('dropdb', [
+    'mongo-drop'
+  ]);
+
+  // installs dependencies via npm and bower
+  grunt.registerTask('depends', [
+    'shell:depends'
+  ]);
+  
   // TODO -- add linting and testing
   grunt.registerTask('test', [
     // 'jshint',
     // 'mochaTest'
   ]);
 
-  // TODO -- add build processes
+  // TODO -- add build processes    
   grunt.registerTask('build', [
     // 'concat',
     // 'uglify',
@@ -176,19 +184,10 @@ module.exports = function(grunt) {
   grunt.registerTask('run', [
     'nodemon'
   ]);
-  
-  // installs dependencies via npm and bower
-  grunt.registerTask('depends', [
-    'shell:depends'
-  ]);
-
-  grunt.registerTask('init', function(){
-    grunt.task.run([ 'test', 'build', 'run' ]);
-  });
 
   // runs local deployment for testing
   grunt.registerTask('local', function(){
-    grunt.task.run([ 'test', 'build', 'run' ]);
+    grunt.task.run([ 'depends', 'test', 'build', 'run' ]);
   });
 
 };
