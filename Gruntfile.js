@@ -88,7 +88,7 @@ module.exports = function(grunt) {
     shell: {
       // seeds database with 300 records
       seeddb: {
-        command: 'node db/seed-data.js 300'
+        command: 'node db/seed-data.js 50'
       },
       
       // rebases from upstream staging
