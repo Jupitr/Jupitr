@@ -32,7 +32,6 @@ exports.addUser = addUser = function(data, callback) {
     email: data.email,
     cohort: data.cohort,
     zip: data.zip,
-    githublink: data.githublink,
     twitter: data.twitter,
     website: data.website,
     gender: data.gender,
@@ -44,17 +43,21 @@ exports.addUser = addUser = function(data, callback) {
     technologies: data.technologies,
     currentemployer: data.currentemployer,
     currentemployerrole: data.currentemployerrole,
+    currentemployertype: data.currentemployertype,
     currentemployerstartdate: data.currentemployerstartdate,
     prioremployer1: data.prioremployer1,
     prioremployer1role: data.prioremployer1role,
+    prioremployer1type: data.prioremployer1type,
     prioremployer1startdate: data.prioremployer1startdate,
     prioremployer1enddate: data.prioremployer1enddate,
     prioremployer2: data.prioremployer2,
     prioremployer2role: data.prioremployer2role,
+    prioremployer2type: data.prioremployer2type,
     prioremployer2startdate: data.prioremployer2startdate,
     prioremployer2enddate: data.prioremployer2enddate,
     prioremployer3: data.prioremployer3,
     prioremployer3role: data.prioremployer3role,
+    prioremployer3type: data.prioremployer3type,
     prioremployer3startdate: data.prioremployer3startdate,
     prioremployer3enddate: data.prioremployer3enddate,   
   });
@@ -80,3 +83,23 @@ exports.updateProfile = updateProfile = function(data, callback) {
     callback(data);
   })
 }; 
+
+
+///////////////////////////////////////////////////////////////////////////////
+//                    to seed database with user records                     //
+//                un-comment function below and restart server               //
+//           also comment out the set-interval call in seed-data.js          //
+//      set the records variable to specify number of records to create      //
+//    re-comment the function to avoid seeding the database multiple times   //
+///////////////////////////////////////////////////////////////////////////////
+
+/*
+var records = 200;
+
+var userGenerator = require('./seed-data.js');
+for (var i = 0; i < records; i++) {
+  addUser(userGenerator(), function() {
+    console.log('seed record created');
+  });
+}
+*/
