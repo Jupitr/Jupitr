@@ -3,13 +3,18 @@ angular.module('jupitr.services', [])
 .factory('User', function($http, $location) {
   // need to add handle success/errors to these?
   
-  var getAll = function() {
+  var getAll = function(cb) {
     return $http({
       method: 'GET', 
-      url: '/api/users/'
+      url: '/api/allusers'
     })
     .then(function(resp) {
-      return resp.data;
+      if (resp.data === 'Unauthorized') {
+        $location.path('/login');
+      }
+      else {
+        cb(resp.data);
+      }
     });
   };
 
@@ -19,7 +24,12 @@ angular.module('jupitr.services', [])
       url: '/api/profile'
     })
     .then(function(resp) {
-      cb(resp.data);
+      if (resp.data === 'Unauthorized') {
+        $location.path('/login');
+      }
+      else {
+        cb(resp.data);
+      }
     });
   };
 

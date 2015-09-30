@@ -30,6 +30,7 @@ everyauth.github
   .redirectPath('/auth');
 
 // default logout path is /logout
+everyauth.everymodule.logoutPath('/api/logout');
 everyauth.everymodule.handleLogout( function (req, res) {
   req.logout(); 
   req.session.destroy(function(err){
@@ -51,7 +52,7 @@ app.use(session({
 }));
 app.use(everyauth.middleware());
 
-app.get('/api/alluser', function(req, res) {
+app.get('/api/allusers', function(req, res) {
   helpers.validateUser(req, res, function(){
     user.sendAllUsers(function(users){
       res.json(users);
@@ -71,16 +72,18 @@ app.get('/auth', function(req, res){
 //   // });
 // });
 
-app.get('/api/profile', helpers.validateUser, function(req, res) {
-  user.findUserProfile(req.session.uid, function(record){
-    console.log(record);
-    res.json(record);
+app.get('/api/profile', function(req, res) {
+  helpers.validateUser(req, res, function() {
+    console.log('send profile');
+    user.findUserProfile(req.session.uid, function(record){
+      res.json(record);
+    });
   });
 });
 
-app.get('/api/', helpers.validateUser, function(req, res) {
-  res.sendStatus(200);
-});
+// app.get('/api/', helpers.validateUser, function(req, res) {
+//   res.sendStatus(200);
+// });
 
 // temp route to display profile info for deployment testing
 app.get('/test' , function(req, res) {

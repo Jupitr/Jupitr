@@ -11,13 +11,13 @@ angular.module('jupitr', [
         templateUrl: 'app/login/login.html',
         controller: 'loginController'
       })
-      // .when('/home', {
-      //   templateUrl: 'app/home/home.html',
-      //   controller: 'homeController'
-      // })
+      .when('/home', {
+        templateUrl: 'app/home/home.html',
+        controller: 'homeController'
+      })
       .when('/profile', {
         templateUrl: 'app/profile/profile.html',
-        controller: 'profileController',
+        controller: 'profileController'
       })
       .otherwise({
         redirectTo: '/'
