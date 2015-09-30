@@ -52,7 +52,7 @@ app.use(session({
 }));
 app.use(everyauth.middleware());
 
-app.get('/api/alluser', function(req, res) {
+app.get('/api/allusers', function(req, res) {
   helpers.validateUser(req, res, function(){
     user.sendAllUsers(function(users){
       res.json(users);

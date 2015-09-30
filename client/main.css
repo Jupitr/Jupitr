@@ -17,3 +17,21 @@ rect {
 .link {
   stroke: white;
 }
+
+#map {
+  fill:none;
+}
+
+#states {
+  fill: rgba(200, 200, 200, 0.5);
+}
+
+#state-borders {
+  stroke: #aaa;
+  stroke-width: 0.5px;
+}
+
+.user {
+  stroke: rgba(50, 50, 50, 0.2);
+  stroke-width: 0.05px;
+}
