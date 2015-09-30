@@ -37,4 +37,4 @@ client/lib
 *.jshintrc
 
 # Config files
-
+server/utils/config.js
