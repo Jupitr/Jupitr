@@ -77,6 +77,7 @@ module.exports = function(grunt) {
       }
     },
     
+    // drops jupiter database
     'mongo-drop': {
       options: {
         dbname: 'jupitr',
@@ -87,18 +88,18 @@ module.exports = function(grunt) {
     shell: {
       // seeds database with 300 records
       seeddb: {
-        command: 'node db/seed-data.js 300'
+        command: 'node db/seed-data.js 50'
       },
-      // dropdb: {
-      //   multiple: {
-      //     command: [
-      //       'mongo',
-      //       'use jupitr',
-      //       'db.dropDatabase()',
-      //       'exit'
-      //     ].join('&&')
-      //   }
-      // }
+      
+      // rebases from upstream staging
+      rebase: {
+        command: 'git pull --rebase upstream staging'
+      },
+      
+      // pushes to remote origin branch
+      push: {
+        command: 'git push origin'
+      }
     }
   });
 
@@ -129,13 +130,28 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
+  grunt.registerTask('server-prod', [
+    'shell'
+  ]);
+  
   // seeds database with 300 records
   grunt.registerTask('seeddb', [
     'shell:seeddb'
   ]);
   
+  // drops jupiter database
   grunt.registerTask('dropdb', [
     'mongo-drop'
+  ]);
+  
+  // rebases from upstream staging
+  grunt.registerTask('rebase', [
+    'shell:rebase'
+  ]);
+  
+  // pushes to remote origin branch
+  grunt.registerTask('push', [
+    'shell:push'
   ]);
   
   grunt.registerTask('test', [
@@ -148,30 +164,13 @@ module.exports = function(grunt) {
     'uglify',
     'cssmin'
   ]);
-
-  grunt.registerTask('server-prod', [
-    'shell'
+  
+  grunt.registerTask('run', [
+    'nodemon'
   ]);
 
-  grunt.registerTask('upload', function(n) {
-    if (grunt.option('prod')) {
-      grunt.task.run([ 'server-prod' ]);
-    } else {
-      console.log('local server');
-      grunt.task.run([ 'server-dev' ]);
-    }
-  });
-
-  grunt.registerTask('deploy', function(){
-    grunt.task.run([ 'test', 'build', 'upload' ]);
-  });
-
-  grunt.registerTask('heroku:production', function(){
-    grunt.task.run([ 'build' ]);
-  });
-
-  grunt.registerTask('heroku:development', function(){
-    grunt.task.run([ 'build' ]);
+  grunt.registerTask('local', function(){
+    grunt.task.run([ 'test', 'build', 'run' ]);
   });
 
 };
