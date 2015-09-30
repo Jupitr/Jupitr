@@ -5,16 +5,26 @@ var session = require('express-session');
 var everyauth = require('everyauth');
 var helpers = require('./utils/helpers');
 // var handler = require('./utils/request-handler');
-var config = require('./utils/config');
 var user = require('../db/userController.js');
 var db = require('../db/config.js');
 
 var app = express();
 
+var id, secret;
+
+if (process.env.APP_ID && process.env.APP_SECRET) {
+  id = process.env.APP_ID;
+  secret = process.env.APP_SECRET;
+} else {
+  var config = require('./utils/config');
+  id = config.github.appId;
+  secret = config.github.appSecret;
+}
+
 everyauth.github
   .entryPath('/api/github')
-  .appId(config.github.appId)
-  .appSecret(config.github.appSecret)
+  .appId(id)
+  .appSecret(secret)
   .scope('user')
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, githubUserMetadata) {
     session.oauth = accessToken;
