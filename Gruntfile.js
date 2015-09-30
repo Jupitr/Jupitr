@@ -77,6 +77,7 @@ module.exports = function(grunt) {
       }
     },
     
+    // drops jupiter database
     'mongo-drop': {
       options: {
         dbname: 'jupitr',
@@ -89,16 +90,14 @@ module.exports = function(grunt) {
       seeddb: {
         command: 'node db/seed-data.js 300'
       },
-      // dropdb: {
-      //   multiple: {
-      //     command: [
-      //       'mongo',
-      //       'use jupitr',
-      //       'db.dropDatabase()',
-      //       'exit'
-      //     ].join('&&')
-      //   }
-      // }
+      
+      rebase: {
+        command: 'git pull --rebase upstream staging'
+      },
+      
+      push: {
+        command: 'git push origin '
+      }
     }
   });
 
@@ -134,6 +133,7 @@ module.exports = function(grunt) {
     'shell:seeddb'
   ]);
   
+  // drops jupiter database
   grunt.registerTask('dropdb', [
     'mongo-drop'
   ]);
