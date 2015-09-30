@@ -1,27 +1,22 @@
 angular.module('jupitr.profile', [])
-.controller('profileController', function($scope, User, $location) {  
-  $scope.profile = {}; 
+.controller('profileController', function($scope, User, $location) { 
+  $scope.user = {};
 
   $scope.update = function(user) {
-    // deep copy of user object stored in profile object
-    $scope.profile = angular.copy(user); 
-    // Update Users with updated user profile, then send to main/home page
-    User.update($scope.profile)
+    // Update using User factory (see services.js) with updated user profile, 
+    // then send to profile page again
+    User.update($scope.user)
       .then(function() {
-        $location.path('/');
+        $location.path('/profile');
       })
       .catch(function(error) {
         console.log(error);
       });
   };
 
-  $scope.reset = function() {
-    // reset user object to stored profile (empty if not filled out previously)
-    $scope.user = angular.copy($scope.profile);
-  };
-
   User.getMyRecord(function(data){
     console.log(data);
-    $scope.reset();
+    // get profile data from session
+    $scope.user = data;
   });
 });

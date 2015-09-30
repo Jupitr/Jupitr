@@ -19,7 +19,7 @@ angular.module('jupitr.services', [])
       url: '/api/profile'
     })
     .then(function(resp) {
-      cb(resp);
+      cb(resp.data);
     });
   };
 
