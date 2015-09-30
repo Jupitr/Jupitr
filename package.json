@@ -1,14 +1,15 @@
 {
   "name": "jupitr",
   "version": "1.0.0",
-  "description": "a tool to connect hack reactor students and alumni",
+  "description": "A portal for Hack Reactor students and alumni to connect with each other",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dnld/Jupitr.git"
+    "url": "git+https://github.com/Jupitr/Jupitr.git"
   },
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Dnld/Jupitr/issues"
+    "url": "https://github.com/Jupitr/Jupitr/issues"
   },
   "engines": {
     "node": "0.12.7",
@@ -18,7 +19,7 @@
     "postinstall": "./node_modules/bower/bin/bower install",
     "start": "node index.js"
   },
-  "homepage": "https://github.com/Dnld/Jupitr#readme",
+  "homepage": "https://github.com/Jupitr/Jupitr",
   "dependencies": {
     "body-parser": "^1.14.0",
     "bower": "^1.5.3",
