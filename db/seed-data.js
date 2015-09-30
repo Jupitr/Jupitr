@@ -127,7 +127,7 @@ var generateRandomUser = function() {
   
 }
 
-// console.log(generateRandomUser());
+console.log(generateRandomUser());
 
 var records = Number(process.argv[2]);
 
