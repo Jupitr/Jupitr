@@ -137,8 +137,8 @@ for (var i = 0; i < records; i++) {
   });
 }
 
-// setTimeout(function() {
-//   process.exit();
-// }, 1000);
+setTimeout(function() {
+  process.exit();
+}, 1000);
 
 module.exports = generateRandomUser;
