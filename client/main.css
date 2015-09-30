@@ -34,13 +34,8 @@ rect {
 }
 
 #state-borders {
-  stroke: white;
+  stroke: rgba(255, 255, 255, 0.85);
   stroke-width: 0.5px;
-}
-
-.user {
-  stroke: rgba(50, 50, 50, 0.2);
-  stroke-width: 0.05px;
 }
 
 /*Home Page*/
