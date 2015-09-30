@@ -12,7 +12,10 @@ var lastNames = ['Smith', 'Doe', 'Miller', 'Penny', 'Tabor', 'Lee', 'Balestra',
   
 var zips = ['94121', '94110', '94014', '94132', '94133', '10014', '10128',
   '90210', '90004', '98105', '98111', '97201', '73301', '02108', '33101',
-  '72201', '19019', '80123', '20009', '94107', '94703', '94606', '95015'];
+  '72201', '19019', '80123', '20009', '94107', '94703', '94606', '95015',
+  '60611', '60617', '48207', '10003', '48224', '44105', '44112', '53705',
+  '53711', '53202', '84601', '84601', '87101', '87105', '77001', '77005',
+  '30301', '30305', '37115', '37203', '33601', '33605', '02113', '57702'];
 
 var genders = ['male', 'female'];
 
@@ -47,7 +50,7 @@ var generateRandomUser = function() {
   var githubLogin = handle;
   var githubLink = 'http://www.github.com/' + handle;
   var twitter = '@' + handle;
-  var website = 'http://www.' + handle + '.com'
+  var website = 'http://www.' + handle.toLowerCase() + '.com'
   var gender = pickRandom(genders);
   var race = pickRandom(races);
   var thesis = pickRandom(projects);
