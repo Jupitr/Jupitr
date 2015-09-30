@@ -35,16 +35,12 @@
           ng-model="user.zip" ng-class="" required>
         </label>
         <label>
-          Cohort:
+          School/Cohort:
           <select name="cohort" ng-model="user.cohort" ng-class="" required>
-            <option value="HRRB01">HRRB01</option>
-            <option value="HRRB02">HRRB02</option>
-            <option value="HRRB03">HRRB03</option>
-            <option value="HRRB04">HRRB04</option>
-            <option value="HRRB05">HRRB05</option>
-            <option value="HRRB06">HRRB06</option>
-            <option value="HRRB07">HRRB07</option>
-            <option value="HRRB08">HRRB08</option>
+            <option value="HR">Hack Reactor, San Francisco</option>Cohort Number:
+            <input type="text" name="HRCohort"> 
+            <option value="HRRB">Hack Reactor, Remote Beta</option>Cohort Number:
+            <input type="text" name="HRRBCohort"> 
           </select>
         </label>
         <label>
@@ -52,12 +48,21 @@
           <select name="gender" ng-model="user.gender" ng-class="">
             <option value="male">Male</option>
             <option value="female">Female</option>
+            <option value="transgender">Transgender</option>
+            <option value="other">Other</option>
           </select>
         </label>
         <label>
           Ethnicity:
-          <input type="text" name="race" maxlength="100" 
-          ng-model="user.race" ng-class="">
+          <select name="race" ng-model="user.race" ng-class="">
+            <option value="Asian">Asian</option>
+            <option value="Black/African-American">Black or African American</option>
+            <option value="Hispanic">Hispanic or Latino</option>
+            <option value="Native American">Native American or Alaska Native</option>
+            <option value="Native Hawaiian/Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
+            <option value="Caucasion/White">White</option>
+            <option value="Other">Other</option>
+          </select>
         </label>
       </fieldset>
 
@@ -152,7 +157,7 @@
         </label>
         <label>
           Website:
-          <input type="text" name="website" maxlength="100" 
+          <input type="url" name="website" maxlength="100" 
           ng-model="user.website" ng-class="">  
         </label>
         <label>
@@ -179,7 +184,19 @@
           Technologies:
           <input type="checkbox" name="technologies" value="angular">Angular
           <input type="checkbox" name="technologies" value="backbone">Backbone
+          <input type="checkbox" name="technologies" value="CSS">CSS
           <input type="checkbox" name="technologies" value="d3">D3
+          <input type="checkbox" name="technologies" value="Express">Express
+          <input type="checkbox" name="technologies" value="Fortran">Fortran
+          <input type="checkbox" name="technologies" value="HTML">HTML
+          <input type="checkbox" name="technologies" value="iOS">iOS
+          <input type="checkbox" name="technologies" value="Java">Java
+          <input type="checkbox" name="technologies" value="JavaScript">JavaScript
+          <input type="checkbox" name="technologies" value="MongoDB">MongoDB
+          <input type="checkbox" name="technologies" value="Node">Node        
+          <input type="checkbox" name="technologies" value="SQL">SQL
+          <input type="checkbox" name="technologies" value="Unix">Unix          
+          <input type="checkbox" name="technologies" value="vim">vim
         </label>
       </fieldset>
 
