@@ -87,17 +87,17 @@ angular.module('jupitr.login', [])
         var drawGraph = function(){
 
           forceGraph
-            .nodes(nodes)
-            .links(links)
+            .nodes(scope.graph.nodes)
+            .links(scope.graph.links)
             .start();
 
           var link = svg.selectAll(".link")
-            .data(links)
+            .data(scope.graph.links)
             .enter().append("line")
             .attr("class", "link");
 
           var node = svg.selectAll(".node")
-            .data(nodes)
+            .data(scope.graph.nodes)
             .enter().append("g")
             .attr("class", "node")
             .call(forceGraph.drag);
