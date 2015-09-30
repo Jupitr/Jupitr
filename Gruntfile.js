@@ -99,6 +99,11 @@ module.exports = function(grunt) {
       // pushes to remote origin branch
       push: {
         command: 'git push origin'
+      },
+      
+      // installs dependencies via npm and bower
+      depends: {
+        command: 'npm install'
       }
     }
   });
@@ -127,7 +132,7 @@ module.exports = function(grunt) {
   });
 
   ////////////////////////////////////////////////////
-  // Main grunt tasks
+  //              Main grunt tasks                  //
   ////////////////////////////////////////////////////
 
   grunt.registerTask('server-prod', [
@@ -154,21 +159,34 @@ module.exports = function(grunt) {
     'shell:push'
   ]);
   
+  // TODO -- add linting and testing
   grunt.registerTask('test', [
-    'jshint',
-    'mochaTest'
+    // 'jshint',
+    // 'mochaTest'
   ]);
 
+  // TODO -- add build processes
   grunt.registerTask('build', [
-    'concat',
-    'uglify',
-    'cssmin'
+    // 'concat',
+    // 'uglify',
+    // 'cssmin'
   ]);
   
+  // runs server via nodemon
   grunt.registerTask('run', [
     'nodemon'
   ]);
+  
+  // installs dependencies via npm and bower
+  grunt.registerTask('depends', [
+    'shell:depends'
+  ]);
 
+  grunt.registerTask('init', function(){
+    grunt.task.run([ 'test', 'build', 'run' ]);
+  });
+
+  // runs local deployment for testing
   grunt.registerTask('local', function(){
     grunt.task.run([ 'test', 'build', 'run' ]);
   });
