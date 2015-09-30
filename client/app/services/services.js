@@ -36,7 +36,7 @@ angular.module('jupitr.services', [])
   var getUser = function(user) {
     return $http({
       method: 'GET', 
-      url: '/api/users/' + user.githublogin
+      url: '/api/users' //this route currently does not exist
     })
     .then(function(resp) {
       return resp.data;
@@ -45,8 +45,8 @@ angular.module('jupitr.services', [])
 
   var update = function(user) {
     return $http({
-      method: 'POST', // s/b PUT?
-      url: '/api/update/' + user.githublogin,
+      method: 'POST', 
+      url: '/api/update',
       data: user
     });
   };
