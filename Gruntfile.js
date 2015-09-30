@@ -91,13 +91,10 @@ module.exports = function(grunt) {
         command: 'node db/seed-data.js 300'
       },
       
+      // rebases from upstream staging
       rebase: {
         command: 'git pull --rebase upstream staging'
       },
-      
-      push: {
-        command: 'git push origin '
-      }
     }
   });
 
@@ -136,6 +133,10 @@ module.exports = function(grunt) {
   // drops jupiter database
   grunt.registerTask('dropdb', [
     'mongo-drop'
+  ]);
+  
+  grunt.registerTask('rebase', [
+    'shell:rebase'
   ]);
   
   grunt.registerTask('test', [
