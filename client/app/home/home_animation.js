@@ -142,6 +142,7 @@ d3.json('app/home/us.json', function(err, us){
     })
     .on('mouseover', function() {
       var self = d3.select(this);
+      var dad = d3.select(this.parentNode);
       // transform text
       self.select('text')
         .transition()
@@ -159,15 +160,15 @@ d3.json('app/home/us.json', function(err, us){
       // manage popup
       var num = self.attr('num');
       var arc = d3.svg.arc() 
-                  .innerRadius(15) 
-                  .outerRadius(20) 
+                  .innerRadius(40) 
+                  .outerRadius(80) 
                   .startAngle(0) 
-                  .endAngle(num/35 * Math.PI);
+                  .endAngle((num/35 + 0.5) * Math.PI);
       var x = d3.mouse(this)[0] - 200;
       var y = d3.mouse(this)[1] - 200;
 
-      if (!self.select('#popup')[0][0]) {
-        var popup = self.append('g')
+      if (!d3.select('#popup')[0][0]) {
+        var popup = dad.append('g')
                         .attr('id', 'popup')
                         .attr('transform', 'translate(' + x + ',' + y + ')');
 
@@ -179,9 +180,28 @@ d3.json('app/home/us.json', function(err, us){
               .attr('stroke-width', 1)
               .attr('stroke', 'rgba(150, 150, 150, 0.9)')
               .style('fill', 'rgba(255, 255, 255, 0.6)');
+        popup.append('circle')
+              .attr('transform', 'translate(' + 100 + ',' + 100 + ')')
+              .attr('stroke-width', 0.1)
+              .attr('stroke', 'rgba(0, 0, 0, 0.3)')
+              .attr('fill', 'rgba(120, 120, 120, 0.4)')
+              .attr('r', 75);
         popup.append('path')
               .attr('d', arc)
-              .style('fill', 'pink');
+              .attr('transform', 'translate(' + 100 + ',' + 100 + ')')
+              .attr('stroke', 'rgba(255, 255, 255, 0.3)')
+              .attr('fill', 'rgba(120, 120, 120, 0.5)')
+              .style('fill', 'rgba(0, 0, 0, 0.5)');
+        popup.append('text')
+              .attr('transform', 'translate(' + 77 + ',' + 110 + ')')
+              .style('font-size', '35px')
+              .text(function(){
+                var text = self.attr('num');
+                if (text.length < 2) {
+                  text = 0 + text;
+                }
+                return text;
+              });
       }
     })
     .on('mouseleave', function(){
@@ -195,7 +215,7 @@ d3.json('app/home/us.json', function(err, us){
         .attr('fill', function(d) {
           return circle.attr('prevColor');
         });
-      self.selectAll('#popup').remove();
+      d3.selectAll('#popup').remove();
     });
 
   // sort the circles so smaller ones appear before the bigger ones
