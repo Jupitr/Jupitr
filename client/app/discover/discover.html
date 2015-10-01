@@ -10,7 +10,7 @@
           <p class="location">{{profile.city}}, {{profile.state}}</p>
         </div>
         <div class="col-sm-7">
-          <p>{{profile.currentemployer}}</p>
+          <p class="company">{{profile.currentemployer}}</p>
         </div>
         <div class="col-sm-2">
           <p class="cohort">{{profile.cohort}}</p>
@@ -18,54 +18,56 @@
       </div>
       <div class="row info-expanded">
         <div class="col-sm-3">
-          <p>{{profile.email}}</p>
-          <p>{{profile.githublogin}}</p>
-          <p>{{profile.twitter}}</p>
-          <p>{{profile.website}}</p>
+          <p><a href="mailto:{{profile.email}}">{{profile.email}}</a></p>
+          <p><a href="{{profile.website}}" target="_blank">{{profile.website}}</a></p>
+          <p><span class="field-title">Github:  </span><a href="https://www.github.com/{{profile.githublogin}}" target="_blank">{{profile.githublogin}}</a></p>
+          <p><span class="field-title">Twitter:  </span><a href="https://www.twitter.com/{{profile.twitter}}" target="_blank">{{profile.twitter}}</a></p>
         </div>
         <div class="col-sm-3">
-          <p>{{profile.thesis}}</p>
-          <p>{{profile.thesisurl}}</p>
-          <p>{{profile.greenfield}}</p>
-          <p>{{profile.legacy}}</p>
+          <p><span class="field-title">Thesis:  </span><a href="{{profile.thesisurl}}" target="_blank">{{profile.thesis}}</a></p>
+          <p><span class="field-title">Greenfield:  </span>{{profile.greenfield}}</p>
+          <p><span class="field-title">Legacy:  </span>{{profile.legacy}}</p>
         </div>
         <div class="col-sm-3">
+          <p class="field-title">Technologies:</p>
           <div class="technologies" ng-repeat="technology in profile.technologies track by $index">
             <p>{{technology}}</p>
           </div>
         </div>
         <div class="col-sm-3">
+          <p class="field-title">Demographics:</p>
           <p>{{profile.gender}}</p>
           <p>{{profile.race}}</p>
         </div>
       </div>
       <div class="row info-employment">
+        <p class="employment-title">Employment History: </p>
         <div class="col-sm-3">
           <p>{{profile.currentemployer}}</p>
           <p>{{profile.currentemployerrole}}</p>
           <p>{{profile.currentemployertype}}</p>
-          <p>{{profile.currentemployerstartdate}}</p>
+          <p><span class="field-title">Start:  </span>{{profile.currentemployerstartdate.split(' ')[1]}} {{profile.currentemployerstartdate.split(' ')[3]}}</p>
         </div>
         <div class="col-sm-3">
           <p>{{profile.prioremployer1}}</p>
           <p>{{profile.prioremployer1role}}</p>
           <p>{{profile.prioremployer1type}}</p>
-          <p>{{profile.prioremployer1startdate}}</p>
-          <p>{{profile.prioremployer1enddate}}</p>
+          <p><span class="field-title">Start:  </span>{{profile.prioremployer1startdate.split(' ')[1]}} {{profile.prioremployer1startdate.split(' ')[3]}}</p>
+          <p><span class="field-title">End:  </span>{{profile.prioremployer1enddate.split(' ')[1]}} {{profile.prioremployer1enddate.split(' ')[3]}}</p>
         </div>
         <div class="col-sm-3">
           <p>{{profile.prioremployer2}}</p>
           <p>{{profile.prioremployer2role}}</p>
           <p>{{profile.prioremployer2type}}</p>
-          <p>{{profile.prioremployer2startdate}}</p>
-          <p>{{profile.prioremployer2enddate}}</p>
+          <p><span class="field-title">Start:  </span>{{profile.prioremployer2startdate.split(' ')[1]}} {{profile.prioremployer2startdate.split(' ')[3]}}</p>
+          <p><span class="field-title">End:  </span>{{profile.prioremployer2enddate.split(' ')[1]}} {{profile.prioremployer2enddate.split(' ')[3]}}</p>
         </div>
         <div class="col-sm-3">
           <p>{{profile.prioremployer3}}</p>
           <p>{{profile.prioremployer3role}}</p>
           <p>{{profile.prioremployer3type}}</p>
-          <p>{{profile.prioremployer3startdate}}</p>
-          <p>{{profile.prioremployer3enddate}}</p>
+          <p><span class="field-title">Start:  </span>{{profile.prioremployer3startdate.split(' ')[1]}} {{profile.prioremployer3startdate.split(' ')[3]}}</p>
+          <p><span class="field-title">End:  </span>{{profile.prioremployer3enddate.split(' ')[1]}} {{profile.prioremployer3enddate.split(' ')[3]}}</p>
         </div>
       </div>
     </div>

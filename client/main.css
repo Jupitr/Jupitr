@@ -185,8 +185,7 @@ text {
 }
 
 #discover-inner {
-  margin: 0px 140px 30px 140px;
-  
+  margin: 0px 110px 30px 110px; 
 }
 
 .search {
@@ -194,8 +193,9 @@ text {
   border-radius: 3px;
   margin-top: 30px;
   margin-bottom: 30px;
-  font: 18px;
-  width: 300px;
+  font: 28px;
+  width: 350px;
+  height: 40px;
   font-color: black;
 }
 
@@ -204,35 +204,65 @@ text {
   border-radius: 3px;
   margin-bottom: 30px;
   background-color: white;
+  color: #254255;
   font-weight: 400;
   padding: 35px;
 }
 
-.
+.profile-view a {
+  text-decoration: none;
+  color: #254255;
+  border-bottom: 1px dotted;
+}
+
+.info-basic, .info-expanded {
+  padding-bottom: 12px;
+}
 
 .info-expanded, .info-employment {
   border-top: 1px solid #B3B3B3;
+  padding-top: 14px;
+}
+
+.field-title {
+  color: #434343;
+  font-size: 14px;
 }
 
 .name {
-  font-size: 28px;
   font-family: Courier;
-  padding-bottom: 6px;
+  font-size: 36px;
+  font-weight: 600;
+  color: #333333;
+  padding-bottom: 2px;
+  line-height: 40px;
 }
 
-.cohort
+.location {
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+}
 
+.company {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 14px;
+  color: black;
+}
 
+.cohort {
+  border: 1px solid black;
+  border-radius: 4px;
+  color: #FF0000;
+  font-weight: 500;
+  float: right;
+  margin-top: 8px;
+  padding: 4px 8px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.employment-title {
+  font-size: 14px;
+  color: #434343;
+  margin-bottom: 4px;
+}
