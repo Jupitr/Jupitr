@@ -4,6 +4,7 @@ angular.module('jupitr', [
     'jupitr.home',
     'jupitr.profile',
     'jupitr.discover',
+    'jupitr.cohort',
     'ngRoute'
   ])
   .config(function($routeProvider) { 
@@ -22,11 +23,15 @@ angular.module('jupitr', [
       })
       .when('/profile', {
         templateUrl: 'app/profile/profile.html',
-        controller: 'profileController',
+        controller: 'profileController'
       })
       .when('/discover', {
         templateUrl: 'app/discover/discover.html',
-        controller: 'discoverController',
+        controller: 'discoverController'
+      })
+      .when('/cohort', {
+        templateUrl: 'app/cohort/cohort.html',
+        controller: 'cohortController'
       })
       .otherwise({
         redirectTo: '/'
