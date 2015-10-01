@@ -23,7 +23,7 @@ var map = d3.geo.path()
   .projection(states);
 
 // zoom event
-var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
+var zoom = d3.behavior.zoom().scaleExtent([1, 40]).on("zoom", zoomed);
 var zoomToggle = false;
 svg
   .call(zoom)
@@ -138,7 +138,7 @@ d3.json('app/home/us.json', function(err, us){
     .selectAll('circle')
     .data(userLocGen).enter()
     .append('g')
-    .on('mouseover', function(){
+    .on('mouseover', function() {
       d3.select(this).select('text')
         .transition()
         .duration(200)
@@ -174,6 +174,7 @@ d3.json('app/home/us.json', function(err, us){
     .attr('transform', function(d) {
       return "translate(" + states(d[0]) + ")";  
     })
+    .attr('zoomed', 'false')
     .attr('toggled', 'false')
     .attr('r', function(d) {
       return getCirGenRadius(d);
@@ -249,7 +250,6 @@ function zoomed() {
     d3.select(this).attr('r', Math.max(baseR/d3.event.scale, 1));
    });
 
-   console.log(d3.event.scale);
   g.selectAll('.connection')
    .each(function() {
     var baseS = d3.select(this).attr('baseS');
@@ -259,22 +259,34 @@ function zoomed() {
       .attr('opacity', Math.max(0.8/d3.event.scale, 0.7));
    });
 
-  // if (d3.event.scale > 5) {
-  //   if (!zoomToggle) {
-  //     zoomToggle = true;
-  //     console.log(g.selectAll('#userGen'));
-  //     // g.selectAll('#userGen').transition().duration(500).style('display', 'none');
-  //     // g.selectAll('#states').selectAll('path').attr('fill', 'rgb(200, 200, 200)');
-  //   }
-  // }
-  // else {
-  //   zoomToggle = false;
-  //   g.selectAll('#userGen').transition().duration(500).style('display', 'inline-block');
-  //   g.selectAll('#states').transition().duration(500).style('display', 'inline-block');
-  // }
+  var userGenCir = g.select('#userGen').selectAll('circle');
+  userGenCir.on('click', function() {
+    var self = d3.select(this);
+    var t = d3.transform(self.attr("transform")),
+      x = t.translate[0],
+      y = t.translate[1];
+    var scale = 30;
+    svg.transition().duration(3000)
+        .call(zoom.translate([((x * -scale) + (width / 2)), ((y * -scale) + height / 2)])
+        .scale(scale).event);
+  });
+  if (d3.event.scale > 18) {
+    g.select('#userGen').style('display', 'none');
+  }
+  else {
+    g.select('#userGen').style('display', 'inline-block');
+  }
 }
 
-// handler for click to center event
-function clicked(d) {
-  
-}
+// handler for click to center event 
+// function clicked(d) {
+//   x.domain([states(d[0])[0], d.x + d.dx]);
+//   y.domain([d.y, 1]).range([d.y ? 20 : 0, height]);
+
+//   rect.transition()
+//       .duration(750)
+//       .attr("x", function(d) { return x(d.x); })
+//       .attr("y", function(d) { return y(d.y); })
+//       .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
+//       .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); });
+// }
