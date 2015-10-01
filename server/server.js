@@ -62,15 +62,20 @@ app.use(session({
 }));
 app.use(everyauth.middleware());
 
+// route to get every single user record in db; check if has already requested
 app.get('/api/allusers', function(req, res) {
   helpers.validateUser(req, res, function(){
     user.sendAllUsers(function(users){
-      res.json(users);
+      if (!req.session.allUserSent) {
+        req.session.allUserSent = true;
+        res.json(users);
+      }
       res.end();
     });
   });
 });
 
+// server private route to check if a github user has the right permission
 app.get('/auth', function(req, res){
   helpers.checkAuth(req, res, helpers.getOrgs);
 });
@@ -82,6 +87,7 @@ app.get('/auth', function(req, res){
 //   // });
 // });
 
+// route to get the login user's profile 
 app.get('/api/profile', function(req, res) {
   helpers.validateUser(req, res, function() {
     console.log('send profile');
@@ -90,10 +96,6 @@ app.get('/api/profile', function(req, res) {
     });
   });
 });
-
-// app.get('/api/', helpers.validateUser, function(req, res) {
-//   res.sendStatus(200);
-// });
 
 // temp route to display profile info for deployment testing
 app.get('/test' , function(req, res) {
