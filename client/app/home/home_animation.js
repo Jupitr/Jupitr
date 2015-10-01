@@ -257,8 +257,6 @@ function zoomed() {
     connectionMouseleave = d3.select(this).on('mouseleave');
     d3.select(this).attr('stroke-width', Math.max(baseS/d3.event.scale, 0.15))
       .attr('opacity', Math.max(0.8/d3.event.scale, 0.7));
-      // .on('mouseover', null)
-      // .on('mouseleave', null);
    });
 
   // if (d3.event.scale > 5) {
@@ -274,4 +272,9 @@ function zoomed() {
   //   g.selectAll('#userGen').transition().duration(500).style('display', 'inline-block');
   //   g.selectAll('#states').transition().duration(500).style('display', 'inline-block');
   // }
+}
+
+// handler for click to center event
+function clicked(d) {
+  
 }
