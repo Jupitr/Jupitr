@@ -88,6 +88,7 @@ body, header, footer, nav {
   text-transform: uppercase;
   background-color: #aaa;
 }
+
 .navigation li {
   display: inline-block;
   padding: 15px;
@@ -128,7 +129,44 @@ footer {
 }
 
 .profile {
-  padding: 20px 40px;
+
+}
+
+form {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+fieldset {
+  border: 0;
+  padding: 40px;
+  width: 50%;
+  margin-top: 10px;
+}
+
+input {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+legend {
+  font: bold 16px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+label {
+  margin-right: 20px;
+  margin-bottom: 15px;
+}
+
+.career {
+  float: right;
+}
+
+.contact {
+  float: left;
 }
 
 .vis {
