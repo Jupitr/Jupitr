@@ -119,7 +119,7 @@
         <label>
           Start Date:
           <input type="date" name="currentemployerstartdate" maxlength="100" 
-          ng-model="user.currentstartdate" ng-class="">
+          ng-model="user.currentemployerstartdate" ng-class="">
         </label>
         <label>
           Previous Employer 1:
@@ -245,29 +245,29 @@
         </label>
         <label>
           Technologies:
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Android">Android
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Angular">Angular
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Backbone">Backbone
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="C/C++">C/C++
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="CSS">CSS
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="D3">D3
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Go">Go
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Express">Express
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="HTML">HTML
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="iOS">iOS
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Java">Java
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="JavaScript">JavaScript
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Jquery">Jquery
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="MongoDB">MongoDB
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Node">Node
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Pearl">Pearl
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="PHP">PHP
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Rails">Rails
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="React">React
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Ruby">Ruby
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Ruby">Rust          
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="SQL">SQL
-          <input type="checkbox" name="technologies" ng-model="user.technologies" value="Unix">Unix          
+          <input type="checkbox" name="Android" ng-model="technology.Android" value="Android">Android
+          <input type="checkbox" name="Angular" ng-model="technology.Angular" value="Angular">Angular
+          <input type="checkbox" name="Backbone" ng-model="technology.Backbone" value="Backbone">Backbone
+          <input type="checkbox" name="C/C++" ng-model="technology['C/C++']" value="C/C++">C/C++
+          <input type="checkbox" name="CSS" ng-model="technology.CSS" value="CSS">CSS
+          <input type="checkbox" name="D3" ng-model="technology.D3" value="D3">D3
+          <input type="checkbox" name="Go" ng-model="technology.Go" value="Go">Go
+          <input type="checkbox" name="Express" ng-model="technology.Express" value="Express">Express
+          <input type="checkbox" name="HTML" ng-model="technology.HTML" value="HTML">HTML
+          <input type="checkbox" name="iOS" ng-model="technology.iOS" value="iOS">iOS
+          <input type="checkbox" name="Java" ng-model="technology.Java" value="Java">Java
+          <input type="checkbox" name="JavaScript" ng-model="technology.JavaScript" value="JavaScript">JavaScript
+          <input type="checkbox" name="Jquery" ng-model="technology.Jquery" value="Jquery">Jquery
+          <input type="checkbox" name="MongoDB" ng-model="technology.MongoDB" value="MongoDB">MongoDB
+          <input type="checkbox" name="Node" ng-model="technology.Node" value="Node">Node
+          <input type="checkbox" name="Pearl" ng-model="technology.Pearl" value="Pearl">Pearl
+          <input type="checkbox" name="PHP" ng-model="technology.PHP" value="PHP">PHP
+          <input type="checkbox" name="Rails" ng-model="technology.Rails" value="Rails">Rails
+          <input type="checkbox" name="React" ng-model="technology.React" value="React">React
+          <input type="checkbox" name="Ruby" ng-model="technology.Ruby" value="Ruby">Ruby
+          <input type="checkbox" name="Rust" ng-model="technology.Rust" value="Rust">Rust          
+          <input type="checkbox" name="SQL" ng-model="technology.SQL" value="SQL">SQL
+          <input type="checkbox" name="Unix" ng-model="technology.Unix" value="Unix">Unix          
         </label>
       </fieldset>
 
@@ -276,6 +276,7 @@
     </form>
       <pre>school = {{school | json}}</pre> <!-- Remove before deployment -->
       <pre>user = {{user | json}}</pre> <!-- Remove before deployment -->
+      <pre>technology = {{technology | json}}</pre> <!-- Remove before deployment -->
   </div>
 
 </div>
