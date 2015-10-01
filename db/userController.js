@@ -2,7 +2,6 @@ var User = require('./userModel.js');
 
 // returns an array of all user profiles as separate JSON objects
 exports.sendAllUsers = function(callback) {
-  console.log('_______________ inside send all users');
   User.find({}, function(err, users) {
     if (err) {
       console.error(err);
@@ -95,7 +94,7 @@ exports.updateProfile = updateProfile = function(data, callback) {
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// var records = 600;
+// var records = 400;
 
 // var userGenerator = require('./seed-data.js');
 // for (var i = 0; i < records; i++) {

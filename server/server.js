@@ -97,7 +97,6 @@ app.get('/api/profile', function(req, res) {
 
 // temp route to display profile info for deployment testing
 app.get('/test' , function(req, res) {
-  console.log('__________________________________ calling send all users');
   user.sendAllUsers(function(data) {
     res.send(data);
   });
