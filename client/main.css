@@ -8,10 +8,6 @@ rect {
   pointer-events: all;
 }
 
-.node {
-  fill: black;
-}
-
 #login {
   display: inline-block;
   float: right;
