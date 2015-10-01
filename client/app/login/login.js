@@ -63,26 +63,20 @@ angular.module('jupitr.login', [])
       ]
     }      
   })
-  .directive('loginVis', function($window){
+  .directive('loginVis', function(){
     return {
       restrict: 'EA',
-      template: '<svg width="800" height="600"></svg>',
       link: function(scope, elem, attrs){
-        var d3 = $window.d3;
-        var rawSvg = elem.find("svg")[0];
-        var svg = d3.select(rawSvg);
+        var svg = d3.select(elem[0])
+          .append('svg')
+          .attr('width', '800')
+          .attr('height', '600');
         
         var forceGraph = d3.layout.force()
-          .size([width, height])
+          .size([800, 600])
           .distance(100)
           .charge(-100)
           .gravity(0.05);
-          // .on('tick', tick);
-
-
-        svg.append('rect')
-          .attr('width', width)
-          .attr('height', height);
 
         var drawGraph = function(){
 
