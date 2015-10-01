@@ -3,6 +3,7 @@ angular.module('jupitr', [
     'jupitr.login',
     'jupitr.home',
     'jupitr.profile',
+    'jupitr.discover',
     'ngRoute'
   ])
   .config(function($routeProvider) { 
@@ -22,6 +23,10 @@ angular.module('jupitr', [
       .when('/profile', {
         templateUrl: 'app/profile/profile.html',
         controller: 'profileController',
+      })
+      .when('/discover', {
+        templateUrl: 'app/discover/discover.html',
+        controller: 'discoverController',
       })
       .otherwise({
         redirectTo: '/'
