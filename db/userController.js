@@ -2,6 +2,7 @@ var User = require('./userModel.js');
 
 // returns an array of all user profiles as separate JSON objects
 exports.sendAllUsers = function(callback) {
+  console.log('_______________ inside send all users');
   User.find({}, function(err, users) {
     if (err) {
       console.error(err);
