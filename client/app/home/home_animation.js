@@ -2,9 +2,6 @@
 var width = window.innerWidth;
 var height = window.innerHeight - 100;
 
-// var scope = angular.element(document.getElementById('homeController')).scope().data;
-// console.log(scope);
-
 var svg = d3.select("#map").append('svg')
   .attr('class', 'vis')
   .attr("width", width)
@@ -30,16 +27,17 @@ var dummyLocGen = [];
 // stores precise location info
 var dummyLoc = [];
 // dummy data
-var dummyLength = dummy().length;
 var cohortCoords = {};
 
-dummy().forEach(function(user){
+// get data obj from localStorage
+var allUsers = JSON.parse(window.localStorage.getItem('hrr8.jupitr'));
+allUsers.forEach(function(user){
   if (user.longitude) {
     var coordsGen = floorCoords([user.longitude, user.latitude]).slice();
 
     locStoreGen[coordsGen] = locStoreGen[coordsGen] || 0;
     if (locStoreGen[coordsGen] === 0) {
-      dummyLocGen.push([coordsGen, user.city + ', ' + user.state + ' area']);
+      dummyLocGen.push([coordsGen, user.city + ', ' + user.state]);
     }
     locStoreGen[coordsGen]++;
     
@@ -221,6 +219,3 @@ function randomColor(alpha) {
   var b = 200;
   return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
 }
-
-
-
