@@ -2,7 +2,6 @@
 var width = window.innerWidth;
 var height = window.innerHeight - 200;
 
-console.log(width);
 var svg = d3.select("#map").append("svg")
   .attr("width", width)
   .attr("height", height);
@@ -36,7 +35,7 @@ dummy().forEach(function(user){
 
     locStoreGen[coordsGen] = locStoreGen[coordsGen] || 0;
     if (locStoreGen[coordsGen] === 0) {
-      dummyLocGen.push(coordsGen);
+      dummyLocGen.push([coordsGen, user.city + ', ' + user.state + ' area']);
     }
     locStoreGen[coordsGen]++;
     
@@ -142,8 +141,7 @@ d3.json('app/home/us.json', function(err, us){
         .duration(200)
         .style('font-size', '10px');
       var circle = d3.select(this).select('circle');
-      circle  
-        .attr('toggled', 'false')
+      circle.attr('toggled', 'false')
         .attr('fill', function(d) {
           return circle.attr('prevColor');
         });
@@ -152,11 +150,11 @@ d3.json('app/home/us.json', function(err, us){
   divs.append('circle')
     .attr('class', 'userGen')
     .attr('transform', function(d) {
-      return "translate(" + states(d) + ")";  
+      return "translate(" + states(d[0]) + ")";  
     })
     .attr('toggled', 'false')
     .attr('r', function(d) {
-      var num = floorCoords(d, function(data) {
+      var num = floorCoords(d[0], function(data) {
         return locStoreGen[data];
       });
       // var scale = d3.scale.linear().domain([1, 200]).range([5, 50]);
@@ -166,7 +164,7 @@ d3.json('app/home/us.json', function(err, us){
       return num;
     })
     .attr('fill', function(d) {
-      var num = floorCoords(d, function(data) {
+      var num = floorCoords(d[0], function(data) {
         return locStoreGen[data];
       });
       var r = 120 + num;
@@ -177,14 +175,21 @@ d3.json('app/home/us.json', function(err, us){
     .attr('stroke', 'white')
     .attr('stroke-width', 0.35);
 
+  // sort the circles so smaller ones appear before the bigger ones
+  divs.sort(function(a, b){
+    return locStoreGen[b] - locStoreGen[a];
+  });
+
   divs.append('text')
     .attr('x', function(d) {
-      return states(d)[0];  
+      return states(d[0])[0];  
     })
     .attr('y', function(d) {
-      return states(d)[1];  
+      return states(d[0])[1];  
     })
-    .text('test');
+    .text(function(d) {
+      return d[1];
+    });
 
 });
 
@@ -200,8 +205,8 @@ function floorCoords(arr, cb) {
   cb = cb || function(coords) {
     return coords;
   };
-  var x = Math.floor(arr[0] * 2) / 2 + 0.2;
-  var y = Math.floor(arr[1] * 2) / 2 + 0.2;
+  var x = Math.floor(arr[0] * 1.25) / 1.25 + 0.25;
+  var y = Math.floor(arr[1] * 1.25) / 1.25 + 0.25;
   return cb([x, y]);
 }
 
