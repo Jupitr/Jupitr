@@ -19,7 +19,7 @@ angular.module('jupitr.home', [])
         scope.getAll(function(data){
           if (data) {
             data = JSON.stringify(data);
-            window.localStorage.setItem('hr8.jupitr', data);
+            window.localStorage.setItem('hrr8.jupitr', data);
           }
           scope.loadVis(scope.url);
         });

@@ -30,7 +30,7 @@ var dummyLoc = [];
 var cohortCoords = {};
 
 // get data obj from localStorage
-var allUsers = JSON.parse(window.localStorage.getItem('hr8.jupitr'));
+var allUsers = JSON.parse(window.localStorage.getItem('hrr8.jupitr'));
 allUsers.forEach(function(user){
   if (user.longitude) {
     var coordsGen = floorCoords([user.longitude, user.latitude]).slice();
@@ -219,6 +219,3 @@ function randomColor(alpha) {
   var b = 200;
   return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
 }
-
-
-
