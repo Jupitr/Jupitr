@@ -79,8 +79,7 @@ d3.json('app/home/us.json', function(err, us){
   g.append('g')
     .attr('id', 'state-borders')
     .append("path")
-    .datum(topojson
-    .mesh(us, us.objects.states, function(a, b) { 
+    .datum(topojson.mesh(us, us.objects.states, function(a, b) { 
       return a !== b; 
     }))
     .attr('id', 'state-borders')
@@ -138,12 +137,18 @@ d3.json('app/home/us.json', function(err, us){
     .selectAll('circle')
     .data(userLocGen).enter()
     .append('g')
+    .attr('num', function(d) {
+      return locStoreGen[d[0]];
+    })
     .on('mouseover', function() {
-      d3.select(this).select('text')
+      var self = d3.select(this);
+      // transform text
+      self.select('text')
         .transition()
         .duration(200)
         .style('font-size', '35px');
-      var circle = d3.select(this).select('circle');
+      // change circle fill
+      var circle = self.select('circle');
       if (circle.attr('toggled') === 'false') {
         circle.attr('prevColor', function(d) {
           circle.attr('toggled', 'true');
@@ -151,17 +156,46 @@ d3.json('app/home/us.json', function(err, us){
         });
       }
       circle.attr('fill', 'rgba(255, 255, 255, 0.5)');
+      // manage popup
+      var num = self.attr('num');
+      var arc = d3.svg.arc() 
+                  .innerRadius(15) 
+                  .outerRadius(20) 
+                  .startAngle(0) 
+                  .endAngle(num/35 * Math.PI);
+      var x = d3.mouse(this)[0] - 200;
+      var y = d3.mouse(this)[1] - 200;
+
+      if (!self.select('#popup')[0][0]) {
+        var popup = self.append('g')
+                        .attr('id', 'popup')
+                        .attr('transform', 'translate(' + x + ',' + y + ')');
+
+        popup.append('rect')   
+              .attr('width', 200)
+              .attr('height', 200)
+              .attr('rx', 10)
+              .attr('ry', 10)
+              .attr('stroke-width', 1)
+              .attr('stroke', 'rgba(150, 150, 150, 0.9)')
+              .style('fill', 'rgba(255, 255, 255, 0.6)');
+        popup.append('path')
+              .attr('d', arc)
+              .style('fill', 'pink');
+      }
     })
     .on('mouseleave', function(){
-      d3.select(this).select('text')
+      var self = d3.select(this);
+      self.select('text')
         .transition()
         .duration(200)
         .style('font-size', '10px');
-      var circle = d3.select(this).select('circle');
+      var circle = self.select('circle');
       circle.attr('toggled', 'false')
         .attr('fill', function(d) {
           return circle.attr('prevColor');
         });
+      self.selectAll('#popup').remove();
     });
 
   // sort the circles so smaller ones appear before the bigger ones
@@ -277,16 +311,3 @@ function zoomed() {
     g.select('#userGen').style('display', 'inline-block');
   }
 }
-
-// handler for click to center event 
-// function clicked(d) {
-//   x.domain([states(d[0])[0], d.x + d.dx]);
-//   y.domain([d.y, 1]).range([d.y ? 20 : 0, height]);
-
-//   rect.transition()
-//       .duration(750)
-//       .attr("x", function(d) { return x(d.x); })
-//       .attr("y", function(d) { return y(d.y); })
-//       .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
-//       .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); });
-// }
