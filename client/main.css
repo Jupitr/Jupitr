@@ -1,3 +1,107 @@
+/* ===================== CSS RESET ====================== */
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ======================== GRID ======================== */
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* =================== CUSTOM STYLES ==================== */
+
+html, body {
+  font: 300 1em/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: black;
+  height: 100%;
+}
+
+#container {
+  min-height: 100%;
+  position: relative;
+}
+
+header, footer {
+  background-color: #555;
+}
+
+header {
+  padding: 20px;
+  font: 300 1.3em/2em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+body {
+  padding-bottom: 40px;
+}
+
+footer {
+  font: 300 10px/10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 40px;
+  padding: 15px;
+}
+
+.profile {
+  background-color: #fff;
+}
+
 .vis {
   background-color: rgba(220, 200, 0, 0.8);
 }
