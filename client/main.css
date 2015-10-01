@@ -177,3 +177,38 @@ text {
   cursor: default;
 }
 /*Home Page*/
+
+/*Discover Page*/
+
+#discover-outer {
+  background-color: rgba(220, 200, 0, 0.8);
+}
+
+#discover-inner {
+  margin: 30px 140px 30px 140px;
+  
+}
+
+.search-box {
+  margin-bottom: 60px;
+}
+
+.profile-view {
+  border: 1px solid black;
+  margin-bottom: 30px;
+  background-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

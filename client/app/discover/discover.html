@@ -1,49 +1,73 @@
-<div id="discovery">
-  
-  <div class="search-box">
-    <input type="text" ng-model="searchFilter" class="search" placeholder="search">
+<div id="discover-outer">
+  <div id="discover-inner">
+    <div class="search-box">
+      <input type="text" ng-model="searchFilter" class="search" placeholder="search">
+    </div>
+    <div class="container-fluid profile-view" ng-repeat="profile in profiles | filter:searchFilter">
+      <div class="row info-basid">
+        <div class="col-sm-3">
+          <p class="name">{{profile.name}}</p>
+          <p>{{profile.city}}, {{profile.state}}</p>
+        </div>
+        <div class="col-sm-7">
+          <p>{{profile.currentemployer}}</p>
+        </div>
+        <div class="col-sm-2">
+          <p class="cohort">{{profile.cohort}}</p>
+        </div>
+      </div>
+      <div class="row info-expanded">
+        <div class="col-sm-3">
+          <p>{{profile.email}}</p>
+          <p>{{profile.githublogin}}</p>
+          <p>{{profile.twitter}}</p>
+          <p>{{profile.website}}</p>
+        </div>
+        <div class="col-sm-3">
+          <p>{{profile.thesis}}</p>
+          <p>{{profile.thesisurl}}</p>
+          <p>{{profile.greenfield}}</p>
+          <p>{{profile.legacy}}</p>
+        </div>
+        <div class="col-sm-3">
+          <div class="technologies" ng-repeat="technology in profile.technologies track by $index">
+            <p>{{technology}}</p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <p>{{profile.gender}}</p>
+          <p>{{profile.race}}</p>
+        </div>
+      </div>
+      <div class="row info-employment">
+        <div class="col-sm-3">
+          <p>{{profile.currentemployer}}</p>
+          <p>{{profile.currentemployerrole}}</p>
+          <p>{{profile.currentemployertype}}</p>
+          <p>{{profile.currentemployerstartdate}}</p>
+        </div>
+        <div class="col-sm-3">
+          <p>{{profile.prioremployer1}}</p>
+          <p>{{profile.prioremployer1role}}</p>
+          <p>{{profile.prioremployer1type}}</p>
+          <p>{{profile.prioremployer1startdate}}</p>
+          <p>{{profile.prioremployer1enddate}}</p>
+        </div>
+        <div class="col-sm-3">
+          <p>{{profile.prioremployer2}}</p>
+          <p>{{profile.prioremployer2role}}</p>
+          <p>{{profile.prioremployer2type}}</p>
+          <p>{{profile.prioremployer2startdate}}</p>
+          <p>{{profile.prioremployer2enddate}}</p>
+        </div>
+        <div class="col-sm-3">
+          <p>{{profile.prioremployer3}}</p>
+          <p>{{profile.prioremployer3role}}</p>
+          <p>{{profile.prioremployer3type}}</p>
+          <p>{{profile.prioremployer3startdate}}</p>
+          <p>{{profile.prioremployer3enddate}}</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="profile-view" ng-repeat="profile in profiles | filter:searchFilter">
-    <div class="general-info">
-      <p>{{profile.name}}</p>
-      <p>{{profile.githublogin}}</p>
-      <p>{{profile.email}}</p>
-      <p>{{profile.city}}</p>
-      <p>{{profile.state}}</p>
-      <p>{{profile.cohort}}</p>
-      <p>{{profile.twitter}}</p>
-      <p>{{profile.website}}</p>
-      <p>{{profile.gender}}</p>
-      <p>{{profile.race}}</p>
-      <p>{{profile.thesis}}</p>
-      <p>{{profile.thesisurl}}</p>
-      <p>{{profile.greenfield}}</p>
-      <p>{{profile.legacy}}</p>
-    </div>
-    <div class="technologies" ng-repeat="technology in profile.technologies track by $index">
-      <p>{{technology}}</p>
-    </div>
-     <div class="employment-info">
-      <p>{{profile.currentemployer}}</p>
-      <p>{{profile.currentemployerrole}}</p>
-      <p>{{profile.currentemployertype}}</p>
-      <p>{{profile.currentemployerstartdate}}</p>
-      <p>{{profile.prioremployer1}}</p>
-      <p>{{profile.prioremployer1role}}</p>
-      <p>{{profile.prioremployer1type}}</p>
-      <p>{{profile.prioremployer1startdate}}</p>
-      <p>{{profile.prioremployer1enddate}}</p>
-      <p>{{profile.prioremployer2}}</p>
-      <p>{{profile.prioremployer2role}}</p>
-      <p>{{profile.prioremployer2type}}</p>
-      <p>{{profile.prioremployer2startdate}}</p>
-      <p>{{profile.prioremployer2enddate}}</p>
-      <p>{{profile.prioremployer3}}</p>
-      <p>{{profile.prioremployer3role}}</p>
-      <p>{{profile.prioremployer3type}}</p>
-      <p>{{profile.prioremployer3startdate}}</p>
-      <p>{{profile.prioremployer3enddate}}</p>
-    </div>
-  </div>
-  
 </div>
