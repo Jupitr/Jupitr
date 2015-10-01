@@ -82,12 +82,12 @@ app.get('/auth', function(req, res){
   helpers.checkAuth(req, res, helpers.getOrgs);
 });
 
-// app.get('/api/update', function(req, res) {
-//   // call update user api; uncomment when done
-//   // user.updateUser(req.data, function(){
-//     res.sendStatus(200);
-//   // });
-// });
+app.post('/api/update', function(req, res) {
+  // call update user api
+  user.updateProfile(req.body, function(){
+    res.sendStatus(200);
+  });
+});
 
 // route to get the login user's profile 
 app.get('/api/profile', function(req, res) {
