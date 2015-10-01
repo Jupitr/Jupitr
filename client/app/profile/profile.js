@@ -44,7 +44,7 @@ angular.module('jupitr.profile', [])
     // $scope.user.currentemployer = "placeholder";
     // $scope.user.currentemployerrole = "placeholder";
     // $scope.user.currentemployertype = "contract"; 
-    // $scope.user.currentemployerstartdate = new Date();
+    // $scope.user.currentemployerstartdate = null;
     // $scope.user.prioremployer1 = "placeholder";
     // $scope.user.prioremployer1role = "placeholder";
     // $scope.user.prioremployer1type = "contract"; 
@@ -58,7 +58,7 @@ angular.module('jupitr.profile', [])
     // $scope.user.prioremployer3 = "placeholder";
     // $scope.user.prioremployer3role = "placeholder";
     // $scope.user.prioremployer3type = "contract"; 
-    $scope.user.prioremployer3startdate = ISODate("2015-09-30T21:06:01.213Z");
+    // $scope.user.prioremployer3startdate = new Date("2015-09-30T21:06:01.213Z");
     // $scope.user.prioremployer3enddate = new Date("2015-09-30T21:06:01.213Z");
     // $scope.user.thesis = "placeholder"; 
     // $scope.user.thesisurl = "http://www.thesis.com"; 
@@ -81,33 +81,28 @@ angular.module('jupitr.profile', [])
         $scope.technology[$scope.user.technologies[i]] = true;
       }
     }
-    // if ($scope.user.currentemployerstartdate) {
-
-    // }
-    // if ($scope.user.currentemployerstartdate) {
-
-    // }
-    // if () {
-      
-    // }
-    // if () {
-      
-    // }
-    // if () {
-      
-    // }
-    // if () {
-      
-    // }
-    // if () {
-      
-    // }
-    
-    $scope.user.prioremployer1startdate = new Date($scope.user.prioremployer1startdate);
-    $scope.user.prioremployer1enddate = new Date($scope.user.prioremployer1enddate);
-    $scope.user.prioremployer2startdate = new Date($scope.user.prioremployer2startdate);
-    $scope.user.prioremployer2enddate = new Date($scope.user.prioremployer2enddate);
-    $scope.user.prioremployer3startdate = new Date($scope.user.prioremployer3startdate);
-    $scope.user.prioremployer3enddate = new Date($scope.user.prioremployer3enddate);
+    // convert date string data to dates for use in form
+    if ($scope.user.currentemployerstartdate) {
+      $scope.user.currentemployerstartdate = new Date($scope.user.currentemployerstartdate);
+    }
+    if ($scope.user.prioremployer1startdate) {
+      $scope.user.prioremployer1startdate = new Date($scope.user.prioremployer1startdate);
+    }
+    if ($scope.user.prioremployer1enddate) {
+      $scope.user.prioremployer1enddate = new Date($scope.user.prioremployer1enddate);
+    }
+    if ($scope.user.prioremployer2startdate) {
+      $scope.user.prioremployer2startdate = new Date($scope.user.prioremployer2startdate);
+    }
+    if ($scope.user.prioremployer2enddate) {
+      $scope.user.prioremployer2enddate = new Date($scope.user.prioremployer2enddate);
+    }
+    if ($scope.user.prioremployer3startdate) {
+      $scope.user.prioremployer3startdate = new Date($scope.user.prioremployer3startdate);
+    }
+    if ($scope.user.prioremployer3enddate) {
+      $scope.user.prioremployer3enddate = new Date($scope.user.prioremployer3enddate);
+    } 
   });
+
 });
