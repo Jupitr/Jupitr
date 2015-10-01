@@ -65,13 +65,15 @@ app.use(everyauth.middleware());
 // route to get every single user record in db; check if has already requested
 app.get('/api/allusers', function(req, res) {
   helpers.validateUser(req, res, function(){
-    user.sendAllUsers(function(users){
-      if (!req.session.allUserSent) {
-        req.session.allUserSent = true;
+    if (!req.session.sendAllUsers) {
+      user.sendAllUsers(function(users){
+        req.session.sendAllUsers = true;
         res.json(users);
-      }
-      res.end();
-    });
+      });
+    }
+    else {
+      res.end();  
+    }
   });
 });
 
