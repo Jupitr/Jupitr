@@ -129,8 +129,6 @@ angular.module('jupitr.login', [])
             .attr("class", "hr")
             .call(forceGraph.drag);
 
-          hrNode.fixed = true;
-
           hrNode.append("image")
             .attr("xlink:href", "http://www.hackreactor.com/favicon.ico")
             .attr("x", -8)
@@ -156,6 +154,9 @@ angular.module('jupitr.login', [])
               .attr("y1", function(d) { return d.source.y; })
               .attr("x2", function(d) { return d.target.x; })
               .attr("y2", function(d) { return d.target.y; });
+
+            hrNode.x = 400;
+            hrNode.y = 300;  
 
             node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
             hrNode.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
