@@ -162,9 +162,9 @@ rect {
   fill:none;
 }
 
-#states {
+/*#states {
   fill: rgba(0, 0, 0, 0.95);
-}
+}*/
 
 #userGen {
   display: inline-block;

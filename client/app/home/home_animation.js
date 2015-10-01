@@ -1,6 +1,7 @@
 // map for Geo data visual homepage
 var width = window.innerWidth;
 var height = window.innerHeight - 100;
+var scale0 = 1250;
 
 var svg = d3.select("#map").append('svg')
   .attr('class', 'vis')
@@ -21,36 +22,44 @@ var g = svg.append("g");
 var map = d3.geo.path()
   .projection(states);
 
-// stores generalized location info
+// zoom event
+var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
+var zoomToggle = false;
+svg
+  .call(zoom)
+  .call(zoom.event);
+
+// stores generalized location count
+// format: {'[x, y]': 24, '[x2, y2]': 2, ...}
 var locStoreGen = {};
-var dummyLocGen = [];
-// stores precise location info
-var dummyLoc = [];
-// dummy data
+// stores generalized location coords
+// format: [[x, y], [x2, y2], ...]
+var userLocGen = [];
+// stores precise user location coords by cohort
+// format: {HRR8: [[x, y], [x2, y2], ...]}
 var cohortCoords = {};
 
 // get data obj from localStorage
 var allUsers = JSON.parse(window.localStorage.getItem('hrr8.jupitr'));
+// iterate through data obj and extract out coords info to save into 
+// respective arrays and objects
 allUsers.forEach(function(user){
   if (user.longitude) {
     var coordsGen = floorCoords([user.longitude, user.latitude]).slice();
 
     locStoreGen[coordsGen] = locStoreGen[coordsGen] || 0;
     if (locStoreGen[coordsGen] === 0) {
-      dummyLocGen.push([coordsGen, user.city + ', ' + user.state]);
+      userLocGen.push([coordsGen, user.city + ', ' + user.state]);
     }
     locStoreGen[coordsGen]++;
     
     var coords = [noise(user.longitude), noise(user.latitude)];
-    dummyLoc.push(coords);  
     cohortCoords[user.cohort] = cohortCoords[user.cohort] || [];
     cohortCoords[user.cohort].push(coords);
   }
 });
 
 d3.json('app/home/us.json', function(err, us){
-  // https://gist.github.com/markmarkoh/2969317
-  // link for world data if group prefers world over us data
   if(err){
     console.log(err);
   }
@@ -65,39 +74,44 @@ d3.json('app/home/us.json', function(err, us){
     .attr('fill', 'rgba(0, 0, 0, 0.95)')
     .attr('stroke', 'rgba(255, 255, 255, 0.35)')
     .attr('stroke-width', 0.5);
-    // .on('mouseover', function(){
-    //   d3.select(this).style('fill', 'rgba(0, 0, 0, 0.8)');
-    // })
-    // .on("mouseout", function(d) {
-    //   d3.select(this).style('fill', 'rgba(0, 0, 0, 0.95)');
-    // });
 
   // draw the us state border
   g.append('g')
     .attr('id', 'state-borders')
     .append("path")
-    .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+    .datum(topojson
+    .mesh(us, us.objects.states, function(a, b) { 
+      return a !== b; 
+    }))
     .attr('id', 'state-borders')
     .attr('d', map);
 
   // path connecting people from the same cohort
   for (var prop in cohortCoords) {
-    var color= randomColor(0.6);
+    var color= randomColor(0.8);
     var connectionData = cohortCoords[prop];
     var connection = d3.svg.line()
-                           .x(function(d){return states(d)[0];})
-                           .y(function(d){return states(d)[1];})
+                           .x(function(d){
+                              return states(d)[0];
+                            })
+                           .y(function(d){
+                            return states(d)[1];
+                            })
                            .interpolate('linear');
-    // connections
+    // connections between people in the same cohort; right now for demo and 
+    // speed, only use path from start to end so it's not a one to one connection
+    // will fix later; low priority
     g.append('g')
       .attr('id', prop)
        .append('path')
+       .attr('class', 'connection')
        .attr('d', connection(connectionData))
        .attr('stroke', color)
        .attr('stroke-width', 0.2)
+       .attr('baseS', 0.2)
        .attr('fill', 'none')
        .on('mouseover', function(){
-          d3.select(this).transition().duration(50).attr('stroke-width', 3);
+          d3.select(this).transition().duration(50).attr('stroke-width', 1.5);
        })
        .on('mouseleave', function(){
           d3.select(this).transition().duration(50).attr('stroke-width', 0.2);
@@ -113,7 +127,8 @@ d3.json('app/home/us.json', function(err, us){
       .attr('transform', function(d) {
         return 'translate(' + states(d) + ')'; 
       })
-      .attr('r', 5)
+      .attr('baseR', 7)
+      .attr('r', 7)
       .attr('fill', 'rgba(255, 0, 0, 0.5)');
   }  
 
@@ -121,7 +136,7 @@ d3.json('app/home/us.json', function(err, us){
   var divs = g.append('g')
     .attr('id', 'userGen')
     .selectAll('circle')
-    .data(dummyLocGen).enter()
+    .data(userLocGen).enter()
     .append('g')
     .on('mouseover', function(){
       d3.select(this).select('text')
@@ -161,14 +176,10 @@ d3.json('app/home/us.json', function(err, us){
     })
     .attr('toggled', 'false')
     .attr('r', function(d) {
-      var num = floorCoords(d[0], function(data) {
-        return locStoreGen[data];
-      });
-      // var scale = d3.scale.linear().domain([1, 200]).range([5, 50]);
-      // num = scale(num);  
-      num = num < 10 ? 10 : num;
-      num = num > 50 ? 50 : num * 1.5;
-      return num;
+      return getCirGenRadius(d);
+    })
+    .attr('baseR', function(d) {
+      return getCirGenRadius(d);
     })
     .attr('fill', function(d) {
       var num = floorCoords(d[0], function(data) {
@@ -195,11 +206,10 @@ d3.json('app/home/us.json', function(err, us){
 
 });
 
-
 // helper func
 function noise(num) {
   var sign = Math.random() > 0.5 ? 1 : -1;
-  var amp = Math.random() * 0.4;
+  var amp = Math.random() * 0.2;
   return num + sign * amp;
 }
 
@@ -218,4 +228,50 @@ function randomColor(alpha) {
   var g = Math.floor(Math.random() * 150) + 100;
   var b = 200;
   return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+}
+
+function getCirGenRadius(d) {
+  var num = floorCoords(d[0], function(data) {
+    return locStoreGen[data];
+  });
+  num = num < 10 ? 10 : num;
+  num = num > 50 ? 50 : num * 1.5;
+  return num;
+}
+
+// zoom handler
+var connectionMouseover, connectionMouseleave;
+function zoomed() {
+  g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  g.selectAll('.user')
+   .each(function() {
+    var baseR = d3.select(this).attr('baseR');
+    d3.select(this).attr('r', Math.max(baseR/d3.event.scale, 1));
+   });
+
+   console.log(d3.event.scale);
+  g.selectAll('.connection')
+   .each(function() {
+    var baseS = d3.select(this).attr('baseS');
+    connectionMouseover = d3.select(this).on('mouseover');
+    connectionMouseleave = d3.select(this).on('mouseleave');
+    d3.select(this).attr('stroke-width', Math.max(baseS/d3.event.scale, 0.15))
+      .attr('opacity', Math.max(0.8/d3.event.scale, 0.7));
+      // .on('mouseover', null)
+      // .on('mouseleave', null);
+   });
+
+  // if (d3.event.scale > 5) {
+  //   if (!zoomToggle) {
+  //     zoomToggle = true;
+  //     console.log(g.selectAll('#userGen'));
+  //     // g.selectAll('#userGen').transition().duration(500).style('display', 'none');
+  //     // g.selectAll('#states').selectAll('path').attr('fill', 'rgb(200, 200, 200)');
+  //   }
+  // }
+  // else {
+  //   zoomToggle = false;
+  //   g.selectAll('#userGen').transition().duration(500).style('display', 'inline-block');
+  //   g.selectAll('#states').transition().duration(500).style('display', 'inline-block');
+  // }
 }
