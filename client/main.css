@@ -1,4 +1,4 @@
-body {
+.vis {
   background-color: rgba(220, 200, 0, 0.8);
 }
 
@@ -42,5 +42,9 @@ rect {
   font-family: 'Courier';
   font-size: 10px;
   fill: white;
+}
+
+text {
+  cursor: default;
 }
 /*Home Page*/

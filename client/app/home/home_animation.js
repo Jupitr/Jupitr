@@ -1,8 +1,12 @@
 // map for Geo data visual homepage
 var width = window.innerWidth;
-var height = window.innerHeight - 200;
+var height = window.innerHeight - 100;
 
-var svg = d3.select("#map").append("svg")
+// var scope = angular.element(document.getElementById('homeController')).scope().data;
+// console.log(scope);
+
+var svg = d3.select("#map").append('svg')
+  .attr('class', 'vis')
   .attr("width", width)
   .attr("height", height);
 
@@ -147,6 +151,11 @@ d3.json('app/home/us.json', function(err, us){
         });
     });
 
+  // sort the circles so smaller ones appear before the bigger ones
+  divs.sort(function(a, b){
+    return locStoreGen[b[0]] - locStoreGen[a[0]];
+  });
+
   divs.append('circle')
     .attr('class', 'userGen')
     .attr('transform', function(d) {
@@ -175,11 +184,6 @@ d3.json('app/home/us.json', function(err, us){
     .attr('stroke', 'white')
     .attr('stroke-width', 0.35);
 
-  // sort the circles so smaller ones appear before the bigger ones
-  divs.sort(function(a, b){
-    return locStoreGen[b] - locStoreGen[a];
-  });
-
   divs.append('text')
     .attr('x', function(d) {
       return states(d[0])[0];  
@@ -205,8 +209,8 @@ function floorCoords(arr, cb) {
   cb = cb || function(coords) {
     return coords;
   };
-  var x = Math.floor(arr[0] * 1.25) / 1.25 + 0.25;
-  var y = Math.floor(arr[1] * 1.25) / 1.25 + 0.25;
+  var x = Math.floor(arr[0] * 1.25) / 1.25 + 0.3;
+  var y = Math.floor(arr[1] * 1.25) / 1.25 + 0.3;
   return cb([x, y]);
 }
 
