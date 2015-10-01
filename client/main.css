@@ -1,3 +1,136 @@
+/* ===================== CSS RESET ====================== */
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ======================== GRID ======================== */
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* =================== CUSTOM STYLES ==================== */
+
+body, header, footer, nav {
+  width: 100%;
+  font: 300 1em/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: black;
+}
+
+.wrapper {
+  width: 95%;
+  height: 95%;
+  position: absolute; 
+  left: 0; 
+  right: 0;
+  top: 0; 
+  bottom: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow:auto;
+}
+
+.navigation {
+  font: bold .8em/1em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  background-color: #aaa;
+}
+.navigation li {
+  display: inline-block;
+  padding: 15px;
+  background-color: #888;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: white;
+}
+
+#container {
+  top: 30px;
+  bottom: 30px;
+  background-color: rgba(220, 200, 0, 0.8);
+}
+
+header, footer {
+  background-color: #555;
+}
+
+header {
+  padding: 30px;
+  font: 300 1.3em/2em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+body {
+  padding-bottom: 30px;
+}
+
+footer {
+  font: 300 10px/10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.profile {
+  padding: 20px 40px;
+}
+
 .vis {
   background-color: rgba(220, 200, 0, 0.8);
 }

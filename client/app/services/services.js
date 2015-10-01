@@ -45,6 +45,9 @@ angular.module('jupitr.services', [])
 
   var update = function(user) {
     return $http({
+      headers: {
+        'Content-Type': 'application/json'
+      },
       method: 'POST', 
       url: '/api/update',
       data: user
