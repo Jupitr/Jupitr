@@ -47,7 +47,7 @@ var pickRandom = function(list) {
 };
 
 var generateRandomUser = function() {
-  var firstName = pickRandom(firstNames)
+  var firstName = pickRandom(firstNames);
   var lastName = pickRandom(lastNames);
   var name = firstName + ' ' + lastName;
   var email = firstName + lastName + '@myemail.com';
@@ -56,7 +56,7 @@ var generateRandomUser = function() {
   var handle = firstName.toLowerCase() + Math.floor(Math.random() * 1000);
   var githubLogin = handle;
   var twitter = handle;
-  var website = 'http://www.' + handle+ '.com'
+  var website = 'http://www.' + handle+ '.com';
   var gender = pickRandom(genders);
   var race = pickRandom(races);
   var thesis = pickRandom(projects);
@@ -69,23 +69,23 @@ var generateRandomUser = function() {
   technologies.push(pickRandom(techs));
   var currentEmployer = pickRandom(companies);
   var currentEmployerRole = pickRandom(roles);
-  var currentEmployerType = pickRandom(types)
-  var currentEmployerStartDate = new Date();
+  var currentEmployerType = pickRandom(types);
+  var currentEmployerStartDate = String(new Date());
   var priorEmployer1 = pickRandom(companies);
   var priorEmployer1Role = pickRandom(roles);
   var priorEmployer1Type = pickRandom(types);
-  var priorEmployer1StartDate = new Date();
-  var priorEmployer1EndDate = new Date();
+  var priorEmployer1StartDate = String(new Date());
+  var priorEmployer1EndDate = String(new Date());
   var priorEmployer2 = pickRandom(companies);
   var priorEmployer2Role = pickRandom(roles);
   var priorEmployer2Type = pickRandom(types);
-  var priorEmployer2StartDate = new Date();
-  var priorEmployer2EndDate = new Date();
+  var priorEmployer2StartDate = String(new Date());
+  var priorEmployer2EndDate = String(new Date());
   var priorEmployer3 = pickRandom(companies);
   var priorEmployer3Role = pickRandom(roles);
   var priorEmployer3Type = pickRandom(types);
-  var priorEmployer3StartDate = new Date();
-  var priorEmployer3EndDate = new Date();
+  var priorEmployer3StartDate = String(new Date());
+  var priorEmployer3EndDate = String(new Date());
 
   return {
     name: name,
@@ -126,7 +126,7 @@ var generateRandomUser = function() {
     prioremployer3enddate: priorEmployer3EndDate,
   };
   
-}
+};
 
 // console.log(generateRandomUser());
 

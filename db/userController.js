@@ -81,7 +81,7 @@ exports.updateProfile = updateProfile = function(data, callback) {
       return;
     }
     callback(data);
-  })
+  });
 }; 
 
 
