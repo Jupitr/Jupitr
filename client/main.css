@@ -1,3 +1,7 @@
+body {
+  background-color: rgba(220, 200, 0, 0.8);
+}
+
 /*Login Visualization*/
 rect {
   fill: white;
@@ -33,14 +37,10 @@ rect {
   fill: rgba(0, 0, 0, 0.95);
 }
 
-#state-borders {
-  stroke: white;
-  stroke-width: 0.5px;
+#userGen {
+  display: inline-block;
+  font-family: 'Courier';
+  font-size: 10px;
+  fill: white;
 }
-
-.user {
-  stroke: rgba(50, 50, 50, 0.2);
-  stroke-width: 0.05px;
-}
-
 /*Home Page*/
