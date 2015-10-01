@@ -77,14 +77,14 @@ header, footer {
 }
 
 header {
-  padding: 20px;
+  padding: 30px;
   font: 300 1.3em/2em "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
   text-align: center;
 }
 
 body {
-  padding-bottom: 40px;
+  padding-bottom: 30px;
 }
 
 footer {
@@ -94,12 +94,13 @@ footer {
   position: absolute;
   width: 100%;
   bottom: 0;
-  height: 40px;
-  padding: 15px;
+  height: 30px;
+  padding: 10px;
 }
 
 .profile {
   background-color: #fff;
+  padding: 20px 40px;
 }
 
 .vis {
