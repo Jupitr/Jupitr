@@ -185,19 +185,43 @@ text {
 }
 
 #discover-inner {
-  margin: 30px 140px 30px 140px;
+  margin: 0px 140px 30px 140px;
   
 }
 
-.search-box {
-  margin-bottom: 60px;
+.search {
+  border: 2px solid black;
+  border-radius: 3px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font: 18px;
+  width: 300px;
+  font-color: black;
 }
 
 .profile-view {
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 3px;
   margin-bottom: 30px;
   background-color: white;
+  font-weight: 400;
+  padding: 35px;
 }
+
+.
+
+.info-expanded, .info-employment {
+  border-top: 1px solid #B3B3B3;
+}
+
+.name {
+  font-size: 28px;
+  font-family: Courier;
+  padding-bottom: 6px;
+}
+
+.cohort
+
 
 
 

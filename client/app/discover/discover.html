@@ -4,10 +4,10 @@
       <input type="text" ng-model="searchFilter" class="search" placeholder="search">
     </div>
     <div class="container-fluid profile-view" ng-repeat="profile in profiles | filter:searchFilter">
-      <div class="row info-basid">
+      <div class="row info-basic">
         <div class="col-sm-3">
           <p class="name">{{profile.name}}</p>
-          <p>{{profile.city}}, {{profile.state}}</p>
+          <p class="location">{{profile.city}}, {{profile.state}}</p>
         </div>
         <div class="col-sm-7">
           <p>{{profile.currentemployer}}</p>
