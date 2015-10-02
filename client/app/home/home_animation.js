@@ -171,11 +171,11 @@ d3.json('app/home/us.json', function(err, us){
               .attr('width', 300)
               .attr('height', 135)
               .attr('stroke-width', 1)
-              .attr('stroke', 'rgba(255, 255, 255, 0.9)')
+              .attr('stroke', 'rgba(40, 40, 40, 0.9)')
               .style('fill', 'rgba(255, 255, 255, 0.6)');
         var text = popup.append('text')
                         .attr('transform', 'translate(0, 10)')
-                        .attr('fill', 'white');
+                        .attr('fill', 'rgb(20, 20, 20)');
         var record = userStore[name];
         for (var prop in record) {
           if (prop !== 'coords') {
@@ -398,6 +398,7 @@ function zoomed() {
   if (d3.event.scale > 18) {
     // general user location circle is hidden
     g.select('#userGen').style('display', 'none');
+    g.selectAll('.user').attr('stroke-width', 0.02).attr('stroke', 'rgba(255, 255, 255, 0.7)');
     g.selectAll('.zoom')
       .style('display', 'inline-block')
       .attr('font-size', 0.3);
