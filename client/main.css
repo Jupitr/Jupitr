@@ -67,7 +67,7 @@ body, header, footer, nav {
   color: black;
 }
 
-.wrapper {
+/*.wrapper {
   width: 95%;
   position: absolute; 
   left: 0; 
@@ -77,8 +77,8 @@ body, header, footer, nav {
   margin: 30px auto;
   max-width: 100%;
   max-height: 100%;
-  /*overflow:auto;*/
-}
+  overflow:auto;
+}*/
 
 .navigation {
   font: bold .8em/1em "Helvetica Neue", Helvetica, Arial, sans-serif;
