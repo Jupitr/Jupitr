@@ -8,10 +8,10 @@ var svg = d3.select("#map").append('svg')
   .attr("width", width)
   .attr("height", height);
 
-// storing map using US state data, TODO ask team if they want world data.
+// storing map using US state data
 var states = d3.geo.albersUsa()
-  .scale(1250)
-  .translate([width/2, height/2]);
+  .scale(1200)
+  .translate([width/2, height/2 - 25]);
 // d3.geo.albersUsa for US map
 // d3.geo.equirectangular for world map
 // https://github.com/mbostock/d3/wiki/Geo-Projections
@@ -36,8 +36,9 @@ var locStoreGen = {};
 // format: [[x, y], [x2, y2], ...]
 var userLocGen = [];
 // stores precise user location coords by cohort
-// format: {HRR8: [[x, y], [x2, y2], ...]}
+// format: {HRR8: [{coords: [x, y], name: 'xyz', ... }, {coords: [x, y], name: 'xyz', ... }], ...}
 var cohortCoords = {};
+var userStore = {};
 
 // get data obj from localStorage
 var allUsers = JSON.parse(window.localStorage.getItem('hrr8.jupitr'));
@@ -53,9 +54,10 @@ allUsers.forEach(function(user){
     }
     locStoreGen[coordsGen]++;
     
-    var coords = [noise(user.longitude), noise(user.latitude)];
+    var profile = getUserProfile(user);
+    userStore[profile.cohort + profile.name] = profile;
     cohortCoords[user.cohort] = cohortCoords[user.cohort] || [];
-    cohortCoords[user.cohort].push(coords);
+    cohortCoords[user.cohort].push(profile);
   }
 });
 
@@ -85,22 +87,28 @@ d3.json('app/home/us.json', function(err, us){
     .attr('id', 'state-borders')
     .attr('d', map);
 
+  // create group container to hold all connection paths between user nodes
+  var connectionGroup = g.append('g').attr('id', 'conneciton');
+  // create group container to hold all user nodes; appended after connecitonGroup
+  // so this group takes priority over the other one on HTML mouse events
+  var userGroup = g.append('g').attr('id', 'user');
   // path connecting people from the same cohort
   for (var prop in cohortCoords) {
+    // create random color for the connection path; each cohort has a different color
     var color= randomColor(0.8);
     var connectionData = cohortCoords[prop];
     var connection = d3.svg.line()
                            .x(function(d){
-                              return states(d)[0];
+                              return states(d.coords)[0];
                             })
                            .y(function(d){
-                            return states(d)[1];
+                            return states(d.coords)[1];
                             })
                            .interpolate('linear');
     // connections between people in the same cohort; right now for demo and 
     // speed, only use path from start to end so it's not a one to one connection
     // will fix later; low priority
-    g.append('g')
+    connectionGroup.append('g')
       .attr('id', prop)
        .append('path')
        .attr('class', 'connection')
@@ -117,14 +125,17 @@ d3.json('app/home/us.json', function(err, us){
        })
 
     // precise location info per cohort
-    g.append('g')
+    userGroup.append('g')
       .attr('id', prop)
       .selectAll('circle')
       .data(connectionData).enter()
       .append('circle')
       .attr('class', 'user')
+      .attr('id', function(d) {
+        return prop + d.name;
+      })
       .attr('transform', function(d) {
-        return 'translate(' + states(d) + ')'; 
+        return 'translate(' + states(d.coords) + ')'; 
       })
       .attr('baseR', 7)
       .attr('r', 7)
@@ -143,12 +154,12 @@ d3.json('app/home/us.json', function(err, us){
     .on('mouseover', function() {
       var self = d3.select(this);
       var dad = d3.select(this.parentNode);
-      // transform text
+      // transform location text upon mouse event
       self.select('text')
         .transition()
         .duration(200)
         .style('font-size', '35px');
-      // change circle fill
+      // change circle fill to be highlighted
       var circle = self.select('circle');
       if (circle.attr('toggled') === 'false') {
         circle.attr('prevColor', function(d) {
@@ -157,7 +168,7 @@ d3.json('app/home/us.json', function(err, us){
         });
       }
       circle.attr('fill', 'rgba(255, 255, 255, 0.5)');
-      // manage popup
+      // manage popup - shows how many hack reactor students are in the general area
       var num = self.attr('num');
       var arc = d3.svg.arc() 
                   .innerRadius(40) 
@@ -191,7 +202,7 @@ d3.json('app/home/us.json', function(err, us){
               .attr('transform', 'translate(' + 100 + ',' + 100 + ')')
               .attr('stroke', 'rgba(255, 255, 255, 0.3)')
               .attr('fill', 'rgba(120, 120, 120, 0.5)')
-              .style('fill', 'rgba(0, 0, 0, 0.5)');
+              .style('fill', 'rgba(60, 60, 60, 0.9)');
         popup.append('text')
               .attr('transform', 'translate(' + 77 + ',' + 110 + ')')
               .style('font-size', '35px')
@@ -294,23 +305,31 @@ function getCirGenRadius(d) {
   return num;
 }
 
+function getUserProfile(user) {
+  return {
+    coords: [noise(user.longitude), noise(user.latitude)],
+    name: user.name,
+    location: user.city + ', ' + user.state,
+    email: user.email,
+    company: user.currentemployer,
+    cohort: user.cohort
+  };
+}
+
 // zoom handler
-var connectionMouseover, connectionMouseleave;
 function zoomed() {
   g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   g.selectAll('.user')
    .each(function() {
     var baseR = d3.select(this).attr('baseR');
-    d3.select(this).attr('r', Math.max(baseR/d3.event.scale, 1));
+    d3.select(this).attr('r', Math.max(baseR/d3.event.scale, 0.5));
    });
 
   g.selectAll('.connection')
    .each(function() {
     var baseS = d3.select(this).attr('baseS');
-    connectionMouseover = d3.select(this).on('mouseover');
-    connectionMouseleave = d3.select(this).on('mouseleave');
     d3.select(this).attr('stroke-width', Math.max(baseS/d3.event.scale, 0.15))
-      .attr('opacity', Math.max(0.8/d3.event.scale, 0.7));
+      .attr('opacity', Math.max(0.8/d3.event.scale, 0.3));
    });
 
   var userGenCir = g.select('#userGen').selectAll('circle');
@@ -324,8 +343,47 @@ function zoomed() {
         .call(zoom.translate([((x * -scale) + (width / 2)), ((y * -scale) + height / 2)])
         .scale(scale).event);
   });
+
+  // if zoom in to 18 times bigger
   if (d3.event.scale > 18) {
+    // general user location circle is hidden
     g.select('#userGen').style('display', 'none');
+    // add to user event so that mouseover will create pop up profile
+    g.selectAll('.user').each(function(){
+      d3.select(this)
+        .on('mouseover', function() {
+          var rect = d3.select(this)[0][0].getBoundingClientRect();
+          var name = d3.select(this).attr('id');
+          var x = rect.left - 550;
+          var y = rect.top - 250;
+          var popup = svg.append('g')
+                          .attr('id', 'popup')
+                          .attr('transform', 'translate(' + x + ',' + y + ')');
+          popup.append('rect')
+                .attr('rx', 10)
+                .attr('ry', 10)
+                .attr('width', 300)
+                .attr('height', 135)
+                .attr('stroke-width', 1)
+                .attr('stroke', 'rgba(255, 255, 255, 0.9)')
+                .style('fill', 'rgba(255, 255, 255, 0.6)');
+          var text = popup.append('text')
+                          .attr('transform', 'translate(0, 10)')
+                          .attr('fill', 'white');
+          var record = userStore[name];
+          for (var prop in record) {
+            if (prop !== 'coords') {
+              text.append('tspan')
+                  .text(record[prop])
+                  .attr('dy', 20)
+                  .attr('x', 20);
+            }
+          }
+        })
+        .on('mouseleave', function() {
+          d3.selectAll('#popup').remove();
+        });
+    });
   }
   else {
     g.select('#userGen').style('display', 'inline-block');

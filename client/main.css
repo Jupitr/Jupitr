@@ -207,25 +207,21 @@ rect {
 
 /*Home Visualization*/
 
-
 #map {
   fill:none;
 }
 
-/*#states {
-  fill: rgba(0, 0, 0, 0.95);
-}*/
-
 #userGen {
   display: inline-block;
-  font-family: 'Courier';
   font-size: 10px;
   fill: white;
 }
 
 text {
   cursor: default;
+  font-family: 'Courier';
 }
+
 /*Home Page*/
 
 /*Discover Page*/
