@@ -216,18 +216,15 @@ rect {
 
 #userGen {
   display: inline-block;
-  font-family: 'Courier';
   font-size: 10px;
   fill: white;
 }
 
-#userprof {
-  float: right;
-}
-
 text {
   cursor: default;
+  font-family: 'Courier';
 }
+
 /*Home Page*/
 
 /*Discover Page*/

@@ -38,6 +38,7 @@ var userLocGen = [];
 // stores precise user location coords by cohort
 // format: {HRR8: [{coords: [x, y], name: 'xyz', ... }, {coords: [x, y], name: 'xyz', ... }], ...}
 var cohortCoords = {};
+var userStore = {};
 
 // get data obj from localStorage
 var allUsers = JSON.parse(window.localStorage.getItem('hrr8.jupitr'));
@@ -53,7 +54,8 @@ allUsers.forEach(function(user){
     }
     locStoreGen[coordsGen]++;
     
-    var profile= getUserProfile(user);
+    var profile = getUserProfile(user);
+    userStore[profile.cohort + profile.name] = profile;
     cohortCoords[user.cohort] = cohortCoords[user.cohort] || [];
     cohortCoords[user.cohort].push(profile);
   }
@@ -94,13 +96,13 @@ d3.json('app/home/us.json', function(err, us){
   for (var prop in cohortCoords) {
     // create random color for the connection path; each cohort has a different color
     var color= randomColor(0.8);
-    var connectionData = cohortCoords[prop].coords;
+    var connectionData = cohortCoords[prop];
     var connection = d3.svg.line()
                            .x(function(d){
-                              return states(d)[0];
+                              return states(d.coords)[0];
                             })
                            .y(function(d){
-                            return states(d)[1];
+                            return states(d.coords)[1];
                             })
                            .interpolate('linear');
     // connections between people in the same cohort; right now for demo and 
@@ -129,8 +131,11 @@ d3.json('app/home/us.json', function(err, us){
       .data(connectionData).enter()
       .append('circle')
       .attr('class', 'user')
+      .attr('id', function(d) {
+        return prop + d.name;
+      })
       .attr('transform', function(d) {
-        return 'translate(' + states(d) + ')'; 
+        return 'translate(' + states(d.coords) + ')'; 
       })
       .attr('baseR', 7)
       .attr('r', 7)
@@ -301,7 +306,14 @@ function getCirGenRadius(d) {
 }
 
 function getUserProfile(user) {
-  {}
+  return {
+    coords: [noise(user.longitude), noise(user.latitude)],
+    name: user.name,
+    location: user.city + ', ' + user.state,
+    email: user.email,
+    company: user.currentemployer,
+    cohort: user.cohort
+  };
 }
 
 // zoom handler
@@ -341,17 +353,32 @@ function zoomed() {
       d3.select(this)
         .on('mouseover', function() {
           var rect = d3.select(this)[0][0].getBoundingClientRect();
+          var name = d3.select(this).attr('id');
           var x = rect.left - 550;
           var y = rect.top - 250;
-          svg.append('rect')
-              .attr('id', 'popup')
-              .attr('x', x)
-              .attr('y', y)
-              .attr('rx', 10)
-              .attr('ry', 10)
-              .attr('width', 400)
-              .attr('height', 300)
-              .style('fill', 'rgba(255, 255, 255, 0.6)');
+          var popup = svg.append('g')
+                          .attr('id', 'popup')
+                          .attr('transform', 'translate(' + x + ',' + y + ')');
+          popup.append('rect')
+                .attr('rx', 10)
+                .attr('ry', 10)
+                .attr('width', 300)
+                .attr('height', 135)
+                .attr('stroke-width', 1)
+                .attr('stroke', 'rgba(255, 255, 255, 0.9)')
+                .style('fill', 'rgba(255, 255, 255, 0.6)');
+          var text = popup.append('text')
+                          .attr('transform', 'translate(0, 10)')
+                          .attr('fill', 'white');
+          var record = userStore[name];
+          for (var prop in record) {
+            if (prop !== 'coords') {
+              text.append('tspan')
+                  .text(record[prop])
+                  .attr('dy', 20)
+                  .attr('x', 20);
+            }
+          }
         })
         .on('mouseleave', function() {
           d3.selectAll('#popup').remove();
