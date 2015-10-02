@@ -125,8 +125,25 @@ d3.json('app/home/us.json', function(err, us){
        })
 
     // precise location info per cohort
-    userGroup.append('g')
-      .attr('id', prop)
+    var individual = userGroup.append('g')
+                                .attr('id', prop);
+    individual
+      .selectAll('text')
+      .data(connectionData).enter()
+      .append('text')
+      .attr('class', 'zoom')
+      .attr('id', function(d) {
+        return prop + d.name;
+      })
+      .attr('transform', function(d) {
+        return 'translate(' + states(d.coords) + ')'; 
+      })
+      .text(function(d) {
+        return d.name;
+      })
+      .attr('fill', 'white')
+      .style('display', 'none');
+    individual
       .selectAll('circle')
       .data(connectionData).enter()
       .append('circle')
@@ -139,8 +156,41 @@ d3.json('app/home/us.json', function(err, us){
       })
       .attr('baseR', 7)
       .attr('r', 7)
-      .attr('fill', 'rgba(255, 0, 0, 0.5)');
-  }  
+      .attr('fill', 'rgba(255, 0, 0, 0.5)')
+      .on('mouseover', function() {
+        var rect = d3.select(this)[0][0].getBoundingClientRect();
+        var name = d3.select(this).attr('id');
+        var x = rect.left - 350;
+        var y = rect.top - 250;
+        var popup = svg.append('g')
+                        .attr('id', 'popup')
+                        .attr('transform', 'translate(' + x + ',' + y + ')');
+        popup.append('rect')
+              .attr('rx', 10)
+              .attr('ry', 10)
+              .attr('width', 300)
+              .attr('height', 135)
+              .attr('stroke-width', 1)
+              .attr('stroke', 'rgba(40, 40, 40, 0.9)')
+              .style('fill', 'rgba(255, 255, 255, 0.6)');
+        var text = popup.append('text')
+                        .attr('transform', 'translate(0, 10)')
+                        .attr('fill', 'rgb(20, 20, 20)');
+        var record = userStore[name];
+        for (var prop in record) {
+          if (prop !== 'coords') {
+            text.append('tspan')
+                .text(record[prop])
+                .attr('dy', 20)
+                .attr('x', 20);
+          }
+        }
+      })
+      .on('mouseleave', function() {
+        d3.selectAll('#popup').remove();
+        d3.selectAll('.zoom').attr('font-size', 0.3);
+      });
+  } 
 
   // general data location
   var divs = g.append('g')
@@ -348,44 +398,13 @@ function zoomed() {
   if (d3.event.scale > 18) {
     // general user location circle is hidden
     g.select('#userGen').style('display', 'none');
-    // add to user event so that mouseover will create pop up profile
-    g.selectAll('.user').each(function(){
-      d3.select(this)
-        .on('mouseover', function() {
-          var rect = d3.select(this)[0][0].getBoundingClientRect();
-          var name = d3.select(this).attr('id');
-          var x = rect.left - 550;
-          var y = rect.top - 250;
-          var popup = svg.append('g')
-                          .attr('id', 'popup')
-                          .attr('transform', 'translate(' + x + ',' + y + ')');
-          popup.append('rect')
-                .attr('rx', 10)
-                .attr('ry', 10)
-                .attr('width', 300)
-                .attr('height', 135)
-                .attr('stroke-width', 1)
-                .attr('stroke', 'rgba(255, 255, 255, 0.9)')
-                .style('fill', 'rgba(255, 255, 255, 0.6)');
-          var text = popup.append('text')
-                          .attr('transform', 'translate(0, 10)')
-                          .attr('fill', 'white');
-          var record = userStore[name];
-          for (var prop in record) {
-            if (prop !== 'coords') {
-              text.append('tspan')
-                  .text(record[prop])
-                  .attr('dy', 20)
-                  .attr('x', 20);
-            }
-          }
-        })
-        .on('mouseleave', function() {
-          d3.selectAll('#popup').remove();
-        });
-    });
+    g.selectAll('.user').attr('stroke-width', 0.02).attr('stroke', 'rgba(255, 255, 255, 0.7)');
+    g.selectAll('.zoom')
+      .style('display', 'inline-block')
+      .attr('font-size', 0.3);
   }
   else {
     g.select('#userGen').style('display', 'inline-block');
+    g.selectAll('.zoom').style('display', 'none');
   }
 }
