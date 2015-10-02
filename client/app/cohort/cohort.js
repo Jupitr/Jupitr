@@ -7,9 +7,7 @@ angular.module('jupitr.cohort', [])
       restrict: 'EA',
       link: function(scope, elem, attrs){
         var width = window.innerWidth;
-        var height = Math.ceil(width*0.7);
-        var oR = 0;
-        var nTop = 0;
+        var height = window.innerHeight - 300;
 
         var svg = d3.select(elem[0])
           .append('svg')
@@ -30,31 +28,52 @@ angular.module('jupitr.cohort', [])
 
           var students = root.bubbles.length;
           var color = d3.scale.category20();
-          var yCord = root.bubbles.length;
-          var xCord = width/(1+3*yCord);
+          var xCord = width/(1+3*students);
+          var yCord = Math.ceil(width/students*2);
 
-          studentName.append('rect')
+          studentName.append('circle')
             .attr({
-              'width': '175',
-              'height': '175',
-              'x': function(d, i){return (width/4) * (i) + 100},
-              'y': '200'
+              'r': '85',
+              'cx': function(d, i){return (width/4.5) * (i) + 185;},
+              'cy': '345'
             })
-            .style('fill', function(d, i){return color(i);})
+            .style('fill', '#254255')
             .style('opacity', 0.2);
             // on mouseover focus
 
           studentName.append('text')
             .attr({
-              'x': function(d, i){return (width/4) * (i) + 185},
-              'y': '290',
+              'x': function(d, i){return (width/4.5) * (i) + 185;},
+              'y': '355',
               'font-size': 25,
               'text-anchor': 'middle'
             })
             .text(function(d){return d.name;})
-            .style('fill', function(d, i){return color(i);});
+            .style('fill', 'black');
 
+          for(var j = 0; j < students; j++){
+            var descriptBubbles = svg.selectAll('.descriptors')
+              .data(root.bubbles[j].description)
+              .enter()
+              .append('g');
 
+              descriptBubbles.append('circle')
+                .attr({
+                  'r': '40',
+                  'cx': function(d,i) {return (xCord*(3*(j+1)-1) + xCord*1.5*Math.cos((i-1)*45/180*3.1415926) -160);},
+                  'cy': function(d,i) {return ((yCord+xCord)/3 + xCord*1.5*Math.sin((i-1)*45/180*3.1415926));},
+                  'cursor': 'pointer',
+                  'font-size': '6'
+                })
+                .style({
+                  'opacity': '0.2',
+                  'fill': function(d, i){return color(i);}
+                })
+                .text(function(d){return d.name;})
+                .on('click', function(d, i){
+                  window.open(d.address);
+                });
+          }
 
         });
       }
