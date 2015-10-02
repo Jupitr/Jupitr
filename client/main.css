@@ -69,16 +69,15 @@ body, header, footer, nav {
 
 .wrapper {
   width: 95%;
-  height: 95%;
   position: absolute; 
   left: 0; 
   right: 0;
   top: 0; 
   bottom: 0;
-  margin: auto;
+  margin: 30px auto;
   max-width: 100%;
   max-height: 100%;
-  overflow:auto;
+  /*overflow:auto;*/
 }
 
 .navigation {
@@ -119,6 +118,7 @@ li.selected {
 #container {
   top: 30px;
   bottom: 30px;
+  background-color: rgba(220, 200, 0, 0.8);
 }
 
 header, footer {
@@ -144,7 +144,7 @@ footer {
 }
 
 .profile {
-  background-color: rgba(220, 200, 0, 0.8);
+
 }
 
 form {
@@ -185,7 +185,7 @@ label {
 }
 
 .vis {
-  background-color: rgba(220, 200, 0, 0.8);
+ /* background-color: rgba(220, 200, 0, 0.8);*/
 }
 
 /*Login Visualization*/
@@ -234,11 +234,12 @@ text {
 /*Discover Page*/
 
 #discover-outer {
-  background-color: rgba(220, 200, 0, 0.8);
+  /*background-color: rgba(220, 200, 0, 0.8);*/
 }
 
 #discover-inner {
-  margin: 0px 110px 30px 110px; 
+  margin: 0px 110px; 
+  padding-bottom: 30px;
 }
 
 .search {
