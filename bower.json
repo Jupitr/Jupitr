@@ -25,6 +25,7 @@
     "bootstrap-social": "~4.10.1",
     "d3": "~3.5.6",
     "font-awesome": "~4.4.0",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "topojson": "~1.6.19"
   }
 }

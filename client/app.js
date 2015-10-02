@@ -1,6 +1,7 @@
 angular.module('jupitr', [
     'jupitr.services',
     'jupitr.login',
+    'jupitr.logout',
     'jupitr.home',
     'jupitr.profile',
     'jupitr.discover',
@@ -32,6 +33,10 @@ angular.module('jupitr', [
       .when('/cohort', {
         templateUrl: 'app/cohort/cohort.html',
         controller: 'cohortController'
+      })
+      .when('/logout', {
+        templateUrl: 'app/login/login.html',
+        controller: 'logoutController'        
       })
       .otherwise({
         redirectTo: '/'
