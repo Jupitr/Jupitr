@@ -197,10 +197,7 @@ rect {
 #login {
   display: inline-block;
   float: right;
-  width: 33%;
-}
-
-#animation {
+  width: 10%;
 }
 
 .link {

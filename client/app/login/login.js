@@ -86,7 +86,7 @@ angular.module('jupitr.login', [])
 
         var svg = d3.select(elem[0])
           .append('svg')
-          .attr('width', '800')
+          .attr('width', '100%')
           .attr('height', '600');
         
         var forceGraph = d3.layout.force()
