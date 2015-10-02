@@ -2,53 +2,55 @@
 
   <nav class="navigation">
     <ul>
-      <li><a href="/#/home">Home</a></li>
-      <li><a class='selected' href="#/profile">Profile</a></li>
-      <li><a href="/api/logout">Logout</a></li>
+      <li><a href="/#/home">Home</a></li><!--
+      --><li><a href="/#/discover">Discover</a></li><!--
+      --><li class="selected"><a href="#/profile">Profile</a></li><!--
+      --><li><a href="/#/login">Login</a></li><!--
+      --><li><a href="/api/logout">Logout</a></li>
     </ul>
   </nav>
 
   <div ng-controller="profileController" class="profile">
     <form name="profileForm" ng-submit='updateProfile()' novalidate>
-      <fieldset>
+      <fieldset class="contact">
         <legend>
-          Contact Information and Personal Details
+          Contact&nbsp;Information&nbsp;and&nbsp;Personal&nbsp;Details
         </legend>
         <label>
           Name: 
           <input type="text" name="name" maxlength="100" 
-          ng-model="user.name" ng-class="" required>
+          ng-model="user.name" required>
         </label>
         <label>
-          Github Login: 
+          Github&nbsp;Login: 
           <input type="text" name="githublogin" maxlength="100" 
-          ng-model="user.githublogin" ng-class="" required>
+          ng-model="user.githublogin" required>
         </label>
         <label>
           Email:
           <input type="email" name="email" maxlength="100" 
-          ng-model="user.email" ng-class="" required>
+          ng-model="user.email" required>
         </label>
         <label>
           City: 
           <input type="text" name="city" maxlength="100" 
-          ng-model="user.city" ng-class="" required>
+          ng-model="user.city" required>
         </label>
         <label>
           State: 
           <input type="text" name="state" maxlength="100" 
-          ng-model="user.state" ng-class="" required>
+          ng-model="user.state" required>
         </label>
         <label>
           Zipcode:
           <input type="text" name="zip" maxlength="5" 
-          ng-model="user.zip" ng-class="" required>
+          ng-model="user.zip" required>
         </label>
         <label>
           School/Cohort:        
             <input type="radio" name="HR" ng-model="school.name" value="HR" required>Hack Reactor, San Francisco
             <input type="radio" name="HRRB" ng-model="school.name" value="HRRB" required>Hack Reactor, Remote Beta
-            <select name="cohort" ng-model="user.cohort" ng-class="" required>
+            <select name="cohort" ng-model="user.cohort" required>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -103,7 +105,7 @@
         </label>
         <label>
           Gender:
-          <select name="gender" ng-model="user.gender" ng-class="">
+          <select name="gender" ng-model="user.gender">
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
@@ -111,7 +113,7 @@
         </label>
         <label>
           Ethnicity:
-          <select name="race" ng-model="user.race" ng-class="">
+          <select name="race" ng-model="user.race">
             <option value="Asian">Asian</option>
             <option value="Black/African-American">Black or African American</option>
             <option value="Hispanic">Hispanic or Latino</option>
@@ -123,18 +125,18 @@
         </label>
       </fieldset>
 
-      <fieldset>
+      <fieldset class="career">
         <legend>
-          Career Information
+          Career&nbsp;Information
         </legend>
         <label>
-          Current Employer:
+          Current&nbsp;Employer:
           <input type="text" name="currentemployer" maxlength="100" 
-          ng-model="user.currentemployer" ng-class="">
+          ng-model="user.currentemployer">
         </label>
         <label>
           Job Type:
-          <select name="currentemployertype" ng-model="user.currentemployertype" ng-class="">
+          <select name="currentemployertype" ng-model="user.currentemployertype">
             <option value="onsite">Onsite</option>
             <option value="remote">Remote</option>
             <option value="freelance">Freelance</option>
@@ -142,23 +144,23 @@
           </select>
         </label>
         </label>
-          Current Job Title/Role:
+          Current&nbsp;Job&nbsp;Title/Role:
           <input type="text" name="currentemployerrole" maxlength="100" 
-          ng-model="user.currentemployerrole" ng-class="">
+          ng-model="user.currentemployerrole">
         </label>
         <label>
-          Start Date:
+          Start&nbsp;Date:
           <input type="date" name="currentemployerstartdate" maxlength="100" 
-          ng-model="user.currentemployerstartdate" ng-class="">
+          ng-model="user.currentemployerstartdate">
         </label>
         <label>
-          Previous Employer 1:
+          Previous&nbsp;Employer&nbsp;1:
           <input type="text" name="prioremployer1" 
-          ng-model="user.prioremployer1" ng-class="">
+          ng-model="user.prioremployer1">
         </label>
         <label>
-          Job Type:
-          <select name="prioremployer1type" ng-model="user.prioremployer1type" ng-class="">
+          Job&nbsp;Type:
+          <select name="prioremployer1type" ng-model="user.prioremployer1type">
             <option value="onsite">Onsite</option>
             <option value="remote">Remote</option>
             <option value="freelance">Freelance</option>
@@ -166,28 +168,28 @@
           </select>
         </label>
         </label>
-          Job Title/Role:
+          Job&nbsp;Title/Role:
           <input type="text" name="prioremployer1role" maxlength="100" 
-          ng-model="user.prioremployer1role" ng-class="">
+          ng-model="user.prioremployer1role">
         </label>
         <label>
-          Start Date:
+          Start&nbsp;Date:
           <input type="date" name="prioremployer1startdate" maxlength="100" 
-          ng-model="user.prioremployer1startdate" ng-class="">
+          ng-model="user.prioremployer1startdate">
         </label>
         <label>
-          End Date:
+          End&nbsp;Date:
           <input type="date" name="prioremployer1enddate" maxlength="100" 
-          ng-model="user.prioremployer1enddate" ng-class=""> 
+          ng-model="user.prioremployer1enddate"> 
         </label>
         <label>
-          Previous Employer 2:
+          Previous&nbsp;Employer&nbsp;2:
           <input type="text" name="prioremployer2" 
-          ng-model="user.prioremployer2" ng-class="">
+          ng-model="user.prioremployer2">
         </label>
         <label>
-          Job Type:
-          <select name="prioremployer2type" ng-model="user.prioremployer2type" ng-class="">
+          Job&nbsp;Type:
+          <select name="prioremployer2type" ng-model="user.prioremployer2type">
             <option value="onsite">Onsite</option>
             <option value="remote">Remote</option>
             <option value="freelance">Freelance</option>
@@ -195,28 +197,28 @@
           </select>
         </label>
         </label>
-          Job Title/Role:
+          Job&nbsp;Title/Role:
           <input type="text" name="prioremployer2role" maxlength="100" 
-          ng-model="user.prioremployer2role" ng-class="">
+          ng-model="user.prioremployer2role">
         </label>
         <label>
-          Start Date:
+          Start&nbsp;Date:
           <input type="date" name="prioremployer2startdate" maxlength="100" 
-          ng-model="user.prioremployer2startdate" ng-class="">
+          ng-model="user.prioremployer2startdate">
         </label>
         <label>
-          End Date:
+          End&nbsp;Date:
           <input type="date" name="prioremployer2enddate" maxlength="100" 
-          ng-model="user.prioremployer1enddate" ng-class=""> 
+          ng-model="user.prioremployer1enddate"> 
         </label>
         <label>
-          Previous Employer 3:
+          Previous&nbsp;Employer&nbsp;3:
           <input type="text" name="prioremployer3" 
-          ng-model="user.prioremployer3" ng-class="">
+          ng-model="user.prioremployer3">
         </label>
         <label>
-          Job Type:
-          <select name="prioremployer3type" ng-model="user.prioremployer3type" ng-class="">
+          Job&nbsp;Type:
+          <select name="prioremployer3type" ng-model="user.prioremployer3type">
             <option value="onsite">Onsite</option>
             <option value="remote">Remote</option>
             <option value="freelance">Freelance</option>
@@ -224,49 +226,49 @@
           </select>
         </label>
         </label>
-          Job Title/Role:
+          Job&nbsp;Title/Role:
           <input type="text" name="prioremployer3role" maxlength="100" 
-          ng-model="user.prioremployer3role" ng-class="">
+          ng-model="user.prioremployer3role">
         </label>
         <label>
-          Start Date:
+          Start&nbsp;Date:
           <input type="date" name="prioremployer3startdate" maxlength="100" 
-          ng-model="user.prioremployer3startdate" ng-class="">
+          ng-model="user.prioremployer3startdate">
         </label>
         <label>
-          End Date:
+          End&nbsp;Date:
           <input type="date" name="prioremployer3enddate" maxlength="100" 
-          ng-model="user.prioremployer3enddate" ng-class=""> 
+          ng-model="user.prioremployer3enddate"> 
         </label>
         <label>
           Twitter:
           <input type="text" name="twitter" maxlength="100" 
-          ng-model="user.twitter" ng-class="">
+          ng-model="user.twitter">
         </label>
         <label>
           Website:
           <input type="url" name="website" maxlength="100" 
-          ng-model="user.website" ng-class="">  
+          ng-model="user.website">  
         </label>
         <label>
           Thesis:
           <input type="text" name="thesis" maxlength="100" 
-          ng-model="user.thesis" ng-class="">
+          ng-model="user.thesis">
         </label>
         <label>
-          Thesis URL:
+          Thesis&nbsp;URL:
           <input type="url" name="thesisurl" maxlength="100" 
-          ng-model="user.thesisurl" ng-class="">
+          ng-model="user.thesisurl">
         </label>
         <label>
           Greenfield:
           <input type="text" name="greenfield" maxlength="100" 
-          ng-model="user.greenfield" ng-class="">
+          ng-model="user.greenfield">
         </label>
         <label>
-          Legacy Project:
+          Legacy&nbsp;Project:
           <input type="text" name="legacy" maxlength="100" 
-          ng-model="user.legacy" ng-class="">
+          ng-model="user.legacy">
         </label>
         <label>
           Technologies:
@@ -299,9 +301,9 @@
       <input type="submit" ng-click="update(user)" value="Save Profile" 
       ng-disabled='profileForm.$invalid'>          
     </form>
-      <pre>school = {{school | json}}</pre> <!-- Remove before deployment -->
-      <pre>user = {{user | json}}</pre> <!-- Remove before deployment -->
-      <pre>technology = {{technology | json}}</pre> <!-- Remove before deployment -->
+      <!-- <pre>school = {{school | json}}</pre> Remove before deployment -->
+      <!-- <pre>user = {{user | json}}</pre> Remove before deployment -->
+      <!-- <pre>technology = {{technology | json}}</pre> Remove before deployment -->
   </div>
 
 </div>
