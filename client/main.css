@@ -67,42 +67,30 @@ body, header, footer, nav {
   color: black;
 }
 
-.wrapper {
-  width: 95%;
-  position: absolute; 
-  left: 0; 
-  right: 0;
-  top: 0; 
-  bottom: 0;
-  margin: 30px auto;
-  max-width: 100%;
-  max-height: 100%;
-  /*overflow:auto;*/
-}
-
 .navigation {
-  font: bold .8em/1em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 400 .6em/1em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   margin: 0;
   padding: 0;
-  text-transform: uppercase;
-  background-color: #aaa;
+  background-color: #888;
+}
+
+.navigation ul {
+  margin: 0;
+  padding: 0;
 }
 
 .navigation li {
   display: inline-block;
-  padding: 15px;
+  padding: 10px;
   background-color: #888;
   width: 16.66%;
   text-align: center;
   border-right: 2px solid #aaa;
 }
 
-.navigation li:last-child {
-  display: inline-block;
-  padding: 15px;
-  background-color: #888;
-  width: 16.66%;
-  text-align: center;
+.navigation a:last-child li {
   border-right: 0;
 }
 
@@ -115,20 +103,17 @@ li.selected {
   background-color: #999;
 }
 
-#container {
-  top: 30px;
-  bottom: 30px;
-}
-
-header, footer {
-  background-color: #555;
-}
-
 header {
-  padding: 30px;
-  font: 300 1.3em/2em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #555;
+  width: 100%;
   color: white;
   text-align: center;
+  padding: 10px;
+}
+
+h1 {
+  font: 300 1.25em/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 1px;
 }
 
 body {
@@ -137,16 +122,16 @@ body {
 
 footer {
   font: 300 10px/10px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: white;
+  color: black;
   text-align: center;
-  padding: 10px;
+  margin-top: 70px;
 }
 
-.profile {
-
+#profile {
+  margin-top: 20px;
 }
 
-form {
+/*form {
   border-radius: 5px;
   font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
   overflow: hidden;
@@ -181,7 +166,7 @@ label {
 
 .contact {
   float: left;
-}
+}*/
 
 /*Login Visualization*/
 rect {
@@ -190,6 +175,7 @@ rect {
 }
 
 #login {
+  margin: 20px;
   display: inline-block;
   float: right;
   width: 10%;
