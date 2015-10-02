@@ -23,7 +23,7 @@ var map = d3.geo.path()
   .projection(states);
 
 // zoom event
-var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
+var zoom = d3.behavior.zoom().scaleExtent([1, 40]).on("zoom", zoomed);
 var zoomToggle = false;
 svg
   .call(zoom)
@@ -79,8 +79,7 @@ d3.json('app/home/us.json', function(err, us){
   g.append('g')
     .attr('id', 'state-borders')
     .append("path")
-    .datum(topojson
-    .mesh(us, us.objects.states, function(a, b) { 
+    .datum(topojson.mesh(us, us.objects.states, function(a, b) { 
       return a !== b; 
     }))
     .attr('id', 'state-borders')
@@ -138,12 +137,19 @@ d3.json('app/home/us.json', function(err, us){
     .selectAll('circle')
     .data(userLocGen).enter()
     .append('g')
-    .on('mouseover', function(){
-      d3.select(this).select('text')
+    .attr('num', function(d) {
+      return locStoreGen[d[0]];
+    })
+    .on('mouseover', function() {
+      var self = d3.select(this);
+      var dad = d3.select(this.parentNode);
+      // transform text
+      self.select('text')
         .transition()
         .duration(200)
         .style('font-size', '35px');
-      var circle = d3.select(this).select('circle');
+      // change circle fill
+      var circle = self.select('circle');
       if (circle.attr('toggled') === 'false') {
         circle.attr('prevColor', function(d) {
           circle.attr('toggled', 'true');
@@ -151,17 +157,65 @@ d3.json('app/home/us.json', function(err, us){
         });
       }
       circle.attr('fill', 'rgba(255, 255, 255, 0.5)');
+      // manage popup
+      var num = self.attr('num');
+      var arc = d3.svg.arc() 
+                  .innerRadius(40) 
+                  .outerRadius(80) 
+                  .startAngle(0) 
+                  .endAngle((num/35 + 0.5) * Math.PI);
+      var x = d3.mouse(this)[0] - 200;
+      var y = d3.mouse(this)[1] - 200;
+
+      if (!d3.select('#popup')[0][0]) {
+        var popup = dad.append('g')
+                        .attr('id', 'popup')
+                        .attr('transform', 'translate(' + x + ',' + y + ')');
+
+        popup.append('rect')   
+              .attr('width', 200)
+              .attr('height', 200)
+              .attr('rx', 10)
+              .attr('ry', 10)
+              .attr('stroke-width', 1)
+              .attr('stroke', 'rgba(150, 150, 150, 0.9)')
+              .style('fill', 'rgba(255, 255, 255, 0.6)');
+        popup.append('circle')
+              .attr('transform', 'translate(' + 100 + ',' + 100 + ')')
+              .attr('stroke-width', 0.1)
+              .attr('stroke', 'rgba(0, 0, 0, 0.3)')
+              .attr('fill', 'rgba(120, 120, 120, 0.4)')
+              .attr('r', 75);
+        popup.append('path')
+              .attr('d', arc)
+              .attr('transform', 'translate(' + 100 + ',' + 100 + ')')
+              .attr('stroke', 'rgba(255, 255, 255, 0.3)')
+              .attr('fill', 'rgba(120, 120, 120, 0.5)')
+              .style('fill', 'rgba(0, 0, 0, 0.5)');
+        popup.append('text')
+              .attr('transform', 'translate(' + 77 + ',' + 110 + ')')
+              .style('font-size', '35px')
+              .text(function(){
+                var text = self.attr('num');
+                if (text.length < 2) {
+                  text = 0 + text;
+                }
+                return text;
+              });
+      }
     })
     .on('mouseleave', function(){
-      d3.select(this).select('text')
+      var self = d3.select(this);
+      self.select('text')
         .transition()
         .duration(200)
         .style('font-size', '10px');
-      var circle = d3.select(this).select('circle');
+      var circle = self.select('circle');
       circle.attr('toggled', 'false')
         .attr('fill', function(d) {
           return circle.attr('prevColor');
         });
+      d3.selectAll('#popup').remove();
     });
 
   // sort the circles so smaller ones appear before the bigger ones
@@ -174,6 +228,7 @@ d3.json('app/home/us.json', function(err, us){
     .attr('transform', function(d) {
       return "translate(" + states(d[0]) + ")";  
     })
+    .attr('zoomed', 'false')
     .attr('toggled', 'false')
     .attr('r', function(d) {
       return getCirGenRadius(d);
@@ -249,7 +304,6 @@ function zoomed() {
     d3.select(this).attr('r', Math.max(baseR/d3.event.scale, 1));
    });
 
-   console.log(d3.event.scale);
   g.selectAll('.connection')
    .each(function() {
     var baseS = d3.select(this).attr('baseS');
@@ -257,21 +311,23 @@ function zoomed() {
     connectionMouseleave = d3.select(this).on('mouseleave');
     d3.select(this).attr('stroke-width', Math.max(baseS/d3.event.scale, 0.15))
       .attr('opacity', Math.max(0.8/d3.event.scale, 0.7));
-      // .on('mouseover', null)
-      // .on('mouseleave', null);
    });
 
-  // if (d3.event.scale > 5) {
-  //   if (!zoomToggle) {
-  //     zoomToggle = true;
-  //     console.log(g.selectAll('#userGen'));
-  //     // g.selectAll('#userGen').transition().duration(500).style('display', 'none');
-  //     // g.selectAll('#states').selectAll('path').attr('fill', 'rgb(200, 200, 200)');
-  //   }
-  // }
-  // else {
-  //   zoomToggle = false;
-  //   g.selectAll('#userGen').transition().duration(500).style('display', 'inline-block');
-  //   g.selectAll('#states').transition().duration(500).style('display', 'inline-block');
-  // }
+  var userGenCir = g.select('#userGen').selectAll('circle');
+  userGenCir.on('click', function() {
+    var self = d3.select(this);
+    var t = d3.transform(self.attr("transform")),
+      x = t.translate[0],
+      y = t.translate[1];
+    var scale = 30;
+    svg.transition().duration(3000)
+        .call(zoom.translate([((x * -scale) + (width / 2)), ((y * -scale) + height / 2)])
+        .scale(scale).event);
+  });
+  if (d3.event.scale > 18) {
+    g.select('#userGen').style('display', 'none');
+  }
+  else {
+    g.select('#userGen').style('display', 'inline-block');
+  }
 }
