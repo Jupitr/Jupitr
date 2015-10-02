@@ -54,6 +54,12 @@ angular.module('jupitr.services', [])
     });
   };
 
+  var logout = function() {
+    return $http({
+      method: 'GET',
+      url: 'api/logout'
+    });
+  };
   // var create = function(user) {
   //   return $http({
   //     method: 'POST', 
@@ -73,7 +79,8 @@ angular.module('jupitr.services', [])
     getMyRecord: getMyRecord,
     getAll: getAll,
     getUser: getUser,
-    update: update
+    update: update,
+    logout: logout
   };
 
 }); 
