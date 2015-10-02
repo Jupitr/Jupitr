@@ -191,7 +191,7 @@ d3.json('app/home/us.json', function(err, us){
               .attr('transform', 'translate(' + 100 + ',' + 100 + ')')
               .attr('stroke', 'rgba(255, 255, 255, 0.3)')
               .attr('fill', 'rgba(120, 120, 120, 0.5)')
-              .style('fill', 'rgba(0, 0, 0, 0.5)');
+              .style('fill', 'rgba(60, 60, 60, 0.9)');
         popup.append('text')
               .attr('transform', 'translate(' + 77 + ',' + 110 + ')')
               .style('font-size', '35px')
