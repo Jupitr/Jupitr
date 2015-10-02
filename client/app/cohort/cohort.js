@@ -11,6 +11,16 @@ angular.module('jupitr.cohort', [])
           .attr('width', '800')
           .attr('height', '600');
           // .on('mouseleave', zoomout)
+
+        d3.json('hrr8.json', function(error, root){
+          if(error){
+            console.log(error);
+          }
+          var studentName = svg.selectAll('.studentName')
+            .data(root.children)
+            .enter()
+            .append('g');
+        });
       }
     };
   });
