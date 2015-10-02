@@ -10,8 +10,8 @@ var svg = d3.select("#map").append('svg')
 
 // storing map using US state data, TODO ask team if they want world data.
 var states = d3.geo.albersUsa()
-  .scale(1250)
-  .translate([width/2, height/2]);
+  .scale(1200)
+  .translate([width/2 - 50, height/2 - 50]);
 // d3.geo.albersUsa for US map
 // d3.geo.equirectangular for world map
 // https://github.com/mbostock/d3/wiki/Geo-Projections
