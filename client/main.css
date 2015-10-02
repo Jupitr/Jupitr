@@ -118,7 +118,6 @@ li.selected {
 #container {
   top: 30px;
   bottom: 30px;
-  background-color: rgba(220, 200, 0, 0.8);
 }
 
 header, footer {
@@ -184,10 +183,6 @@ label {
   float: left;
 }
 
-.vis {
- /* background-color: rgba(220, 200, 0, 0.8);*/
-}
-
 /*Login Visualization*/
 rect {
   fill: white;
@@ -225,10 +220,6 @@ text {
 /*Home Page*/
 
 /*Discover Page*/
-
-#discover-outer {
-  /*background-color: rgba(220, 200, 0, 0.8);*/
-}
 
 #discover-inner {
   margin: 0px 110px; 
