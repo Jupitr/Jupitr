@@ -73,6 +73,16 @@ angular.module('jupitr.cohort', [])
                 .on('click', function(d, i){
                   window.open(d.address);
                 });
+
+              descriptBubbles.append('text')
+                .attr({
+                  'x': function(d,i) {return (xCord*(3*(j+1)-1) + xCord*1.5*Math.cos((i-1)*45/180*3.1415926)-160);},
+                  'y': function(d,i) {return ((yCord+xCord)/3 + xCord*1.5*Math.sin((i-1)*45/180*3.1415926));},
+                  'font-size': 10,
+                  'cursor': 'pointer',
+                  'text-anchor': 'middle'
+                })
+                .text(function(d){return d.name;});
           }
 
         });
