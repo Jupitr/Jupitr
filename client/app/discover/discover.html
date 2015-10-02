@@ -13,7 +13,9 @@
 
   <div id="discover-outer">
     <div id="discover-inner">
-      <div class="search-box">
+      <div class="row">
+        <div class="search-box col-sm-12">
+      </div>
         <input type="text" ng-model="searchFilter" class="search" placeholder="search">
       </div>
       <div class="container-fluid profile-view" ng-repeat="profile in profiles | filter:searchFilter">

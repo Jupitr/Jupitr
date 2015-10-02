@@ -228,9 +228,11 @@ text {
 
 .search {
   border: 1px solid black;
+  float: right;
   border-radius: 3px;
   margin-top: 30px;
   margin-bottom: 30px;
+  margin-right: 30px;
   font: 28px;
   width: 350px;
   height: 40px;
@@ -296,7 +298,7 @@ text {
   font-weight: 500;
   float: right;
   margin-top: 8px;
-  padding: 4px 8px;
+  padding: 6px 8px;
 }
 
 .employment-title {
