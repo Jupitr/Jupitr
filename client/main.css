@@ -128,34 +128,45 @@ footer {
 }
 
 #profile {
-  width: 60%;
-  margin: 0 auto;
+  margin-top: 20px;
 }
 
-form {
-  margin-top: 40px;
+/*form {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+fieldset {
+  border: 0;
+  padding: 40px;
+  width: 50%;
+  margin-top: 10px;
+}
+
+input {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
 }
 
 legend {
   font: bold 16px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-fieldset {
-  border: 0;
-  margin-bottom: 30px;
-}
-
 label {
-  margin: 10px 10px 10px 0px;
+  margin-right: 20px;
+  margin-bottom: 15px;
 }
 
-input[type=checkbox], input[type=radio] {
-  margin: 0px 5px 0px 0px;
+.career {
+  float: right;
 }
 
-input[type=radio]:last-child {
-  margin: 0px 5px 0px 5px;
-}
+.contact {
+  float: left;
+}*/
 
 /*Login Visualization*/
 rect {
