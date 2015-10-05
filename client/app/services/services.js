@@ -1,7 +1,6 @@
 angular.module('jupitr.services', [])
 
 .factory('User', function($http, $location) {
-  // need to add handle success/errors to these?
   
   var getAll = function(cb) {
     return $http({
@@ -32,14 +31,14 @@ angular.module('jupitr.services', [])
       }
     });
   };
-
+  // getUser is not being used but may be of use in the future. 
   var getUser = function(user) {
     return $http({
       method: 'GET', 
-      url: '/api/users' //this route currently does not exist
+      url: '/api/users' // this route currently does not exist
     })
     .then(function(resp) {
-      return resp.data;
+      return resp.data; // this may need to be modified
     });
   };
 
@@ -60,21 +59,6 @@ angular.module('jupitr.services', [])
       url: '/api/logout'
     });
   };
-
-  // var create = function(user) {
-  //   return $http({
-  //     method: 'POST', 
-  //     url: '/api/users/' + user.id,
-  //     data: user
-  //   });
-  // }; 
-
-  // var deleteUser = function(user) {
-  //   return $http({
-  //     method: 'DELETE', 
-  //     url: '/api/users/' + user.id
-  //   });
-  // };
 
   return {
     getMyRecord: getMyRecord,
