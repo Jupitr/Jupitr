@@ -378,6 +378,7 @@ function getUserProfile(user) {
 }
 
 // zoom handler
+// currently zoom out doesn't center on US map
 function zoomed() {
   g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   
@@ -398,6 +399,7 @@ function zoomed() {
 
   // upon clicking on a circle, zoom in and close up to the circle location
   // to reveal individual users
+  // bug: since this is in the zoom handler, clicking won't work until first zoomed
   var userGenCir = g.select('#userGen').selectAll('circle');
   userGenCir.on('click', function() {
     var self = d3.select(this);
