@@ -31,6 +31,7 @@ angular.module('jupitr.cohort', [])
           var xCord = width/(1+3*students);
           var yCord = Math.ceil(width/students*2);
 
+          // Parent bubbles
           studentName.append('circle')
             .attr({
               'class': 'parent',
@@ -42,6 +43,7 @@ angular.module('jupitr.cohort', [])
             .style('opacity', '0.5')
             .on('mouseover', function(d, i){return zoom(d, i);});
 
+          // Parent bubble text info  
           studentName.append('text')
             .attr({
               'class': 'parentText',
@@ -93,6 +95,7 @@ angular.module('jupitr.cohort', [])
                 .text(function(d){return d.name;});
           }
 
+          // on mouseover of Parent bubbles, zoom functionality will hide all descriptor child bubbles
           function zoom(d, i){
             var transition = svg.transition()
               .duration(d3.event.altKey ? 7500 : 350);
@@ -134,6 +137,7 @@ angular.module('jupitr.cohort', [])
                 }          
               });
 
+            // if parent bubble is on right side push others to left, else push to right  
             var zoomPos = -1;
             for(var k = 0; k < students; k++) {
               zoomPos = 1;
