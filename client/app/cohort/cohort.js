@@ -12,7 +12,7 @@ angular.module('jupitr.cohort', [])
         var svg = d3.select(elem[0])
           .append('svg')
           .attr('width', '100%')
-          .attr('height', height);
+          .attr('height', '800');
           // .on('mouseleave', zoomout)
 
         d3.json('app/cohort/hrr8.json', function(error, root){

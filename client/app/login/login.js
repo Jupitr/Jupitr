@@ -82,12 +82,12 @@ angular.module('jupitr.login', [])
       restrict: 'EA',
       link: function(scope, elem, attrs){
 
-        var color = d3.scale.category20();
+        var color = d3.scale.category10();
 
         var svg = d3.select(elem[0])
           .append('svg')
           .attr('width', '100%')
-          .attr('height', '600');
+          .attr('height', '800');
         
         var forceGraph = d3.layout.force()
           .size([800, 700])

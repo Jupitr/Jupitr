@@ -4,7 +4,7 @@ Jupitr is portal for Hack Reactor students and alumni to connect with each other
 
 ## Team
 
-  - __Product Owner__: Kevin lee
+  - __Product Owner__: Kevin Lee
   - __Scrum Master__: Donald Steinert
   - __Development Team Members__: Melinda Budde, Lain Jiang
 

@@ -165,9 +165,11 @@ rect {
 
 #login {
   margin: 20px;
-  display: inline-block;
   float: right;
   width: 10%;
+  position: absolute;
+  top:35%; 
+  left:75%;
 }
 
 .link {
