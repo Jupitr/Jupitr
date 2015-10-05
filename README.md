@@ -50,4 +50,4 @@ View the project roadmap [here](https://github.com/Jupitr/Jupitr/issues)
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines along with the project's [STYLE-GUIDE.md](STYLE-GUIDE.md)

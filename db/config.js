@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
 
-var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/jupitr'
+// sets db location to Heroku Mongolab uri or local host
+var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/jupitr';
 mongoose.connect(dbUri);
 
 var db = mongoose.connection;
 
+// db connection and error logging
 db.once('open', function() {
   console.log('Connection established with MongoDB at: ' + dbUri);
 });
