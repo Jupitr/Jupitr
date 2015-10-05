@@ -126,7 +126,9 @@ d3.json('app/home/us.json', function(err, us){
 
     // precise location info per cohort
     var individual = userGroup.append('g')
-                                .attr('id', prop);
+                                .attr('id', prop)
+                              .append('a')
+                                .attr('xlink:href', '/#/discover');
     // individual person's name
     individual
       .selectAll('text')
