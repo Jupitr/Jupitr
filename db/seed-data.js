@@ -42,10 +42,12 @@ var projects = ['Purify CSS', 'Otto', 'Mirror', 'Lamp', 'Juiptr', 'Super Duper',
   'ToDoer', 'Orange', 'Cool Project Name', 'Zig Zag', 'Stream Line', 'L7', 
   'Middle-Out Compression', 'Weissman Tester', 'IDKJS', 'JS For Cats'];
 
+// helper function to pick random item from seed data above
 var pickRandom = function(list) {
   return list[Math.floor(Math.random() * list.length)];
 };
 
+// generates and returns random user profile for testing
 var generateRandomUser = function() {
   var firstName = pickRandom(firstNames);
   var lastName = pickRandom(lastNames);
@@ -130,6 +132,9 @@ var generateRandomUser = function() {
 
 // console.log(generateRandomUser());
 
+// allows user to specify number of records to create when executing file
+// eg, 'node db/seed-data.js 100' will generate 100 profiles and add them
+// to your Mongo database
 var records = Number(process.argv[2]);
 
 for (var i = 0; i < records; i++) {
@@ -138,6 +143,9 @@ for (var i = 0; i < records; i++) {
   });
 }
 
+// async call to exit profile generator once all records are created
+// comment out this setTimout call when seeding a deployed database
+// see userController.js to seed deployed db
 setTimeout(function() {
   process.exit();
 }, 1000);

@@ -12,7 +12,7 @@ exports.sendAllUsers = function(callback) {
   });
 };
 
-// finds specific user profile based on github login handle
+// finds specific user profile based on Github login handle
 // passes callback a JSON object of profile or undefined
 exports.findUserProfile = function(login, callback) {
   User.find({githublogin: login}, function(err, profile) {
@@ -88,7 +88,7 @@ exports.updateProfile = updateProfile = function(data, callback) {
 ///////////////////////////////////////////////////////////////////////////////
 //            to seed database with user records for deployment:             //
 //                un-comment function below and restart server               //
-//           also comment-out the set-interval call in seed-data.js          //
+//    also comment-out the setTimeout call to process.exit in seed-data.js   //
 //      set the records variable to specify number of records to create      //
 //    re-comment the function to avoid seeding the database multiple times   //
 ///////////////////////////////////////////////////////////////////////////////
