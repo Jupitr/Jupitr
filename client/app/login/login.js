@@ -91,6 +91,7 @@ angular.module('jupitr.login', [])
           .attr('width', '100%')
           .attr('height', '800');
         
+        // increase charge to keep nodes further apart
         var forceGraph = d3.layout.force()
           .size([800, 700])
           .distance(100)
@@ -109,6 +110,7 @@ angular.module('jupitr.login', [])
             .enter().append("line")
             .attr("class", "link");
 
+          // HR node separate from other nodes  
           var studentNodes = scope.graph.nodes.slice(1);
           var hr = scope.graph.nodes.slice(0,1)
 
@@ -155,6 +157,7 @@ angular.module('jupitr.login', [])
             .style('font-family', 'Courier')
             .text(function(d) { return d.name });
 
+          // force graph drag functionality  
           forceGraph.on("tick", function() {
             link.attr("x1", function(d) { return d.source.x; })
               .attr("y1", function(d) { return d.source.y; })
