@@ -378,6 +378,7 @@ function getUserProfile(user) {
 }
 
 // zoom handler
+// currently zoom out doesn't center on US map
 function zoomed() {
   g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   
