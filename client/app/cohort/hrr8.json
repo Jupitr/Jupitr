@@ -1,25 +1,25 @@
 {"name":"HRR8", "bubbles": [
 {"name":"Don Steinert",
 "description":[
-    {"name": "Software Engineer","address":"http://www.citigroup.com", "note":"Software Engineer at CitiGroup for 3 years"},
+    {"name": "CitiGroup","address":"http://www.citigroup.com", "note":"Software Engineer at CitiGroup for 3 years"},
     {"name": "LinkedIn","address":"https://www.linkedin.com/pub/donald-steinert/60/4b4/529"},
     {"name": "Github","address":"https://github.com/Dnld", "note":"Check out my Jupitr project!"}
 ]},
 {"name": "Lain Jiang",
 "description":[
-    {"name":"Data Scientist","address":"https://www.amazon.com","note":"I like Data!"},
+    {"name":"Amazon","address":"https://www.amazon.com","note":"I like Data!"},
     {"name":"LinkedIn","address":"https://www.linkedin.com/in/lainlaijiang", "note":"Add me on LinkedIn!"},
     {"name":"Github","address":"https://github.com/lainjiang"}
 ]},
 {"name":"Melinda Budde",
 "description":[
-    {"name":"CTO","address":"https://www.google.com"},
+    {"name":"Google","address":"https://www.google.com"},
     {"name":"LinkedIn","address":""},
     {"name":"Github","address":"https://github.com/melindab"}
 ]},
 {"name":"Kevin Lee",
 "description":[
-    {"name":"Software Engineer","address":"http://www.uber.com"},
+    {"name":"Uber","address":"http://www.uber.com"},
     {"name":"Linkedin","address":"https://www.linkedin.com/in/lekeve"},
     {"name":"GitHub","address":"https://github.com/LeKeve"}
 ]}

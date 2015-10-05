@@ -13,8 +13,9 @@ angular.module('jupitr.cohort', [])
           .append('svg')
           .attr('width', '100%')
           .attr('height', '800');
-          // .on('mouseleave', zoomout)
+          // on mouseleave zoom out
 
+        // manually created json file. May be better suited in DB if additional cohorts added.  
         d3.json('app/cohort/hrr8.json', function(error, root){
           if(error){
             console.log(error);
@@ -30,6 +31,7 @@ angular.module('jupitr.cohort', [])
           var xCord = width/(1+3*students);
           var yCord = Math.ceil(width/students*2);
 
+          // Parent bubbles
           studentName.append('circle')
             .attr({
               'class': 'parent',
@@ -41,18 +43,20 @@ angular.module('jupitr.cohort', [])
             .style('opacity', '0.5')
             .on('mouseover', function(d, i){return zoom(d, i);});
 
+          // Parent bubble text info  
           studentName.append('text')
             .attr({
               'class': 'parentText',
               'x': function(d, i) {return xCord*(2.75*(1+i)-1);},
               'y': (yCord + xCord)/3.3,
-              'font-size': 25,
+              'font-size': 20,
               'text-anchor': 'middle'
             })
             .text(function(d){return d.name;})
             .style('fill', 'black')
             .on('mouseover', function(d, i){return zoom(d, i);});
 
+          // append descriptor bubbles for each child of parent bubble
           for(var j = 0; j < students; j++){
             var descriptBubbles = svg.selectAll('.child' + j)
               .data(root.bubbles[j].description)
@@ -91,10 +95,7 @@ angular.module('jupitr.cohort', [])
                 .text(function(d){return d.name;});
           }
 
-          function reset(){
-
-          }
-
+          // on mouseover of Parent bubbles, zoom functionality will hide all descriptor child bubbles
           function zoom(d, i){
             var transition = svg.transition()
               .duration(d3.event.altKey ? 7500 : 350);
@@ -129,22 +130,23 @@ angular.module('jupitr.cohort', [])
               })
               .attr("font-size", function(d,ii){
                 if(i === ii){
-                  return 30*1.5;
+                  return 20*1.2;
                 }
                 else{
-                  return 30*0.6;    
+                  return 20*0.6;    
                 }          
               });
 
-            var signSide = -1;
+            // if parent bubble is on right side push others to left, else push to right  
+            var zoomPos = -1;
             for(var k = 0; k < students; k++) {
-              signSide = 1;
+              zoomPos = 1;
               if(k < students/2){
-                signSide = 1;
+                zoomPos = 1;
               } 
               transition.selectAll(".childText" + k)
-                .attr("x", function(d,i) {return (xCord*(3*(k+1)-1) - 0.6*xCord*(k-1) + signSide*xCord*2.5*Math.cos((i-1)*45/180*3.1415926));})
-                .attr("y", function(d,i) {return ((yCord+xCord)/3.2 + signSide*xCord*2.5*Math.sin((i-1)*45/180*3.1415926));})
+                .attr("x", function(d,i) {return (xCord*(3*(k+1)-1) - 0.6*xCord*(k-1) + zoomPos*xCord*2.5*Math.cos((i-1)*45/180*3.1415926));})
+                .attr("y", function(d,i) {return ((yCord+xCord)/3.2 + zoomPos*xCord*2.5*Math.sin((i-1)*45/180*3.1415926));})
                 .attr("font-size", function(){
                   return (k==i)?12:6;
                 })
@@ -153,15 +155,15 @@ angular.module('jupitr.cohort', [])
                 });
                      
               transition.selectAll(".child" + k)
-                .attr("cx", function(d,i) {return (xCord*(3*(k+1)-1) - 0.6*xCord*(k-1) + signSide*xCord*2.5*Math.cos((i-1)*45/180*3.1415926));})
-                .attr("cy", function(d,i) {return ((yCord+xCord)/3.2 + signSide*xCord*2.5*Math.sin((i-1)*45/180*3.1415926));})
+                .attr("cx", function(d,i) {return (xCord*(3*(k+1)-1) - 0.6*xCord*(k-1) + zoomPos*xCord*2.5*Math.cos((i-1)*45/180*3.1415926));})
+                .attr("cy", function(d,i) {return ((yCord+xCord)/3.2 + zoomPos*xCord*2.5*Math.sin((i-1)*45/180*3.1415926));})
                 .attr("r", function(){
                   return (k==i)?(xCord*0.40):(xCord/3.0);               
                 })
                 .style("opacity", function(){
                   return (k==i)?0.2:0;                  
                 }); 
-            }    
+            }
           }
         });
       }

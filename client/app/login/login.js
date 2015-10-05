@@ -77,6 +77,8 @@ angular.module('jupitr.login', [])
       ]
     }      
   })
+// Custom Angular directive for Login Visualization. 
+// http://www.ng-newsletter.com/posts/d3-on-angular.html
   .directive('loginVis', function(){
     return {
       restrict: 'EA',
@@ -89,6 +91,7 @@ angular.module('jupitr.login', [])
           .attr('width', '100%')
           .attr('height', '800');
         
+        // increase charge to keep nodes further apart
         var forceGraph = d3.layout.force()
           .size([800, 700])
           .distance(100)
@@ -107,6 +110,7 @@ angular.module('jupitr.login', [])
             .enter().append("line")
             .attr("class", "link");
 
+          // HR node separate from other nodes  
           var studentNodes = scope.graph.nodes.slice(1);
           var hr = scope.graph.nodes.slice(0,1)
 
@@ -117,11 +121,13 @@ angular.module('jupitr.login', [])
             .call(forceGraph.drag);
 
           node.append("image")
-            .attr("xlink:href", "https://github.com/favicon.ico")
-            .attr("x", -8)
-            .attr("y", -8)
-            .attr("width", 25)
-            .attr("height", 25);
+            .attr({
+              'xlink:href': 'https://github.com/favicon.ico',
+              'x': -8,
+              'y': -8,
+              'width': 25,
+              'height': 25
+          });
 
           var hrNode = svg.selectAll(".hr")
             .data(hr)
@@ -130,11 +136,13 @@ angular.module('jupitr.login', [])
             .call(forceGraph.drag);
 
           hrNode.append("image")
-            .attr("xlink:href", "http://www.hackreactor.com/favicon.ico")
-            .attr("x", -8)
-            .attr("y", -8)
-            .attr("width", 25)
-            .attr("height", 25);
+            .attr({
+              'xlink:href': 'http://www.hackreactor.com/favicon.ico',
+              'x': -8,
+              'y': -8,
+              'width': 25,
+              'height': 25
+            });
 
           node.append("text")
             .attr("dx", 20)
@@ -149,6 +157,7 @@ angular.module('jupitr.login', [])
             .style('font-family', 'Courier')
             .text(function(d) { return d.name });
 
+          // force graph drag functionality  
           forceGraph.on("tick", function() {
             link.attr("x1", function(d) { return d.source.x; })
               .attr("y1", function(d) { return d.source.y; })
