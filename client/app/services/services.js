@@ -62,13 +62,16 @@ angular.module('jupitr.services', [])
   };
 
   var updateUserLocal = function(user) {
-    var records = window.localStorage.getItem('hrr8.jupitr');
+    console.log('updating locally');
+    var records = JSON.parse(window.localStorage.getItem('hrr8.jupitr'));
     for (var i = 0, l = records.length; i < l; i++) {
       if (user.githublogin === records[i].githublogin) {
+        console.log('found records');
         records[i] = user;
+        break;
       }
     }
-    window.localStorage.setItem('hrr8.jupitr', records);
+    window.localStorage.setItem('hrr8.jupitr', JSON.stringify(records));
   };
 
   // var create = function(user) {
