@@ -32,41 +32,6 @@ angular.module('jupitr.profile', [])
     // get profile data from session
     $scope.user = data;
 
-    /////////////////// Remove before going live - testing only ////////////////////////////
-    // $scope.user.cohort = "HRRB 4";
-    // $scope.user.city = "Malibu";
-    // $scope.user.state = "CA";
-    // $scope.user.zip = "90263";
-    // $scope.user.gender = "female";
-    // $scope.user.race = "Caucasion/White";
-    // $scope.user.twitter = "twitty"; 
-    // $scope.user.website = "http://www.mysite.com"; 
-    // $scope.user.currentemployer = "placeholder";
-    // $scope.user.currentemployerrole = "placeholder";
-    // $scope.user.currentemployertype = "contract"; 
-    // $scope.user.currentemployerstartdate = null;
-    // $scope.user.prioremployer1 = "placeholder";
-    // $scope.user.prioremployer1role = "placeholder";
-    // $scope.user.prioremployer1type = "contract"; 
-    // $scope.user.prioremployer1startdate = new Date();
-    // $scope.user.prioremployer1enddate = new Date();
-    // $scope.user.prioremployer2 = "placeholder";
-    // $scope.user.prioremployer2role = "placeholder"; 
-    // $scope.user.prioremployer2type = "contract"; 
-    // $scope.user.prioremployer2startdate = new Date();
-    // $scope.user.prioremployer2enddate = new Date();
-    // $scope.user.prioremployer3 = "placeholder";
-    // $scope.user.prioremployer3role = "placeholder";
-    // $scope.user.prioremployer3type = "contract"; 
-    // $scope.user.prioremployer3startdate = new Date("2015-09-30T21:06:01.213Z");
-    // $scope.user.prioremployer3enddate = new Date("2015-09-30T21:06:01.213Z");
-    // $scope.user.thesis = "placeholder"; 
-    // $scope.user.thesisurl = "http://www.thesis.com"; 
-    // $scope.user.greenfield = "placeholder"; 
-    // $scope.user.legacy = "placeholder"; 
-    // $scope.user.technologies = ["Android", "CSS"]; 
-    ////////////////////////////////////////////////////////////////////////////////////////
-
     // Split school name (HR/HRRB) from cohort number
     // for use in form
     if ($scope.user.cohort) {
