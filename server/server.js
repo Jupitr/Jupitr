@@ -4,7 +4,6 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var everyauth = require('everyauth');
 var helpers = require('./utils/helpers');
-// var handler = require('./utils/request-handler');
 var user = require('../db/userController.js');
 var db = require('../db/config.js');
 
