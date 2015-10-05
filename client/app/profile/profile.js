@@ -1,5 +1,5 @@
 angular.module('jupitr.profile', [])
-.controller('profileController', function($scope, $location, User) { 
+.controller('profileController', function($scope, $location, User, $window) { 
   $scope.user = {};
   $scope.school = {};
   $scope.technology = {};
@@ -17,11 +17,12 @@ angular.module('jupitr.profile', [])
         $scope.user.technologies.push(prop);
       }      
     }
+
     // Update using User factory (see services.js) with updated user profile, 
-    // then send to profile page again
+    // then refresh page
     User.update($scope.user)
       .then(function() {
-        $location.path('/profile');
+        $window.location.reload();
       })
       .catch(function(error) {
         console.log(error);
@@ -46,7 +47,10 @@ angular.module('jupitr.profile', [])
         $scope.technology[$scope.user.technologies[i]] = true;
       }
     }
-    // convert date string data to dates for use in form
+    // convert date string data to dates for use in form.
+    // this may need to be modified in the future as dates are returned to database as dates,
+    // but are saved in database as strings. this causes dates not to appear on discover page.
+    // unable to convert them back to strings as two-way binding results in errors (form expects dates).
     if ($scope.user.currentemployerstartdate) {
       $scope.user.currentemployerstartdate = new Date($scope.user.currentemployerstartdate);
     }
