@@ -88,7 +88,7 @@ module.exports = function(grunt) {
 
     shell: {
       
-      // seeds database with 300 records
+      // seeds database with 50 records
       seeddb: {
         command: 'node db/seed-data.js 50'
       },
@@ -152,7 +152,7 @@ module.exports = function(grunt) {
     'shell:push'
   ]);
   
-  // seeds database with 300 records
+  // seeds database with 50 records
   grunt.registerTask('seeddb', [
     'shell:seeddb'
   ]);
