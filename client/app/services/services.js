@@ -43,6 +43,7 @@ angular.module('jupitr.services', [])
   };
 
   var update = function(user) {
+    updateUserLocal(user);
     return $http({
       headers: {
         'Content-Type': 'application/json'
@@ -59,6 +60,34 @@ angular.module('jupitr.services', [])
       url: '/api/logout'
     });
   };
+
+  var updateUserLocal = function(user) {
+    console.log('updating locally');
+    var records = JSON.parse(window.localStorage.getItem('hrr8.jupitr'));
+    for (var i = 0, l = records.length; i < l; i++) {
+      if (user.githublogin === records[i].githublogin) {
+        console.log('found records');
+        records[i] = user;
+        break;
+      }
+    }
+    window.localStorage.setItem('hrr8.jupitr', JSON.stringify(records));
+  };
+
+  // var create = function(user) {
+  //   return $http({
+  //     method: 'POST', 
+  //     url: '/api/users/' + user.id,
+  //     data: user
+  //   });
+  // }; 
+
+  // var deleteUser = function(user) {
+  //   return $http({
+  //     method: 'DELETE', 
+  //     url: '/api/users/' + user.id
+  //   });
+  // };
 
   return {
     getMyRecord: getMyRecord,
