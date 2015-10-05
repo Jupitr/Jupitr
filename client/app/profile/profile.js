@@ -18,7 +18,7 @@ angular.module('jupitr.profile', [])
       }      
     }
     // Update using User factory (see services.js) with updated user profile, 
-    // then send to profile page again
+    // then refresh page
     User.update($scope.user)
       .then(function() {
         $location.path('/profile');
