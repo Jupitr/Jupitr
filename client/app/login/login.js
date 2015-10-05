@@ -77,6 +77,8 @@ angular.module('jupitr.login', [])
       ]
     }      
   })
+// Custom Angular directive for Login Visualization. 
+// http://www.ng-newsletter.com/posts/d3-on-angular.html
   .directive('loginVis', function(){
     return {
       restrict: 'EA',
@@ -117,11 +119,13 @@ angular.module('jupitr.login', [])
             .call(forceGraph.drag);
 
           node.append("image")
-            .attr("xlink:href", "https://github.com/favicon.ico")
-            .attr("x", -8)
-            .attr("y", -8)
-            .attr("width", 25)
-            .attr("height", 25);
+            .attr({
+              'xlink:href': 'https://github.com/favicon.ico',
+              'x': -8,
+              'y': -8,
+              'width': 25,
+              'height': 25
+          });
 
           var hrNode = svg.selectAll(".hr")
             .data(hr)
@@ -130,11 +134,13 @@ angular.module('jupitr.login', [])
             .call(forceGraph.drag);
 
           hrNode.append("image")
-            .attr("xlink:href", "http://www.hackreactor.com/favicon.ico")
-            .attr("x", -8)
-            .attr("y", -8)
-            .attr("width", 25)
-            .attr("height", 25);
+            .attr({
+              'xlink:href': 'http://www.hackreactor.com/favicon.ico',
+              'x': -8,
+              'y': -8,
+              'width': 25,
+              'height': 25
+            });
 
           node.append("text")
             .attr("dx", 20)
