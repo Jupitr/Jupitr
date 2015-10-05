@@ -127,6 +127,7 @@ d3.json('app/home/us.json', function(err, us){
     // precise location info per cohort
     var individual = userGroup.append('g')
                                 .attr('id', prop);
+    // individual person's name
     individual
       .selectAll('text')
       .data(connectionData).enter()
@@ -143,6 +144,7 @@ d3.json('app/home/us.json', function(err, us){
       })
       .attr('fill', 'white')
       .style('display', 'none');
+    // individual person's location info, represented by red dots
     individual
       .selectAll('circle')
       .data(connectionData).enter()
@@ -233,6 +235,7 @@ d3.json('app/home/us.json', function(err, us){
                         .attr('id', 'popup')
                         .attr('transform', 'translate(' + x + ',' + y + ')');
 
+        // popup background - grey
         popup.append('rect')   
               .attr('width', 200)
               .attr('height', 200)
@@ -241,6 +244,7 @@ d3.json('app/home/us.json', function(err, us){
               .attr('stroke-width', 1)
               .attr('stroke', 'rgba(150, 150, 150, 0.9)')
               .style('fill', 'rgba(255, 255, 255, 0.6)');
+        // amount of students in each location
         popup.append('circle')
               .attr('transform', 'translate(' + 100 + ',' + 100 + ')')
               .attr('stroke-width', 0.1)
@@ -283,7 +287,7 @@ d3.json('app/home/us.json', function(err, us){
   divs.sort(function(a, b){
     return locStoreGen[b[0]] - locStoreGen[a[0]];
   });
-
+  
   divs.append('circle')
     .attr('class', 'userGen')
     .attr('transform', function(d) {
@@ -322,13 +326,16 @@ d3.json('app/home/us.json', function(err, us){
 
 });
 
-// helper func
+// helper func 
+// random location generator based on lattitude and longitude around its location
+// fully for demo only (the dummy data generator only has a few specific zips)
 function noise(num) {
   var sign = Math.random() > 0.5 ? 1 : -1;
   var amp = Math.random() * 0.2;
   return num + sign * amp;
 }
 
+// group location via lattitude & longitude and save in locStoreGen
 function floorCoords(arr, cb) {
   cb = cb || function(coords) {
     return coords;
@@ -338,6 +345,7 @@ function floorCoords(arr, cb) {
   return cb([x, y]);
 }
 
+// random color generator based on rgba() function
 function randomColor(alpha) {
   alpha = alpha || 1;
   var r = Math.floor(Math.random() * 150) + 100;
@@ -355,6 +363,7 @@ function getCirGenRadius(d) {
   return num;
 }
 
+// extract the essential user profiles from the objects stored in localStorage
 function getUserProfile(user) {
   return {
     coords: [noise(user.longitude), noise(user.latitude)],
@@ -369,12 +378,15 @@ function getUserProfile(user) {
 // zoom handler
 function zoomed() {
   g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  
+  // individual circles are scaled based on zoom
   g.selectAll('.user')
    .each(function() {
     var baseR = d3.select(this).attr('baseR');
     d3.select(this).attr('r', Math.max(baseR/d3.event.scale, 0.5));
    });
 
+  // connection path info is scaled based on zoom
   g.selectAll('.connection')
    .each(function() {
     var baseS = d3.select(this).attr('baseS');
@@ -382,6 +394,8 @@ function zoomed() {
       .attr('opacity', Math.max(0.8/d3.event.scale, 0.3));
    });
 
+  // upon clicking on a circle, zoom in and close up to the circle location
+  // to reveal individual users
   var userGenCir = g.select('#userGen').selectAll('circle');
   userGenCir.on('click', function() {
     var self = d3.select(this);
@@ -394,17 +408,20 @@ function zoomed() {
         .scale(scale).event);
   });
 
-  // if zoom in to 18 times bigger
+  // if zoom in to more than 18 times
   if (d3.event.scale > 18) {
     // general user location circle is hidden
     g.select('#userGen').style('display', 'none');
     g.selectAll('.user').attr('stroke-width', 0.02).attr('stroke', 'rgba(255, 255, 255, 0.7)');
+    // all the user's names are displayed
     g.selectAll('.zoom')
       .style('display', 'inline-block')
       .attr('font-size', 0.3);
   }
   else {
+    // when zoom out, general location circles are back on display
     g.select('#userGen').style('display', 'inline-block');
+    // user names are hidden
     g.selectAll('.zoom').style('display', 'none');
   }
 }

@@ -13,7 +13,7 @@ module.exports = {
     }
   },
 
-  // get and check organization
+  // get and check organization; if user belongs to remotebeta then proceed
   getOrgs: function (token, cb) {
     var client = github.client(token);
     var me = client.me();
