@@ -82,7 +82,7 @@ angular.module('jupitr.login', [])
       restrict: 'EA',
       link: function(scope, elem, attrs){
 
-        var color = d3.scale.category20();
+        var color = d3.scale.category10();
 
         var svg = d3.select(elem[0])
           .append('svg')
