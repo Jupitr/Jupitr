@@ -110,7 +110,7 @@ passport.use(new LinkedInStrategy({
   clientID: linkedinId,
   clientSecret: linkedinSecret,
   callbackURL: "http://localhost:3000/auth/linkedin/callback",
-  scope: ['r_emailaddress', 'r_basicprofile'],
+  // scope: ['r_emailaddress', 'r_basicprofile'],
   state: true,
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
@@ -218,7 +218,7 @@ app.get('/auth/github/callback',
   function(req, res) {
     // console.log('Request:', req);
     // console.log('Response:', res);
-    res.redirect('/');
+    res.redirect('/auth');
   });
 
 
