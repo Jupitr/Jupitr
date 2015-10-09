@@ -57,7 +57,7 @@ angular.module('jupitr.services', [])
   var logout = function() {
     return $http({
       method: 'GET',
-      url: '/api/logout'
+      url: '/logout'
     });
   };
 
