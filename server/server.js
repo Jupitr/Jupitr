@@ -141,27 +141,17 @@ app.get('/auth/linkedin',
 app.get('/auth/linkedin/callback',
   passport.authenticate('linkedin', { failureRedirect: '/login' }),
   function(req, res) {
-    // console.log('Success: Authenticated with Linkedin');
-    var test = {
-      "_id":"561887f705b2c47d070465aa",
-      "avatar": req.user._json.publicProfileUrl
-    }
+    console.log('Success: Authenticated with Linkedin');
     var userData = {
+      githublogin: req.session.userRecord.githublogin,
       avatar: req.user._json.pictureUrl,
       headline: req.user._json.headline,
       linkedin: req.user._json.publicProfileUrl
     };
-    
-    // user.findUserProfile(req.session.userRecord.githublogin, function (data) {   
-    //   data.avatar = userData.avatar;
-    //   data.headline = userData.headline;
-    //   data.linkedin = userData.linkedin;
+    user.addLinkedinData(userData, function() {
 
-    //   console.log("DATA INSIDE FIND USER", data);
-      user.updateProfile(test, function(){
-        //console.log("UPDATED DATA");
-      })
-    //});
+    });
+    
     res.redirect('/#/profile');
   });
 

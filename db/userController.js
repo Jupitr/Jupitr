@@ -80,7 +80,6 @@ exports.addUser = addUser = function(data, callback) {
 
 // updates user profile
 exports.updateProfile = updateProfile = function(data, callback) {
-  console.log("updated data is", data);
   if (data.zip) {
     var temp = zipcodes.lookup(data.zip);
     data.city = temp.city;
@@ -98,6 +97,19 @@ exports.updateProfile = updateProfile = function(data, callback) {
     callback(data);
   });
 }; 
+
+exports.addLinkedinData = function(data, callback) {
+  var query = {'githublogin': data.githublogin};
+  var linkedinData = {
+    avatar: data.avatar,
+    linkedin: data.linkedin,
+    headline: data.headline
+  }
+  User.findOneAndUpdate(query, linkedinData, {upsert: true}, function(err, profile) {
+    if (err) console.error(err);
+    callback(profile);
+  })
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //            to seed database with user records for deployment:             //
