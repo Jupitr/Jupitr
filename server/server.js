@@ -110,10 +110,24 @@ passport.use(new LinkedInStrategy({
   clientID: linkedinId,
   clientSecret: linkedinSecret,
   callbackURL: "http://localhost:3000/auth/linkedin/callback",
+  scope: ['r_basicprofile'],
   // scope: ['r_emailaddress', 'r_basicprofile'],
+
   state: true,
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
+  /*
+  // missing to keep auht in session and store data in db??
+  req.session.oauth = accessToken;
+    req.session.uid = profile._json.login;
+    req.session.userRecord = {
+      User.creat({}
+      name: profile._json.name,
+      githublogin: profile._json.login,
+      email: profile._json.email,
+      githublink: 'https://github.com/' + profile._json.login
+    };
+    */
   // asynchronous verification, for effect...
   process.nextTick(function () {
     // To keep the example simple, the user's LinkedIn profile is returned to
@@ -140,8 +154,27 @@ app.get('/auth/linkedin',
 app.get('/auth/linkedin/callback',
   passport.authenticate('linkedin', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log('Success: Authenticated with Linkedin');
-    console.log(req.user);
+    // console.log('Success: Authenticated with Linkedin');
+    var test = {
+      "_id":"561887f705b2c47d070465aa",
+      "avatar": req.user._json.publicProfileUrl
+    }
+    var userData = {
+      avatar: req.user._json.pictureUrl,
+      headline: req.user._json.headline,
+      linkedin: req.user._json.publicProfileUrl
+    };
+    //user.finUserProfile(req.session.)
+    // user.findUserProfile(req.session.userRecord.githublogin, function (data) {   
+    //   data.avatar = userData.avatar;
+    //   data.headline = userData.headline;
+    //   data.linkedin = userData.linkedin;
+
+    //   console.log("DATA INSIDE FIND USER", data);
+      user.updateProfile(test, function(){
+        //console.log("UPDATED DATA");
+      })
+    //});
     res.redirect('/#/profile');
   });
 
@@ -229,6 +262,7 @@ app.get('/api/allusers', function(req, res) {
   helpers.validateUser(req, res, function(){
     if (!req.session.sendAllUsers) {
       user.sendAllUsers(function(users){
+        console.log("user is ", users[0]);
         req.session.sendAllUsers = true;
         res.json(users);
       });
@@ -246,6 +280,7 @@ app.get('/auth', function(req, res){
 
 app.post('/api/update', function(req, res) {
   // call update user api
+  console.log("updating", req.body);
   user.updateProfile(req.body, function(){
     res.sendStatus(200);
   });

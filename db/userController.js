@@ -1,5 +1,5 @@
 var User = require('./userModel.js');
-
+var zipcodes = require('zipcodes');
 // returns an array of all user profiles as separate JSON objects
 exports.sendAllUsers = function(callback) {
   User.find({}, function(err, users) {
@@ -32,34 +32,39 @@ exports.addUser = addUser = function(data, callback) {
     email: data.email,
     cohort: data.cohort,
     zip: data.zip,
+    latitude: data.latitude,
+    longitude: data.longitude,
     twitter: data.twitter,
     website: data.website,
     gender: data.gender,
-    race: data.race,
+    avatar: data.image,
+    // race: data.race,
     thesis: data.thesis,
     thesisurl: data.thesisurl,
     greenfield: data.greenfield,
+    greenfieldurl: data.greenfield,
     legacy: data.legacy,
-    technologies: data.technologies,
-    currentemployer: data.currentemployer,
-    currentemployerrole: data.currentemployerrole,
-    currentemployertype: data.currentemployertype,
-    currentemployerstartdate: data.currentemployerstartdate,
-    prioremployer1: data.prioremployer1,
-    prioremployer1role: data.prioremployer1role,
-    prioremployer1type: data.prioremployer1type,
-    prioremployer1startdate: data.prioremployer1startdate,
-    prioremployer1enddate: data.prioremployer1enddate,
-    prioremployer2: data.prioremployer2,
-    prioremployer2role: data.prioremployer2role,
-    prioremployer2type: data.prioremployer2type,
-    prioremployer2startdate: data.prioremployer2startdate,
-    prioremployer2enddate: data.prioremployer2enddate,
-    prioremployer3: data.prioremployer3,
-    prioremployer3role: data.prioremployer3role,
-    prioremployer3type: data.prioremployer3type,
-    prioremployer3startdate: data.prioremployer3startdate,
-    prioremployer3enddate: data.prioremployer3enddate,   
+    legacyurl: data.legacy,
+    // technologies: data.technologies,
+    // currentemployer: data.currentemployer,
+    // currentemployerrole: data.currentemployerrole,
+    // currentemployertype: data.currentemployertype,
+    // currentemployerstartdate: data.currentemployerstartdate,
+    // prioremployer1: data.prioremployer1,
+    // prioremployer1role: data.prioremployer1role,
+    // prioremployer1type: data.prioremployer1type,
+    // prioremployer1startdate: data.prioremployer1startdate,
+    // prioremployer1enddate: data.prioremployer1enddate,
+    // prioremployer2: data.prioremployer2,
+    // prioremployer2role: data.prioremployer2role,
+    // prioremployer2type: data.prioremployer2type,
+    // prioremployer2startdate: data.prioremployer2startdate,
+    // prioremployer2enddate: data.prioremployer2enddate,
+    // prioremployer3: data.prioremployer3,
+    // prioremployer3role: data.prioremployer3role,
+    // prioremployer3type: data.prioremployer3type,
+    // prioremployer3startdate: data.prioremployer3startdate,
+    // prioremployer3enddate: data.prioremployer3enddate,   
   });
   
   user.save(function(err) {
@@ -75,7 +80,17 @@ exports.addUser = addUser = function(data, callback) {
 
 // updates user profile
 exports.updateProfile = updateProfile = function(data, callback) {
-  User.findByIdAndUpdate(data._id, data, function(err, profile) {
+  console.log("updated data is", data);
+  if (data.zip) {
+    var temp = zipcodes.lookup(data.zip);
+    data.city = temp.city;
+    data.state = temp.state;
+    data.latitude = temp.latitude;
+    data.longitude = temp.longitude;
+    console.log("data after zipcodes", data);
+  }
+  User.findByIdAndUpdate(data._id, function(err, profile) {
+    console.log("!!!!!profile inside update User", profile);
     if (err) {
       console.error(err);
       return;
@@ -83,7 +98,6 @@ exports.updateProfile = updateProfile = function(data, callback) {
     callback(data);
   });
 }; 
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //            to seed database with user records for deployment:             //
