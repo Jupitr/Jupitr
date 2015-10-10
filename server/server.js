@@ -110,24 +110,11 @@ passport.use(new LinkedInStrategy({
   clientID: linkedinId,
   clientSecret: linkedinSecret,
   callbackURL: "http://localhost:3000/auth/linkedin/callback",
-  scope: ['r_basicprofile'],
   // scope: ['r_emailaddress', 'r_basicprofile'],
-
   state: true,
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
-  /*
-  // missing to keep auht in session and store data in db??
-  req.session.oauth = accessToken;
-    req.session.uid = profile._json.login;
-    req.session.userRecord = {
-      User.creat({}
-      name: profile._json.name,
-      githublogin: profile._json.login,
-      email: profile._json.email,
-      githublink: 'https://github.com/' + profile._json.login
-    };
-    */
+  
   // asynchronous verification, for effect...
   process.nextTick(function () {
     // To keep the example simple, the user's LinkedIn profile is returned to
@@ -164,7 +151,7 @@ app.get('/auth/linkedin/callback',
       headline: req.user._json.headline,
       linkedin: req.user._json.publicProfileUrl
     };
-    //user.finUserProfile(req.session.)
+    
     // user.findUserProfile(req.session.userRecord.githublogin, function (data) {   
     //   data.avatar = userData.avatar;
     //   data.headline = userData.headline;
