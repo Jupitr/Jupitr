@@ -52,5 +52,14 @@ userSchema.pre('save', function(next) {
   }
   next();
 });
-
+userSchema.pre('find', function(next) {
+  if (this.zip) {
+    var temp = zipcodes.lookup(this.zip);
+    this.city = temp.city;
+    this.state = temp.state;
+    this.latitude = temp.latitude;
+    this.longitude = temp.longitude;
+  }
+  next();
+});
 module.exports = mongoose.model('User', userSchema);

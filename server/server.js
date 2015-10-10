@@ -111,6 +111,8 @@ passport.use(new LinkedInStrategy({
   clientSecret: linkedinSecret,
   callbackURL: "http://localhost:3000/auth/linkedin/callback",
   scope: ['r_basicprofile'],
+  // scope: ['r_emailaddress', 'r_basicprofile'],
+
   state: true,
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
@@ -218,7 +220,7 @@ app.get('/auth/github/callback',
   function(req, res) {
     // console.log('Request:', req);
     // console.log('Response:', res);
-    res.redirect('/');
+    res.redirect('/auth');
   });
 
 
@@ -229,6 +231,7 @@ app.get('/api/allusers', function(req, res) {
   helpers.validateUser(req, res, function(){
     if (!req.session.sendAllUsers) {
       user.sendAllUsers(function(users){
+        console.log("user is ", users[0]);
         req.session.sendAllUsers = true;
         res.json(users);
       });
@@ -246,6 +249,7 @@ app.get('/auth', function(req, res){
 
 app.post('/api/update', function(req, res) {
   // call update user api
+  console.log("updating", req.body);
   user.updateProfile(req.body, function(){
     res.sendStatus(200);
   });
