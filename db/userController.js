@@ -1,5 +1,5 @@
 var User = require('./userModel.js');
-
+var zipcodes = require('zipcodes');
 // returns an array of all user profiles as separate JSON objects
 exports.sendAllUsers = function(callback) {
   User.find({}, function(err, users) {
@@ -32,6 +32,8 @@ exports.addUser = addUser = function(data, callback) {
     email: data.email,
     cohort: data.cohort,
     zip: data.zip,
+    latitude: data.latitude,
+    longitude: data.longitude,
     twitter: data.twitter,
     website: data.website,
     gender: data.gender,
@@ -87,19 +89,15 @@ exports.updateProfile = updateProfile = function(data, callback) {
     data.longitude = temp.longitude;
     console.log("data after zipcodes", data);
   }
-  User.findByIdAndUpdate(data._id, {
-    // function(err, profile) {
-    // console.log("!!!!!profile inside update User", profile);
-    // if (err) {
-    //   console.error(err);
-    //   return;
-    // }
-    $set: data
-  }
-    //callback(data);
-  );
+  User.findByIdAndUpdate(data._id, function(err, profile) {
+    console.log("!!!!!profile inside update User", profile);
+    if (err) {
+      console.error(err);
+      return;
+    }
+    callback(data);
+  });
 }; 
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //            to seed database with user records for deployment:             //
