@@ -88,7 +88,7 @@ exports.updateProfile = updateProfile = function(data, callback) {
     data.longitude = temp.longitude;
     console.log("data after zipcodes", data);
   }
-  User.findByIdAndUpdate(data._id, function(err, profile) {
+  User.findByIdAndUpdate(data._id, data, function(err, profile) {
     console.log("!!!!!profile inside update User", profile);
     if (err) {
       console.error(err);
