@@ -237,7 +237,12 @@ text {
   padding-bottom: 12px;
 }
 
-.info-expanded, .info-employment {
+.info-expanded, .info-contact {
+  border-top: 1px solid #B3B3B3;
+  padding-top: 14px;
+}
+
+/*.info-expanded, .info-employment {
   border-top: 1px solid #B3B3B3;
   padding-top: 14px;
 }
@@ -248,12 +253,12 @@ text {
 }
 
 .name {
-  font-family: Courier;
-  font-size: 36px;
+  /*font-family: Courier;*/
+  font-size: 30px;
   font-weight: 600;
   color: black;
-  padding-bottom: 2px;
-  line-height: 40px;
+  /*padding-bottom: 2px;*/
+ /* line-height: 20px;*/
 }
 
 .location {
@@ -263,7 +268,7 @@ text {
 }
 
 .company {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   margin-top: 16px;
   color: #4C4C4C;
@@ -276,7 +281,16 @@ text {
   font-weight: 500;
   float: right;
   margin-top: 8px;
+  margin-bottom: 10px;
   padding: 6px 8px;
+}
+
+img {
+  margin-top: 0;
+}
+
+.gender {
+  margin-left: 30%;
 }
 
 .employment-title {
