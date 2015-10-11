@@ -53,53 +53,67 @@ angular.module('jupitr.profile', [])
   };
 
   $scope.updateProfileAndNextStep = function() {
-    $scope.user.currentProfileStep += 1;
-    console.log($scope.user.currentProfileStep);
-    $scope.update($scope.user);
+    $scope.user.currentProfileStep = $scope.user.currentProfileStep + 1;
+    User.update($scope.user)
+      .then(function() {
+        console.log('scope.user:', $scope.user);
+        console.log('step:', $scope.user.currentProfileStep);
+        $scope.init();      
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
-  User.getMyRecord(function(data){
-    // get profile data from session
-    $scope.user = data;
+  $scope.init = function() {
+    User.getMyRecord(function(data){
+      // get profile data from session
+      $scope.user = data;
 
-    // Split school name (HR/HRRB) from cohort number
-    // for use in form
-    if ($scope.user.cohort) {
-      $scope.school.name = $scope.user.cohort.split(' ')[0];
-      $scope.school.cohort = $scope.user.cohort.split(' ')[1];
-    }
-    // technologies are stored as an array in database.
-    // to assign them to a checkbox, loop through technologies array
-    // and assign each item as a property on $scope.technology 
-    if ($scope.user.technologies) {
-      for (var i = 0; i < $scope.user.technologies.length; i++) {
-        $scope.technology[$scope.user.technologies[i]] = true;
-      }
-    }
-    // convert date string data to dates for use in form.
-    // saved in date variable so there are no form validation errors
-    // when we convert back to strings in update function.
-    if ($scope.user.currentemployerstartdate) {
-      $scope.date.currentemployerstartdate = new Date($scope.user.currentemployerstartdate);
-    }
-    if ($scope.user.prioremployer1startdate) {
-      $scope.date.prioremployer1startdate = new Date($scope.user.prioremployer1startdate);
-    }
-    if ($scope.user.prioremployer1enddate) {
-      $scope.date.prioremployer1enddate = new Date($scope.user.prioremployer1enddate);
-    }
-    if ($scope.user.prioremployer2startdate) {
-      $scope.date.prioremployer2startdate = new Date($scope.user.prioremployer2startdate);
-    }
-    if ($scope.user.prioremployer2enddate) {
-      $scope.date.prioremployer2enddate = new Date($scope.user.prioremployer2enddate);
-    }
-    if ($scope.user.prioremployer3startdate) {
-      $scope.date.prioremployer3startdate = new Date($scope.user.prioremployer3startdate);
-    }
-    if ($scope.user.prioremployer3enddate) {
-      $scope.date.prioremployer3enddate = new Date($scope.user.prioremployer3enddate);
-    }
-  });
+      // Split school name (HR/HRRB) from cohort number
+      // for use in form
+      // if ($scope.user.cohort) {
+      //   $scope.school.name = $scope.user.cohort.split(' ')[0];
+      //   $scope.school.cohort = $scope.user.cohort.split(' ')[1];
+      // }
+      // technologies are stored as an array in database.
+      // to assign them to a checkbox, loop through technologies array
+      // and assign each item as a property on $scope.technology 
+      // if ($scope.user.technologies) {
+      //   for (var i = 0; i < $scope.user.technologies.length; i++) {
+      //     $scope.technology[$scope.user.technologies[i]] = true;
+      //   }
+      // }
+      // convert date string data to dates for use in form.
+      // saved in date variable so there are no form validation errors
+      // when we convert back to strings in update function.
+      // if ($scope.user.currentemployerstartdate) {
+      //   $scope.date.currentemployerstartdate = new Date($scope.user.currentemployerstartdate);
+      // }
+      // if ($scope.user.prioremployer1startdate) {
+      //   $scope.date.prioremployer1startdate = new Date($scope.user.prioremployer1startdate);
+      // }
+      // if ($scope.user.prioremployer1enddate) {
+      //   $scope.date.prioremployer1enddate = new Date($scope.user.prioremployer1enddate);
+      // }
+      // if ($scope.user.prioremployer2startdate) {
+      //   $scope.date.prioremployer2startdate = new Date($scope.user.prioremployer2startdate);
+      // }
+      // if ($scope.user.prioremployer2enddate) {
+      //   $scope.date.prioremployer2enddate = new Date($scope.user.prioremployer2enddate);
+      // }
+      // if ($scope.user.prioremployer3startdate) {
+      //   $scope.date.prioremployer3startdate = new Date($scope.user.prioremployer3startdate);
+      // }
+      // if ($scope.user.prioremployer3enddate) {
+      //   $scope.date.prioremployer3enddate = new Date($scope.user.prioremployer3enddate);
+      // }
+
+      // console.log($scope.user);
+      $window.localStorage.setItem('hrr8.jupitr', JSON.stringify([$scope.user]));
+    });
+  };
+
+  $scope.init();
 
 });
