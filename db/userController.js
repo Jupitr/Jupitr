@@ -37,6 +37,7 @@ exports.addUser = addUser = function(data, callback) {
     twitter: data.twitter,
     website: data.website,
     gender: data.gender,
+    //for seed-data/testing
     hasGivenPermission: data.hasGivenPermission,
     // race: data.race,
     thesis: data.thesis,

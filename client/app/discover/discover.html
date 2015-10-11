@@ -36,11 +36,12 @@
       <div class="row info-expanded">
         <div class="col-sm-5">
           <p><a href="mailto:{{profile.email}}">{{profile.email}}</a></p>
-          <p><a href="{{profile.website}}" target="_blank">{{profile.website}}</a></p>
-          <p><span class="field-title"></span><a href="https://www.github.com/{{profile.githublogin}}" target="_blank">Github</a></p><p><span class="field-title"></span><a href="{{profile.linkedin}}" target="_blank">Linkedin</a></p>
+          <p ng-if="profile.website"><a href="{{profile.website}}" target="_blank">{{profile.website}}</a></p>
+          <p ng-if="profile.github"><span class="field-title"></span><a href="https://www.github.com/{{profile.githublogin}}" target="_blank">Github</a></p>
+          <p ng-if="profile.linkedin"><span class="field-title"></span><a href="{{profile.linkedin}}" target="_blank">Linkedin</a></p>
           <p ng-if="profile.twitter"><span class="field-title"></span><a href="https://www.twitter.com/{{profile.twitter}}" target="_blank">Twitter</a></p>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-7" ng-if="profile.githublogin">
           <div>Hack Reactor projects:</div>
           <div ng-if="!profile.thesis && !profile.legacy && !profile.greenfield">
           No projects added yet!</div>
@@ -61,7 +62,7 @@
           <p>{{profile.race}}</p>
         </div> -->
       </div>
-      <div class="row info-contact" ng-if="!profile.hasGivenPermission">
+      <div class="row info-contact" ng-if="!profile.githublogin">
         <div class="col-sm-9">
           <p class="field-title">Invite User:</p>
           <!-- <div ng-if="!profile.signedUp"> -->

@@ -147,7 +147,7 @@ app.get('/auth/linkedin/callback',
       avatar: req.user._json.pictureUrl,
       headline: req.user._json.headline,
       linkedin: req.user._json.publicProfileUrl,
-      //hasGivenPermission: true
+      // hasGivenPermission: true
     };
     user.addLinkedinData(userData, function() {
 
@@ -191,7 +191,6 @@ passport.use(new GitHubStrategy({
       githublogin: profile._json.login,
       email: profile._json.email,
       githublink: 'https://github.com/' + profile._json.login,
-      hasGivenPermission: true
     };
     // console.log(req.session);
 

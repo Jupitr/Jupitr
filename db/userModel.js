@@ -15,7 +15,7 @@ var userSchema = new mongoose.Schema({
   avatar: String,
   linkedin: String,
   headline: String,
-  hasGivenPermission: Boolean,
+  hasGivenPermission: Boolean, // testing/seed-data
   website: String,
   gender: String,
   // race: String,
