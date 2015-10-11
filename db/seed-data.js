@@ -19,24 +19,26 @@ var zips = ['94121', '94110', '94014', '94132', '94133', '10014', '10128',
   '30301', '30305', '37115', '37203', '33601', '33605', '02113', '57702',
   '02113', '64108', '80211'];
 
+var permission = [true, false, true];
+
 var onsiteOrRemote = ['HR', 'HRRB'];
 
 var genders = ['male', 'female', 'other'];
 
-var races = ['Asian', 'Caucasion/White', 'Black/African-American', 'Hispanic',
-  'Native American', 'Middle Eastern', 'Other'];
+// var races = ['Asian', 'Caucasion/White', 'Black/African-American', 'Hispanic',
+//   'Native American', 'Middle Eastern', 'Other'];
 
-var techs = ['JavaScript', 'Node', 'MongoDB', 'Express', 'HTML', 'Angular',
-  'CSS', 'Java', 'iOS', 'Unix', 'D3', 'Backbone', 'SQL', 'React', 'Pearl', 
-  'Ruby', 'Rails', 'Jquery', 'PHP', 'C/C++', 'Android', 'Go', 'Rust'];
+// var techs = ['JavaScript', 'Node', 'MongoDB', 'Express', 'HTML', 'Angular',
+//   'CSS', 'Java', 'iOS', 'Unix', 'D3', 'Backbone', 'SQL', 'React', 'Pearl', 
+//   'Ruby', 'Rails', 'Jquery', 'PHP', 'C/C++', 'Android', 'Go', 'Rust'];
   
-var companies = ['Apple', 'Uber', 'Amazon', 'Google', 'Stripe', 'Hack Reactor',
-  'Intel', 'Microsoft', 'eBay', 'Walmart', 'Square', 'JP Morgan Chase',
-  'Pied Piper', 'Hooli', 'Aviato', 'SquareSpace', ];
+// var companies = ['Apple', 'Uber', 'Amazon', 'Google', 'Stripe', 'Hack Reactor',
+//   'Intel', 'Microsoft', 'eBay', 'Walmart', 'Square', 'JP Morgan Chase',
+//   'Pied Piper', 'Hooli', 'Aviato', 'SquareSpace', ];
 
-var roles = ['Developer', 'Engineer', 'Programmer'];
+// var roles = ['Developer', 'Engineer', 'Programmer'];
 
-var types = ['onsite', 'remote', 'freelance', 'contract'];
+// var types = ['onsite', 'remote', 'freelance', 'contract'];
 
 var projects = ['Purify CSS', 'Otto', 'Mirror', 'Lamp', 'Juiptr', 'Super Duper',
   'ToDoer', 'Orange', 'Cool Project Name', 'Zig Zag', 'Stream Line', 'L7', 
@@ -53,41 +55,48 @@ var generateRandomUser = function() {
   var lastName = pickRandom(lastNames);
   var name = firstName + ' ' + lastName;
   var email = firstName + lastName + '@myemail.com';
-  var cohort = pickRandom(onsiteOrRemote) + ' ' + Math.floor(Math.random() * 15);
-  var zip = pickRandom(zips);
-  var handle = firstName.toLowerCase() + Math.floor(Math.random() * 1000);
-  var githubLogin = handle;
-  var twitter = handle;
-  var website = 'http://www.' + handle+ '.com';
-  var gender = pickRandom(genders);
-  var race = pickRandom(races);
-  var thesis = pickRandom(projects);
-  var thesisurl = 'http://www.' + thesis.split(' ').join('').toLowerCase() + '.com';
-  var greenfield = pickRandom(projects);
-  var legacy = pickRandom(projects);
-  var technologies = [];
-  technologies.push(pickRandom(techs));
-  technologies.push(pickRandom(techs));
-  technologies.push(pickRandom(techs));
-  var currentEmployer = pickRandom(companies);
-  var currentEmployerRole = pickRandom(roles);
-  var currentEmployerType = pickRandom(types);
-  var currentEmployerStartDate = String(new Date());
-  var priorEmployer1 = pickRandom(companies);
-  var priorEmployer1Role = pickRandom(roles);
-  var priorEmployer1Type = pickRandom(types);
-  var priorEmployer1StartDate = String(new Date());
-  var priorEmployer1EndDate = String(new Date());
-  var priorEmployer2 = pickRandom(companies);
-  var priorEmployer2Role = pickRandom(roles);
-  var priorEmployer2Type = pickRandom(types);
-  var priorEmployer2StartDate = String(new Date());
-  var priorEmployer2EndDate = String(new Date());
-  var priorEmployer3 = pickRandom(companies);
-  var priorEmployer3Role = pickRandom(roles);
-  var priorEmployer3Type = pickRandom(types);
-  var priorEmployer3StartDate = String(new Date());
-  var priorEmployer3EndDate = String(new Date());
+  var getPermission = pickRandom(permission);
+  var cohort, zip, handle, githubLogin, twitter, website, gender, thesis,
+      thesisurl, greenfield, greenfieldurl, legacy, legacyurl;
+  if (getPermission) {
+    cohort = pickRandom(onsiteOrRemote) + ' ' + Math.floor(Math.random() * 15);
+    zip = pickRandom(zips);
+    handle = firstName.toLowerCase() + Math.floor(Math.random() * 1000);
+    githubLogin = handle;
+    twitter = handle;
+    website = 'http://www.' + handle+ '.com';
+    gender = pickRandom(genders);
+    // var race = pickRandom(races);
+    thesis = pickRandom(projects);
+    thesisurl = 'http://www.' + thesis.split(' ').join('').toLowerCase() + '.com';
+    greenfield = pickRandom(projects);
+    greenfieldurl = 'http://www.' + thesis.split(' ').join('').toLowerCase() + '.com';
+    legacy = pickRandom(projects);
+    legacyurl = 'http://www.' + thesis.split(' ').join('').toLowerCase() + '.com';
+  }
+  // var technologies = [];
+  // technologies.push(pickRandom(techs));
+  // technologies.push(pickRandom(techs));
+  // technologies.push(pickRandom(techs));
+  // var currentEmployer = pickRandom(companies);
+  // var currentEmployerRole = pickRandom(roles);
+  // var currentEmployerType = pickRandom(types);
+  // var currentEmployerStartDate = String(new Date());
+  // var priorEmployer1 = pickRandom(companies);
+  // var priorEmployer1Role = pickRandom(roles);
+  // var priorEmployer1Type = pickRandom(types);
+  // var priorEmployer1StartDate = String(new Date());
+  // var priorEmployer1EndDate = String(new Date());
+  // var priorEmployer2 = pickRandom(companies);
+  // var priorEmployer2Role = pickRandom(roles);
+  // var priorEmployer2Type = pickRandom(types);
+  // var priorEmployer2StartDate = String(new Date());
+  // var priorEmployer2EndDate = String(new Date());
+  // var priorEmployer3 = pickRandom(companies);
+  // var priorEmployer3Role = pickRandom(roles);
+  // var priorEmployer3Type = pickRandom(types);
+  // var priorEmployer3StartDate = String(new Date());
+  // var priorEmployer3EndDate = String(new Date());
 
   return {
     name: name,
@@ -98,36 +107,38 @@ var generateRandomUser = function() {
     twitter: twitter,
     website: website,
     gender: gender,
-    race: race,
-    currentemployer: currentEmployer,
-    prioremployer1: priorEmployer1,
-    prioremployer2: priorEmployer2,
+    hasGivenPermission: getPermission,
+    // race: race,
+    // currentemployer: currentEmployer,
+    // prioremployer1: priorEmployer1,
+    // prioremployer2: priorEmployer2,
     thesis: thesis,
     thesisurl: thesisurl,
     greenfield: greenfield,
+    greenfieldurl: greenfieldurl,
     legacy: legacy,
-    technologies: technologies ,
-    currentemployer: currentEmployer,
-    currentemployerrole: currentEmployerRole,
-    currentemployertype: currentEmployerType,
-    currentemployerstartdate: currentEmployerStartDate,
-    prioremployer1: priorEmployer1,
-    prioremployer1role: priorEmployer1Role,
-    prioremployer1type: priorEmployer1Type,
-    prioremployer1startdate: priorEmployer1StartDate,
-    prioremployer1enddate: priorEmployer2StartDate,
-    prioremployer2: priorEmployer2,
-    prioremployer2role: priorEmployer2Role,
-    prioremployer2type: priorEmployer2Type,
-    prioremployer2startdate: priorEmployer2StartDate,
-    prioremployer2enddate: priorEmployer2EndDate,
-    prioremployer3: priorEmployer3,
-    prioremployer3role: priorEmployer3Role,
-    prioremployer3type: priorEmployer3Type,
-    prioremployer3startdate: priorEmployer3StartDate,
-    prioremployer3enddate: priorEmployer3EndDate,
-  };
-  
+    legacyurl: legacyurl,
+    // technologies: technologies ,
+    // currentemployer: currentEmployer,
+    // currentemployerrole: currentEmployerRole,
+    // currentemployertype: currentEmployerType,
+    // currentemployerstartdate: currentEmployerStartDate,
+    // prioremployer1: priorEmployer1,
+    // prioremployer1role: priorEmployer1Role,
+    // prioremployer1type: priorEmployer1Type,
+    // prioremployer1startdate: priorEmployer1StartDate,
+    // prioremployer1enddate: priorEmployer2StartDate,
+    // prioremployer2: priorEmployer2,
+    // prioremployer2role: priorEmployer2Role,
+    // prioremployer2type: priorEmployer2Type,
+    // prioremployer2startdate: priorEmployer2StartDate,
+    // prioremployer2enddate: priorEmployer2EndDate,
+    // prioremployer3: priorEmployer3,
+    // prioremployer3role: priorEmployer3Role,
+    // prioremployer3type: priorEmployer3Type,
+    // prioremployer3startdate: priorEmployer3StartDate,
+    // prioremployer3enddate: priorEmployer3EndDate,
+  };  
 };
 
 // console.log(generateRandomUser());

@@ -37,9 +37,7 @@ exports.addUser = addUser = function(data, callback) {
     twitter: data.twitter,
     website: data.website,
     gender: data.gender,
-    
-    hasGivenPermission: false,
-
+    hasGivenPermission: data.hasGivenPermission,
     // race: data.race,
     thesis: data.thesis,
     thesisurl: data.thesisurl,
@@ -105,13 +103,13 @@ exports.addLinkedinData = function(data, callback) {
   var linkedinData = {
     avatar: data.avatar,
     linkedin: data.linkedin,
-    headline: data.headline,
-    hasGivenPermission: data.hasGivenPermission
-  }
+    headline: data.headline
+    //hasGivenPermission: data.hasGivenPermission
+  };
   User.findOneAndUpdate(query, linkedinData, {upsert: true}, function(err, profile) {
     if (err) console.error(err);
     callback(profile);
-  })
+  });
 }
 
 ///////////////////////////////////////////////////////////////////////////////
