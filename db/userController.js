@@ -39,6 +39,10 @@ exports.addUser = addUser = function(data, callback) {
     gender: data.gender,
     //for seed-data/testing
     hasGivenPermission: data.hasGivenPermission,
+    
+    avatar: 'https://static1.squarespace.com/static/522a22cbe4b04681b0bff826/54ad45d5e4b0d6033e5e1243/559bbf3ee4b0c021321aca31/1442518858893/?format=200w',
+    currentProfileStep: 0,
+  
     // race: data.race,
     thesis: data.thesis,
     thesisurl: data.thesisurl,

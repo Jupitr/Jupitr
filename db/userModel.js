@@ -14,6 +14,7 @@ var userSchema = new mongoose.Schema({
   twitter: String,
   avatar: String,
   linkedin: String,
+  currentProfileStep: Number,
   headline: String,
   hasGivenPermission: Boolean, // testing/seed-data
   website: String,

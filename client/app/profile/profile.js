@@ -52,6 +52,12 @@ angular.module('jupitr.profile', [])
       });
   };
 
+  $scope.updateProfileAndNextStep = function() {
+    $scope.user.currentProfileStep += 1;
+    console.log($scope.user.currentProfileStep);
+    $scope.update($scope.user);
+  };
+
   User.getMyRecord(function(data){
     // get profile data from session
     $scope.user = data;
