@@ -38,3 +38,8 @@ client/lib
 
 # Config files
 server/utils/config.js
+
+# .DS_Store
+*/.DS_Store
+.DS_Store
+*/*/.DS_Store
