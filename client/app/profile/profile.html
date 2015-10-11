@@ -9,8 +9,22 @@
   </ul>
 </nav>
 
-<div ng-controller="profileController" id="profile">
-  <form name="profileForm" ng-submit='updateProfile()' novalidate>
+<div ng-controller="profileController" id="profile" ng-switch on="user.hasGivenPermission">
+
+  <div class="container-fluid" ng-switch-when="false">
+    <a class="btn btn-social btn-linkedin" href="/auth/linkedin" role="button">
+    <i class="fa fa-linkedin"></i>
+    Signin with Linkedin</a>
+    <div>
+      <img src="">
+      <p>{{user.name}}</p>
+      <p>{{user.email}}</p>
+      <p>Github: <a href="http://github.com/{{user.githublogin}}">{{user.githublogin}}</a></p>
+    </div>
+  </div>
+
+
+  <form name="profileForm" ng-submit='updateProfile()' novalidate ng-switch-when="true">
     <fieldset class="contact">
       <legend>
         Contact&nbsp;Information&nbsp;and&nbsp;Personal&nbsp;Details

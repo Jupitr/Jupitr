@@ -146,7 +146,8 @@ app.get('/auth/linkedin/callback',
       githublogin: req.session.userRecord.githublogin,
       avatar: req.user._json.pictureUrl,
       headline: req.user._json.headline,
-      linkedin: req.user._json.publicProfileUrl
+      linkedin: req.user._json.publicProfileUrl,
+      hasGivenPermission: true
     };
     user.addLinkedinData(userData, function() {
 
