@@ -18,29 +18,30 @@
     </div>
     <div class="container-fluid profile-view" ng-repeat="profile in profiles | filter:searchFilter">
       <div class="row info-basic">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
           <img ng-if="profile.avatar" src="{{profile.avatar}}" height="100" width="100"/>
           <img ng-show="!profile.avatar" src="http://i2.wp.com/reboot.pro/public/style_images/metro/profile/default_large.png" />
         </div>
         <div class="col-sm-7">
           <p class="name">{{profile.name}}</p>
           <p class="company">{{profile.headline}}</p>
-          <p class="location">{{profile.city}}, {{profile.state}}</p>
+          <p ng-if="profile.city && profile.state" class="location">{{profile.city}}, {{profile.state}}</p>
      <!-- <p class="company">{{profile.currentemployer}}</p> -->
         </div>
         <div class="col-sm-2">
-          <p class="cohort">{{profile.cohort}}</p>
+          <p ng-if="profile.cohort" class="cohort">{{profile.cohort}}</p>
           <p class="gender">{{profile.gender}}</p>
         </div>
       </div>
       <div class="row info-expanded">
         <div class="col-sm-5">
           <p><a href="mailto:{{profile.email}}">{{profile.email}}</a></p>
-          <p><a href="{{profile.website}}" target="_blank">{{profile.website}}</a></p>
-          <p><span class="field-title"></span><a href="https://www.github.com/{{profile.githublogin}}" target="_blank">Github</a></p><p><span class="field-title"></span><a href="{{profile.linkedin}}" target="_blank">Linkedin</a></p>
+          <p ng-if="profile.website"><a href="{{profile.website}}" target="_blank">{{profile.website}}</a></p>
+          <p ng-if="profile.github"><span class="field-title"></span><a href="https://www.github.com/{{profile.githublogin}}" target="_blank">Github</a></p>
+          <p ng-if="profile.linkedin"><span class="field-title"></span><a href="{{profile.linkedin}}" target="_blank">Linkedin</a></p>
           <p ng-if="profile.twitter"><span class="field-title"></span><a href="https://www.twitter.com/{{profile.twitter}}" target="_blank">Twitter</a></p>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-7" ng-if="profile.githublogin">
           <div>Hack Reactor projects:</div>
           <div ng-if="!profile.thesis && !profile.legacy && !profile.greenfield">
           No projects added yet!</div>
@@ -61,13 +62,40 @@
           <p>{{profile.race}}</p>
         </div> -->
       </div>
-      <div class="row info-contact">
-        <div class="col-sm-3">
+      <div class="row info-contact" ng-if="!profile.githublogin">
+        <div class="col-sm-9">
           <p class="field-title">Invite User:</p>
-          <div ng-if="profile.">
+          <!-- <div ng-if="!profile.signedUp"> -->
             <p>This user has not signed up yet, send an invite!</p>
-            
-          </div> 
+        </div>
+        <div  class="col-sm-3">  
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+              Send Invite
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Invite {{profile.name}}!</h4>
+                  </div>
+                  <form>
+                  <div class="modal-body">
+                  <textarea rows="3" height="200" width="200" readonly>To: {{profile.name}}&#10;(user) would like you to join us on Jupitr!&#10;From: The Jupitr Team
+                  </textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Send</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          <!-- </div>  -->
         </div>
       </div>
 <!--    <div class="row info-employment">
@@ -105,3 +133,4 @@
     </div>
   </div>
 </div>
+

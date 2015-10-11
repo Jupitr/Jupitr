@@ -74,6 +74,17 @@ angular.module('jupitr.services', [])
     window.localStorage.setItem('hrr8.jupitr', JSON.stringify(records));
   };
 
+  var sendInvite = function (data) {
+    return $http({
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST', 
+      url: '/api/update',
+      data: data
+    });
+  };
+
   // var create = function(user) {
   //   return $http({
   //     method: 'POST', 
@@ -94,7 +105,8 @@ angular.module('jupitr.services', [])
     getAll: getAll,
     getUser: getUser,
     update: update,
-    logout: logout
+    logout: logout,
+    sendInvite: sendInvite
   };
 
 }); 
