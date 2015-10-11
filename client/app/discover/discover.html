@@ -19,8 +19,8 @@
     <div class="container-fluid profile-view" ng-repeat="profile in profiles | filter:searchFilter">
       <div class="row info-basic">
         <div class="col-sm-2">
-          <img ng-if="profile.avatar" src="{{profile.avatar}}" height="100" width="100"/>
-          <img ng-show="!profile.avatar" src="http://i2.wp.com/reboot.pro/public/style_images/metro/profile/default_large.png" />
+          <img ng-if="profile.avatar" href="{{profile.avatar}}" height="100" width="100"/>
+          <!-- <img ng-show="!profile.avatar" src="http://i2.wp.com/reboot.pro/public/style_images/metro/profile/default_large.png" /> -->
         </div>
         <div class="col-sm-7">
           <p class="name">{{profile.name}}</p>
@@ -62,12 +62,38 @@
         </div> -->
       </div>
       <div class="row info-contact">
-        <div class="col-sm-3">
+        <div class="col-sm-6">
           <p class="field-title">Invite User:</p>
-          <div ng-if="profile.">
+          <!-- <div ng-if="!profile.signedUp"> -->
             <p>This user has not signed up yet, send an invite!</p>
-            
-          </div> 
+           
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+              Send Invite
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                  </div>
+                  <form>
+                  <div class="modal-body">
+                  To: {{profile.name}}
+                  You have been invited!
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Send</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          <!-- </div>  -->
         </div>
       </div>
 <!--    <div class="row info-employment">
@@ -105,3 +131,4 @@
     </div>
   </div>
 </div>
+
