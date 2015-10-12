@@ -306,5 +306,10 @@ img {
 
 .basic-profile {
   text-align: center;
-  margin: 100px;
+  margin: 50px;
+}
+
+.continue-profile {
+  text-align: center;
+  border: 2px solid black;
 }
