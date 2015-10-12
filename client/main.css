@@ -172,6 +172,11 @@ rect {
   left:75%;
 }
 
+textarea {
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+}
 .link {
   stroke: grey;
   opacity: 0.2;
@@ -181,6 +186,23 @@ rect {
 
 #map {
   fill:none;
+  width: auto;
+  height: 50%;
+  float: left;
+}
+
+/*#spacer {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  float: left;
+}*/
+
+#collapsedtree {
+  position: absolute;
+  top: 75px;
+  left: 0px;
+  float: left;
 }
 
 #userGen {
@@ -237,7 +259,12 @@ text {
   padding-bottom: 12px;
 }
 
-.info-expanded, .info-employment {
+.info-expanded, .info-contact {
+  border-top: 1px solid #B3B3B3;
+  padding-top: 14px;
+}
+
+/*.info-expanded, .info-employment {
   border-top: 1px solid #B3B3B3;
   padding-top: 14px;
 }
@@ -247,13 +274,36 @@ text {
   font-size: 14px;
 }
 
+.node rect {
+  cursor: pointer;
+  fill: #4bd9f2;
+  fill-opacity: .8;
+  /*stroke: #3182bd;*/
+  /*stroke-width: 1.5px;*/
+  stroke: #4bd9f2;
+  stroke-width: 0.8px;
+
+}
+
+.node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+path.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+}
+
+
 .name {
-  font-family: Courier;
-  font-size: 36px;
+  /*font-family: Courier;*/
+  font-size: 30px;
   font-weight: 600;
   color: black;
-  padding-bottom: 2px;
-  line-height: 40px;
+  /*padding-bottom: 2px;*/
+ /* line-height: 20px;*/
 }
 
 .location {
@@ -263,7 +313,7 @@ text {
 }
 
 .company {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   margin-top: 16px;
   color: #4C4C4C;
@@ -276,11 +326,30 @@ text {
   font-weight: 500;
   float: right;
   margin-top: 8px;
+  margin-bottom: 10px;
   padding: 6px 8px;
+}
+
+img {
+  margin-top: 0;
+}
+
+.gender {
+  margin-left: 30%;
 }
 
 .employment-title {
   font-size: 14px;
   color: #434343;
   margin-bottom: 4px;
+}
+
+.basic-profile {
+  text-align: center;
+  margin: 50px;
+}
+
+.continue-profile {
+  text-align: center;
+  border: 2px solid black;
 }
