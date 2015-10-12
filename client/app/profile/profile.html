@@ -10,97 +10,131 @@
 </nav>
 
 <div ng-controller="profileController" id="profile">
-  <div>
+
+  <!-- Profile (always shown and updated) -->
+  <div class="container-fluid">
+    <div class="basic-profile">
+      <img ng-src="{{user.avatar}}">
+      <p>{{user.name}}</p>
+      <p>{{user.email}}</p>
+      <p ng-if="user.headline">{{user.headline}}</p>
+      <p ng-if="user.city">{{user.city}}, {{user.state}}</p>
+      <p>Github: <a href="http://github.com/{{user.githublogin}}">{{user.githublogin}}</a></p>
+      <p ng-if="user.linkedin">Linkedin: <a href="{{user.linkedin}}">{{user.linkedin}}</a></p>
+
+      <!-- <a class="btn btn-social btn-vimeo" ng-click="updateProfileAndNextStep()" role="button">
+        <i class="fa fa-user"></i>
+        Complete your Profile</a> -->
+    </div>
+  </div>
+
+  <div ng-switch on="user.currentProfileStep">
 
     <!-- Step 0 -->
-    <div class="container-fluid" ng-if="user.currentProfileStep === 0">
-      <div class="basic-profile">
-        <img src="{{user.avatar}}">
-        <p>{{user.name}}</p>
-        <p>{{user.email}}</p>
-        <p>Github: <a href="http://github.com/{{user.githublogin}}">{{user.githublogin}}</a></p>
-      <div>
-      <br>
-      <p>Step {{user.currentProfileStep}}</p>
-        <a class="btn btn-social btn-vimeo" ng-click="updateProfileAndNextStep()" role="button">
-          <i class="fa fa-user"></i>
-          Complete your Profile</a>
+    <div class="container-fluid" ng-switch-when="0">
+      <div class="continue-profile">
+        <h2>Step {{user.currentProfileStep + 1}}:</h2>
+        <form name="profileForm" ng-submit='updateProfileAndNextStep()' novalidate>
+          <label>
+            Zipcode:
+            <input type="text" class="form-control" name="zip" maxlength="5" 
+            ng-model="user.zip" required>
+          </label>
+          <label>
+            Cohort: 
+             <select name="cohort" ng-model="school.cohort" class="form-control" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+              <option value="32">32</option>
+              <option value="33">33</option>
+              <option value="34">34</option>
+              <option value="35">35</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39">39</option>
+              <option value="40">40</option>
+              <option value="41">41</option>
+              <option value="42">42</option>
+              <option value="43">43</option>
+              <option value="44">44</option>
+              <option value="45">45</option>
+              <option value="46">46</option>
+              <option value="47">47</option>
+              <option value="48">48</option>
+              <option value="49">49</option>
+              <option value="50">50</option>
+            </select>
+          </label>
+          <input type="submit" ng-click="updateProfileAndNextStep()" value="Continue" class="btn btn-primary" ng-disabled='profileForm.$invalid'>  
+        </form>
       </div>
     </div>
 
     <!-- Step 1 -->
-    <div class="container-fluid" ng-if="user.currentProfileStep === 1">WOrds</div>
-    <div>
-      <h2>Step {{user.currentProfileStep}}:</h2>
-      <form ng-submit='updateProfileAndNextStep()' novalidate>
-        <label>
-          Zipcode:
-          <input type="text" class="form-control" name="zip" maxlength="5" 
-          ng-model="user.zip" required>
-        </label>
-        <label>
-          Cohort: 
-           <select name="cohort" ng-model="school.cohort" class="form-control" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-            <option value="28">28</option>
-            <option value="29">29</option>
-            <option value="30">30</option>
-            <option value="31">31</option>
-            <option value="32">32</option>
-            <option value="33">33</option>
-            <option value="34">34</option>
-            <option value="35">35</option>
-            <option value="36">36</option>
-            <option value="37">37</option>
-            <option value="38">38</option>
-            <option value="39">39</option>
-            <option value="40">40</option>
-            <option value="41">41</option>
-            <option value="42">42</option>
-            <option value="43">43</option>
-            <option value="44">44</option>
-            <option value="45">45</option>
-            <option value="46">46</option>
-            <option value="47">47</option>
-            <option value="48">48</option>
-            <option value="49">49</option>
-            <option value="50">50</option>
-          </select>
-        </label>
-        <input type="submit" ng-click="" value="Continue" class="btn btn-primary" ng-disabled='profileForm.$invalid'>  
-      </form>
-    </div>
-  
+    <div class="container-fluid" ng-switch-when="1">
+      <div class="continue-profile">
+        <h2>Step {{user.currentProfileStep + 1}}:</h2>
 
-    <div class="container-fluid" ng-if="user.currentProfileStep === 2">
+        <div>
+          <a class="btn btn-social btn-linkedin" href="/auth/linkedin" role="button" ng-click="updateProfileAndNextStep()">
+            <i class="fa fa-linkedin"></i>
+            Complete with Linkedin</a>    
+        </div>
+        <hr>
+        <h2>OR</h2> 
+        <hr>
 
+        <form name="profileForm" ng-submit='updateProfileAndNextStep()' novalidate>
+          <label>
+            Headline:
+            <input type="text" class="form-control" name="zip" maxlength="5" 
+            ng-model="user.headline">
+          </label>
+          <label>
+            Linkedin URL:
+            <input type="text" class="form-control" name="zip" maxlength="5" 
+            ng-model="user.linkedin">
+          </label>
+          <label>
+            Avatar URL:
+            <input type="text" class="form-control" name="zip" maxlength="5" 
+            ng-model="user.avatar">
+          </label>
+          <input type="submit" ng-click="updateProfileAndNextStep()" value="Continue" class="btn btn-primary" ng-disabled='profileForm.$invalid'>  
+        </form>
+      </div>
     </div>
+
   </div>
 
 
